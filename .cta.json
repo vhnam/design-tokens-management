@@ -2,7 +2,7 @@
   "projectName": "design-tokens-management",
   "mode": "file-router",
   "typescript": true,
-  "packageManager": "npm",
+  "packageManager": "pnpm",
   "includeExamples": false,
   "tailwind": true,
   "addOnOptions": {
@@ -16,5 +16,5 @@
   "routerOnly": false,
   "version": 1,
   "framework": "react",
-  "chosenAddOns": ["eslint", "drizzle", "better-auth"]
+  "chosenAddOns": ["eslint", "drizzle", "better-auth", "tanstack-query"]
 }

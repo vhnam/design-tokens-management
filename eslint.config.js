@@ -1,9 +1,11 @@
 //  @ts-check
 
 import { tanstackConfig } from '@tanstack/eslint-config';
+import tanstackQueryPlugin from '@tanstack/eslint-plugin-query';
 
 export default [
   ...tanstackConfig,
+  ...tanstackQueryPlugin.configs['flat/recommended'],
   {
     rules: {
       'import/no-cycle': 'off',
