@@ -8,6 +8,8 @@ import type { PropsWithChildren } from 'react';
 import tanstackQueryDevtools from '@/integrations/tanstack-query/devtools';
 import TanstackQueryProvider from '@/integrations/tanstack-query/root-provider';
 
+import { TooltipProvider } from '@/components/primitives/tooltip';
+
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
 }>()({
@@ -54,7 +56,9 @@ function RootComponent() {
 
   return (
     <TanstackQueryProvider queryClient={options.context.queryClient}>
-      <Outlet />
+      <TooltipProvider>
+        <Outlet />
+      </TooltipProvider>
       <TanStackDevtools
         config={{
           position: 'bottom-right',
