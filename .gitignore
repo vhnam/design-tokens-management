@@ -1,5 +1,6 @@
 # Dependencies
 node_modules
+.pnpm-store
 
 # OS files
 .DS_Store
@@ -41,3 +42,6 @@ dev.db
 *.db-changes
 *.db-info
 *.db-wal-revert
+
+# AI Agents
+.agents

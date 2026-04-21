@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import { Card, CardHeader, CardTitle } from '@/components/primitives/card';
 
-export const Route = createFileRoute('/auth/forgot-password')({
+export const Route = createFileRoute('/_public/auth/forgot-password')({
   component: RouteComponent,
 });
 

@@ -17,6 +17,8 @@
     "",
     "^@/lib/(.*)$",
     "",
+    "^@/layouts/(.*)$",
+    "",
     "^@/components/primitives/(.*)$",
     "",
     "^@/components/composites/(.*)$",
