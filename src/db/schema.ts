@@ -1,26 +1,15 @@
-import { sqliteTable, integer, text, index } from 'drizzle-orm/sqlite-core';
 import { sql } from 'drizzle-orm';
+import { index, integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
 export type TokenLayer = 'primitive' | 'semantic' | 'component';
 
 export type TokenTheme = 'light' | 'dark';
 
-export type TokenType =
-  | 'color'
-  | 'dimension'
-  | 'fontFamily'
-  | 'fontWeight'
-  | 'duration'
-  | 'cubicBezier'
-  | 'number';
+export type TokenType = 'color' | 'dimension' | 'fontFamily' | 'fontWeight' | 'duration' | 'cubicBezier' | 'number';
 
 const timestampColumns = {
-  createdAt: integer('created_at', { mode: 'timestamp' }).default(
-    sql`(unixepoch())`,
-  ),
-  updatedAt: integer('updated_at', { mode: 'timestamp' }).default(
-    sql`(unixepoch())`,
-  ),
+  createdAt: integer('created_at', { mode: 'timestamp' }).default(sql`(unixepoch())`),
+  updatedAt: integer('updated_at', { mode: 'timestamp' }).default(sql`(unixepoch())`),
 };
 
 // shared column factories
@@ -48,10 +37,7 @@ export const semanticTokens = sqliteTable(
     theme: text('theme').$type<TokenTheme>().notNull().default('light'),
     ...timestampColumns,
   },
-  (t) => [
-    index('semantic_theme_idx').on(t.theme),
-    index('semantic_name_idx').on(t.name),
-  ],
+  (t) => [index('semantic_theme_idx').on(t.theme), index('semantic_name_idx').on(t.name)],
 );
 
 // Layer 3a — brand overrides on semantic tokens
@@ -64,10 +50,7 @@ export const brandOverrides = sqliteTable(
     layer: text('layer').$type<TokenLayer>().notNull().default('semantic'),
     ...timestampColumns,
   },
-  (t) => [
-    index('override_brand_idx').on(t.brand),
-    index('override_name_brand_idx').on(t.name, t.brand),
-  ],
+  (t) => [index('override_brand_idx').on(t.brand), index('override_name_brand_idx').on(t.name, t.brand)],
 );
 
 // Layer 3b — component tokens per brand + theme

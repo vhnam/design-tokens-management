@@ -3,61 +3,67 @@
   "private": true,
   "type": "module",
   "imports": {
-    "#/*": "./src/*"
+    "@/*": "./src/*"
   },
   "scripts": {
-    "dev": "vite dev --port 3000",
+    "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest run",
     "lint": "eslint",
     "format": "prettier --check .",
-    "check": "prettier --write . && eslint --fix",
+    "check": "eslint --fix . && prettier --write .",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
+    "db:push:cloud": "drizzle-kit push --config drizzle.config.turso.ts",
     "db:pull": "drizzle-kit pull",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "db:sync": "tsx --env-file .env scripts/db-sync.ts"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.1.18",
+    "@tailwindcss/vite": "^4.2.3",
     "@tanstack/react-devtools": "latest",
     "@tanstack/react-router": "latest",
     "@tanstack/react-router-devtools": "latest",
     "@tanstack/react-router-ssr-query": "latest",
     "@tanstack/react-start": "latest",
-    "@tanstack/router-plugin": "^1.132.0",
-    "better-auth": "^1.5.3",
-    "better-sqlite3": "^12.6.2",
-    "drizzle-kit": "^0.31.9",
-    "drizzle-orm": "^0.45.1",
+    "@tanstack/router-plugin": "^1.167.22",
+    "@tursodatabase/sync": "^0.5.3",
+    "better-auth": "^1.6.5",
+    "better-sqlite3": "^12.9.0",
+    "drizzle-kit": "^0.31.10",
+    "drizzle-orm": "^0.45.2",
     "lucide-react": "^0.545.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "tailwindcss": "^4.1.18"
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "tailwindcss": "^4.2.3"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.16",
+    "@ianvs/prettier-plugin-sort-imports": "^4.7.1",
+    "@libsql/client": "^0.17.2",
+    "@tailwindcss/typography": "^0.5.19",
     "@tanstack/devtools-vite": "latest",
     "@tanstack/eslint-config": "latest",
-    "@types/better-sqlite3": "^7.6.0",
-    "@types/node": "^22.10.2",
-    "@types/react": "^19.2.0",
-    "@types/react-dom": "^19.2.0",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^22.19.17",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
-    "dotenv": "^17.3.1",
+    "dotenv": "^17.4.2",
     "jsdom": "^28.1.0",
-    "prettier": "^3.8.1",
+    "prettier": "^3.8.3",
     "tsx": "^4.21.0",
-    "typescript": "^5.7.2",
-    "vite": "^8.0.0",
-    "vitest": "^3.0.5"
+    "typescript": "^5.9.3",
+    "vite": "^8.0.9",
+    "vitest": "^3.2.4"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
+      "better-sqlite3",
       "esbuild",
       "lightningcss",
-      "better-sqlite3"
+      "unrs-resolver"
     ]
   }
 }

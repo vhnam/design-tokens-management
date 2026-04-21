@@ -1,13 +1,43 @@
+# Dependencies
 node_modules
+
+# OS files
 .DS_Store
+
+# Build outputs
 dist
 dist-ssr
-*.local
-.env
+.output
+
+# Framework/tooling caches
 .nitro
 .tanstack
-.wrangler
-.output
 .vinxi
 __unconfig*
+
+# Cloud/deploy tooling
+.wrangler
+
+# Test and diagnostics artifacts
+coverage
+*.log
+
+# TypeScript incremental build cache
+*.tsbuildinfo
+
+# Local environment files
+*.local
+.env
+.env.local
+.env.*.local
+
+# Local task scratch file
 todos.json
+
+# Local SQLite runtime files
+dev.db
+*.db-wal
+*.db-shm
+*.db-changes
+*.db-info
+*.db-wal-revert
