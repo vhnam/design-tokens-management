@@ -12,10 +12,12 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as PublicRouteImport } from './routes/_public'
 import { Route as ProtectedRouteImport } from './routes/_protected'
 import { Route as ProtectedIndexRouteImport } from './routes/_protected/index'
+import { Route as ApiTokensSplatRouteImport } from './routes/api/tokens/$'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as PublicAuthRegisterRouteImport } from './routes/_public/auth/register'
 import { Route as PublicAuthLoginRouteImport } from './routes/_public/auth/login'
 import { Route as PublicAuthForgotPasswordRouteImport } from './routes/_public/auth/forgot-password'
+import { Route as ProtectedTokensPrimitiveTokensRouteImport } from './routes/_protected/tokens/primitive-tokens'
 
 const PublicRoute = PublicRouteImport.update({
   id: '/_public',
@@ -29,6 +31,11 @@ const ProtectedIndexRoute = ProtectedIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => ProtectedRoute,
+} as any)
+const ApiTokensSplatRoute = ApiTokensSplatRouteImport.update({
+  id: '/api/tokens/$',
+  path: '/api/tokens/$',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
@@ -51,61 +58,80 @@ const PublicAuthForgotPasswordRoute =
     path: '/auth/forgot-password',
     getParentRoute: () => PublicRoute,
   } as any)
+const ProtectedTokensPrimitiveTokensRoute =
+  ProtectedTokensPrimitiveTokensRouteImport.update({
+    id: '/tokens/primitive-tokens',
+    path: '/tokens/primitive-tokens',
+    getParentRoute: () => ProtectedRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof ProtectedIndexRoute
+  '/tokens/primitive-tokens': typeof ProtectedTokensPrimitiveTokensRoute
   '/auth/forgot-password': typeof PublicAuthForgotPasswordRoute
   '/auth/login': typeof PublicAuthLoginRoute
   '/auth/register': typeof PublicAuthRegisterRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/tokens/$': typeof ApiTokensSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof ProtectedIndexRoute
+  '/tokens/primitive-tokens': typeof ProtectedTokensPrimitiveTokensRoute
   '/auth/forgot-password': typeof PublicAuthForgotPasswordRoute
   '/auth/login': typeof PublicAuthLoginRoute
   '/auth/register': typeof PublicAuthRegisterRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/tokens/$': typeof ApiTokensSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_protected': typeof ProtectedRouteWithChildren
   '/_public': typeof PublicRouteWithChildren
   '/_protected/': typeof ProtectedIndexRoute
+  '/_protected/tokens/primitive-tokens': typeof ProtectedTokensPrimitiveTokensRoute
   '/_public/auth/forgot-password': typeof PublicAuthForgotPasswordRoute
   '/_public/auth/login': typeof PublicAuthLoginRoute
   '/_public/auth/register': typeof PublicAuthRegisterRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/tokens/$': typeof ApiTokensSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/tokens/primitive-tokens'
     | '/auth/forgot-password'
     | '/auth/login'
     | '/auth/register'
     | '/api/auth/$'
+    | '/api/tokens/$'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/tokens/primitive-tokens'
     | '/auth/forgot-password'
     | '/auth/login'
     | '/auth/register'
     | '/api/auth/$'
+    | '/api/tokens/$'
   id:
     | '__root__'
     | '/_protected'
     | '/_public'
     | '/_protected/'
+    | '/_protected/tokens/primitive-tokens'
     | '/_public/auth/forgot-password'
     | '/_public/auth/login'
     | '/_public/auth/register'
     | '/api/auth/$'
+    | '/api/tokens/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   ProtectedRoute: typeof ProtectedRouteWithChildren
   PublicRoute: typeof PublicRouteWithChildren
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  ApiTokensSplatRoute: typeof ApiTokensSplatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -130,6 +156,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof ProtectedIndexRouteImport
       parentRoute: typeof ProtectedRoute
+    }
+    '/api/tokens/$': {
+      id: '/api/tokens/$'
+      path: '/api/tokens/$'
+      fullPath: '/api/tokens/$'
+      preLoaderRoute: typeof ApiTokensSplatRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/api/auth/$': {
       id: '/api/auth/$'
@@ -159,15 +192,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicAuthForgotPasswordRouteImport
       parentRoute: typeof PublicRoute
     }
+    '/_protected/tokens/primitive-tokens': {
+      id: '/_protected/tokens/primitive-tokens'
+      path: '/tokens/primitive-tokens'
+      fullPath: '/tokens/primitive-tokens'
+      preLoaderRoute: typeof ProtectedTokensPrimitiveTokensRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
   }
 }
 
 interface ProtectedRouteChildren {
   ProtectedIndexRoute: typeof ProtectedIndexRoute
+  ProtectedTokensPrimitiveTokensRoute: typeof ProtectedTokensPrimitiveTokensRoute
 }
 
 const ProtectedRouteChildren: ProtectedRouteChildren = {
   ProtectedIndexRoute: ProtectedIndexRoute,
+  ProtectedTokensPrimitiveTokensRoute: ProtectedTokensPrimitiveTokensRoute,
 }
 
 const ProtectedRouteWithChildren = ProtectedRoute._addFileChildren(
@@ -193,6 +235,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProtectedRoute: ProtectedRouteWithChildren,
   PublicRoute: PublicRouteWithChildren,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
+  ApiTokensSplatRoute: ApiTokensSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,4 +1,3 @@
-import appCss from '@/styles.css?url';
 import { TanStackDevtools } from '@tanstack/react-devtools';
 import type { QueryClient } from '@tanstack/react-query';
 import { createRootRouteWithContext, HeadContent, Outlet, Scripts, useRouter } from '@tanstack/react-router';
@@ -8,7 +7,10 @@ import type { PropsWithChildren } from 'react';
 import tanstackQueryDevtools from '@/integrations/tanstack-query/devtools';
 import TanstackQueryProvider from '@/integrations/tanstack-query/root-provider';
 
+import { Toaster } from '@/components/primitives/sonner';
 import { TooltipProvider } from '@/components/primitives/tooltip';
+
+import appCss from '@/styles.css?url';
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
@@ -56,6 +58,7 @@ function RootComponent() {
 
   return (
     <TanstackQueryProvider queryClient={options.context.queryClient}>
+      <Toaster />
       <TooltipProvider>
         <Outlet />
       </TooltipProvider>

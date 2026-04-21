@@ -32,7 +32,7 @@ const data = {
       items: [
         {
           title: 'Primitive Tokens',
-          url: '#',
+          url: '/tokens/primitive-tokens',
         },
         {
           title: 'Semantic Tokens',
