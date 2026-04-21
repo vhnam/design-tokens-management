@@ -1,12 +1,12 @@
 # Design Tokens Management
 
-A TanStack Start app for managing multi-layer design tokens with local SQLite persistence and Better Auth authentication.
+A TanStack Start app for managing multi-layer design tokens with SQLite persistence, Better Auth authentication, and Park UI components powered by Panda CSS.
 
 ## Tech Stack
 
 - TanStack Start + TanStack Router
 - React 19 + Vite
-- Tailwind CSS 4
+- Park UI + Panda CSS
 - Better Auth
 - Drizzle ORM + Drizzle Kit
 - SQLite (via `better-sqlite3`)
@@ -14,14 +14,14 @@ A TanStack Start app for managing multi-layer design tokens with local SQLite pe
 ## Prerequisites
 
 - Node.js 20+
-- npm 10+
+- pnpm 9+
 
 ## Getting Started
 
 1. Install dependencies:
 
    ```bash
-   npm install
+   pnpm install
    ```
 
 2. Create local environment variables:
@@ -34,6 +34,9 @@ A TanStack Start app for managing multi-layer design tokens with local SQLite pe
    - `BETTER_AUTH_URL` (for local dev: `http://localhost:3000`)
    - `BETTER_AUTH_SECRET` (generate with `npx -y @better-auth/cli secret`)
    - `DATABASE_URL` (for local SQLite: `dev.db`)
+   - `MAILER_TOKEN` (required for verification emails)
+   - `TURSO_DATABASE_URL` (optional, used by cloud sync flows)
+   - `TURSO_AUTH_TOKEN` (optional, used by cloud sync flows)
 
 4. Run Better Auth migrations:
 
@@ -46,7 +49,7 @@ A TanStack Start app for managing multi-layer design tokens with local SQLite pe
 5. Run Drizzle migrations:
 
    ```bash
-   npm run db:migrate
+   pnpm db:migrate
    ```
 
    This applies app-specific schema changes from `src/db/schema.ts`.
@@ -54,31 +57,34 @@ A TanStack Start app for managing multi-layer design tokens with local SQLite pe
 6. Start development server:
 
    ```bash
-   npm run dev
+   pnpm dev
    ```
 
 App runs at `http://localhost:3000`.
 
 ## Available Scripts
 
-- `npm run dev`: Start local development server on port `3000`
-- `npm run build`: Build for production
-- `npm run preview`: Preview production build locally
-- `npm run test`: Run tests with Vitest
-- `npm run lint`: Run ESLint
-- `npm run format`: Check formatting with Prettier
-- `npm run check`: Auto-fix formatting and lint issues
-- `npm run db:generate`: Generate Drizzle migration files from schema
-- `npm run db:migrate`: Apply pending migrations
-- `npm run db:push`: Push schema changes directly to database
-- `npm run db:pull`: Pull schema from existing database
-- `npm run db:studio`: Open Drizzle Studio
+- `pnpm dev`: Start local development server on port `3000`
+- `pnpm build`: Build for production
+- `pnpm preview`: Preview production build locally
+- `pnpm test`: Run tests with Vitest
+- `pnpm lint`: Run ESLint
+- `pnpm format`: Check formatting with Prettier
+- `pnpm check`: Auto-fix formatting and lint issues
+- `pnpm db:generate`: Generate Drizzle migration files from schema
+- `pnpm db:migrate`: Apply pending migrations
+- `pnpm db:push`: Push schema changes directly to database
+- `pnpm db:push:cloud`: Push schema using the Turso config
+- `pnpm db:pull`: Pull schema from existing database
+- `pnpm db:studio`: Open Drizzle Studio
+- `pnpm db:sync`: Sync local and cloud database state
 
 ## Authentication
 
 - Better Auth is configured in `src/lib/auth.ts`.
 - Auth API handlers are exposed at `src/routes/api/auth/$.ts`.
 - Client helpers live in `src/lib/auth-client.ts`.
+- UI auth flows live under `src/routes/auth/` (`login`, `register`, `verify-email`).
 
 ## Database
 
@@ -101,6 +107,13 @@ This project uses file-based routing with TanStack Router:
 
 - Root shell/layout: `src/routes/__root.tsx`
 - Home route: `src/routes/index.tsx`
+
+## UI System
+
+- Panda config: `panda.config.ts`
+- Theme source: `src/theme/`
+- UI components: `src/components/ui/`
+- Global styles entry: `src/styles.css`
 
 ## Notes
 
