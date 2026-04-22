@@ -1,19 +1,20 @@
 # Design Tokens Management
 
-A TanStack Start app for managing multi-layer design tokens with SQLite persistence, Better Auth authentication, and Park UI components powered by Panda CSS.
+A TanStack Start app for managing multi-layer design tokens with SQLite persistence, Better Auth authentication, and a Tailwind-based component system.
 
 ## Tech Stack
 
 - TanStack Start + TanStack Router
 - React 19 + Vite
-- Park UI + Panda CSS
+- Tailwind CSS v4 + Base UI + Shadcn/ui
 - Better Auth
 - Drizzle ORM + Drizzle Kit
 - SQLite (via `better-sqlite3`)
+- React Hook Form + Zod
 
 ## Prerequisites
 
-- Node.js 20+
+- Node.js 22+
 - pnpm 9+
 
 ## Getting Started
@@ -52,9 +53,17 @@ A TanStack Start app for managing multi-layer design tokens with SQLite persiste
    pnpm db:migrate
    ```
 
-   This applies app-specific schema changes from `src/db/schema.ts`.
+   This applies app-specific schema changes from:
+   - `src/db/tokens.table.ts`
+   - `src/db/auth.table.ts`
 
-6. Start development server:
+6. Seed primitive tokens (optional):
+
+   ```bash
+   pnpm db:seed:primitives
+   ```
+
+7. Start development server:
 
    ```bash
    pnpm dev
@@ -62,7 +71,7 @@ A TanStack Start app for managing multi-layer design tokens with SQLite persiste
 
 App runs at `http://localhost:3000`.
 
-## Available Scripts
+## Scripts
 
 - `pnpm dev`: Start local development server on port `3000`
 - `pnpm build`: Build for production
@@ -78,18 +87,22 @@ App runs at `http://localhost:3000`.
 - `pnpm db:pull`: Pull schema from existing database
 - `pnpm db:studio`: Open Drizzle Studio
 - `pnpm db:sync`: Sync local and cloud database state
+- `pnpm db:seed:primitives`: Seed primitive tokens from `src/assets/primitive-tokens-tailwind-v4-colors.json`
 
 ## Authentication
 
 - Better Auth is configured in `src/lib/auth.ts`.
 - Auth API handlers are exposed at `src/routes/api/auth/$.ts`.
 - Client helpers live in `src/lib/auth-client.ts`.
-- UI auth flows live under `src/routes/auth/` (`login`, `register`, `verify-email`).
+- UI auth flows live under `src/routes/_public/auth/` (`login`, `register`, `forgot-password`).
 
 ## Database
 
-- Drizzle schema: `src/db/schema.ts`
+- Drizzle schema files:
+  - `src/db/tokens.table.ts`
+  - `src/db/auth.table.ts`
 - Drizzle config: `drizzle.config.ts`
+- Turso Drizzle config: `drizzle.config.turso.ts`
 - Migration output: `drizzle/`
 - Database client: `src/db/index.ts`
 
@@ -103,16 +116,15 @@ Current schema models token layers and workspaces, including:
 
 ## Routing
 
-This project uses file-based routing with TanStack Router:
+This project uses file-based routing with TanStack Router.
 
 - Root shell/layout: `src/routes/__root.tsx`
 - Home route: `src/routes/index.tsx`
 
 ## UI System
 
-- Panda config: `panda.config.ts`
-- Theme source: `src/theme/`
-- UI components: `src/components/ui/`
+- Primitive components: `src/components/primitives/`
+- Composite form components: `src/components/composites/`
 - Global styles entry: `src/styles.css`
 
 ## Notes
