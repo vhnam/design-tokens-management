@@ -15,6 +15,13 @@
       "when": 1776771899703,
       "tag": "0001_nasty_johnny_blaze",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1776831599408,
+      "tag": "0002_brief_dust",
+      "breakpoints": true
     }
   ]
 }

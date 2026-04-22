@@ -1,5 +1,6 @@
-import { config } from 'dotenv';
 import { readFileSync } from 'node:fs';
+
+import { config } from 'dotenv';
 import { sql } from 'drizzle-orm';
 
 config({ path: ['.env.local', '.env'] });
@@ -13,7 +14,12 @@ const { db } = await import(new URL('../src/db/index.ts', import.meta.url).href)
 const { primitiveTokens } = await import(new URL('../src/db/schema.ts', import.meta.url).href);
 
 const jsonUrl = new URL('../src/assets/primitive-tokens-tailwind-v4-colors.json', import.meta.url);
-const tokens = JSON.parse(readFileSync(jsonUrl, 'utf8')) as (typeof primitiveTokens.$inferInsert)[];
+const rawTokens = JSON.parse(readFileSync(jsonUrl, 'utf8')) as (typeof primitiveTokens.$inferInsert)[];
+
+const tokens = rawTokens.map((token) => ({
+  ...token,
+  id: crypto.randomUUID(),
+}));
 
 const result = await db
   .insert(primitiveTokens)
