@@ -1,8 +1,9 @@
+import { TOKEN_TYPE_OPTIONS } from '@/contants/token';
 import { useForm } from '@tanstack/react-form';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
-import type { TokenType } from '@/db/schema';
+import type { TokenType } from '@/types/token';
 
 import { Button } from '@/components/primitives/button';
 import {
@@ -21,38 +22,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 
 import { useCreatePrimitiveToken } from './primitive-tokens.actions';
 
-const TOKEN_TYPE_OPTIONS: { label: string; value: TokenType }[] = [
-  {
-    label: 'Color',
-    value: 'color',
-  },
-  {
-    label: 'Dimension',
-    value: 'dimension',
-  },
-  {
-    label: 'Font Family',
-    value: 'fontFamily',
-  },
-  {
-    label: 'Font Weight',
-    value: 'fontWeight',
-  },
-  {
-    label: 'Duration',
-    value: 'duration',
-  },
-  {
-    label: 'Cubic Bezier',
-    value: 'cubicBezier',
-  },
-  {
-    label: 'Number',
-    value: 'number',
-  },
-];
-
-export const AddPrimitiveTokenDialog = () => {
+export const PrimitiveTokenAddDialog = () => {
   const [open, setOpen] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 

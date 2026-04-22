@@ -1,7 +1,7 @@
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { Navigate } from '@tanstack/react-router';
 import type { PropsWithChildren } from 'react';
 
-import type { Session } from '@/lib/auth';
 import { authClient } from '@/lib/auth-client';
 
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList } from '@/components/primitives/breadcrumb';
@@ -13,7 +13,11 @@ export default function ProtectedLayout({ children }: PropsWithChildren) {
   const { data: session, isPending } = authClient.useSession();
 
   if (isPending) {
-    return <div className="flex min-h-screen items-center justify-center">Loading...</div>;
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <DotLottieReact src="/animations/loading.lottie" loop autoplay className="size-10" />
+      </div>
+    );
   }
 
   if (!session?.user) {

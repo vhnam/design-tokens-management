@@ -3,6 +3,8 @@ import { toast } from 'sonner';
 
 import type { PrimitiveToken } from '@/types/token';
 
+import { usePrimitiveTokensTableStore } from '@/stores/primitive-tokens-table.store';
+
 import { Button } from '@/components/primitives/button';
 import {
   Dialog,
@@ -15,14 +17,13 @@ import {
   DialogTrigger,
 } from '@/components/primitives/dialog';
 
-import { usePrimitiveTokensTableStore } from './primitive-tokens-table.store';
 import { useDeletePrimitiveTokens } from './primitive-tokens.actions';
 
-interface RemovePrimitiveTokenDialogProps {
+interface PrimitiveTokenRemoveDialogProps {
   tokens: PrimitiveToken[];
 }
 
-export const RemovePrimitiveTokenDialog = ({ tokens }: RemovePrimitiveTokenDialogProps) => {
+export const PrimitiveTokenRemoveDialog = ({ tokens }: PrimitiveTokenRemoveDialogProps) => {
   const [open, setOpen] = useState(false);
 
   const deleteTokens = useDeletePrimitiveTokens();

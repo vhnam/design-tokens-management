@@ -1,8 +1,22 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useCallback } from 'react';
+import { toast } from 'sonner';
 
-import type { TokenType } from '@/db/schema';
+import { isValidColorValue } from '@/lib/utils';
 
-import type { PrimitiveToken } from '@/types/token';
+import type { PrimitiveToken, TokenType } from '@/types/token';
+
+import { usePrimitiveTokensTableStore } from '@/stores/primitive-tokens-table.store';
+
+const TOKEN_TYPE_LIST: TokenType[] = [
+  'color',
+  'dimension',
+  'fontFamily',
+  'fontWeight',
+  'duration',
+  'cubicBezier',
+  'number',
+];
 
 export type CreatePrimitiveTokenInput = {
   name: string;
@@ -118,4 +132,50 @@ export const useCreatePrimitiveToken = () => {
       void queryClient.invalidateQueries({ queryKey: ['primitive-tokens'] });
     },
   });
+};
+
+export const useCommitEdit = () => {
+  const update = useUpdatePrimitiveToken();
+  const completeEdit = usePrimitiveTokensTableStore((store) => store.completeEdit);
+
+  return useCallback(() => {
+    const editing = usePrimitiveTokensTableStore.getState().editing;
+    if (!editing) return;
+
+    const payload: UpdatePrimitiveTokenInput = { id: editing.tokenId };
+    switch (editing.columnId) {
+      case 'name':
+        payload.name = editing.draft.trim();
+        break;
+      case 'value':
+        if (isValidColorValue(editing.draft)) {
+          toast.error('Invalid color value');
+          return;
+        }
+        payload.value = editing.draft.trim();
+        break;
+      case 'type':
+        if (!TOKEN_TYPE_LIST.includes(editing.draft as TokenType)) {
+          toast.error('Invalid token type');
+          return;
+        }
+        payload.type = editing.draft as TokenType;
+        break;
+      case 'description':
+        payload.description = editing.draft.trim() === '' ? null : editing.draft.trim();
+        break;
+      default:
+        return;
+    }
+
+    update.mutate(payload, {
+      onSuccess: () => {
+        completeEdit();
+        toast.success('Token updated');
+      },
+      onError: (err) => {
+        toast.error(err.message);
+      },
+    });
+  }, [completeEdit, update]);
 };

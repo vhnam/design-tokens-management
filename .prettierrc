@@ -13,6 +13,7 @@
     "^@/integrations/(.*)$",
     "^@/lib/(.*)$",
     "^@/types/(.*)$",
+    "^@/stores/(.*)$",
     "^@/layouts/(.*)$",
     "^@/features/(.*)$",
     "^@/components/primitives/(.*)$",

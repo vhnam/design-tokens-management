@@ -1,11 +1,7 @@
 import { sql } from 'drizzle-orm';
 import { index, integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
-export type TokenLayer = 'primitive' | 'semantic' | 'component';
-
-export type TokenTheme = 'light' | 'dark';
-
-export type TokenType = 'color' | 'dimension' | 'fontFamily' | 'fontWeight' | 'duration' | 'cubicBezier' | 'number';
+import type { TokenLayer, TokenTheme, TokenType } from '@/types/token';
 
 const timestampColumns = {
   createdAt: integer('created_at', { mode: 'timestamp' }).default(sql`(unixepoch())`),
