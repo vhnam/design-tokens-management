@@ -12,17 +12,14 @@ export type TableCell = {
 };
 
 export const NameCell = ({ row }: TableCell) => {
-  return <span className="inline-flex items-center cursor-default py-1">{row.original.name}</span>;
+  return <Badge variant="secondary">{row.original.name}</Badge>;
 };
 
 export const ValueCell = ({ row }: TableCell) => {
   const value = row.original.value;
   return (
     <div className="inline-flex cursor-default items-center gap-2 py-1">
-      <span
-        className="inline-block size-4 shrink-0 rounded-full border border-border"
-        style={{ backgroundColor: value }}
-      >
+      <span className="inline-block size-6 shrink-0 rounded border border-border" style={{ backgroundColor: value }}>
         &nbsp;
       </span>
       {value}

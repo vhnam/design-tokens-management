@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { PlusIcon } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -67,7 +68,13 @@ export const PrimitiveTokenAddDialog = () => {
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogTrigger render={<Button type="button">Add token</Button>} />
+      <DialogTrigger
+        render={
+          <Button type="button">
+            <PlusIcon className="size-4" /> Add token
+          </Button>
+        }
+      />
       <DialogContent showCloseButton={false}>
         <DialogHeader>
           <DialogTitle>Add token</DialogTitle>

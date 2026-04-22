@@ -58,13 +58,16 @@ export const PrimitiveTokens = () => {
   return (
     <div className="h-full space-y-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Primitive Tokens</h1>
+        <div>
+          <h1 className="text-2xl font-bold">Primitive Tokens</h1>
+          <p className="text-sm text-muted-foreground">Foundation-level design tokens</p>
+        </div>
         <div className="flex items-center gap-2">
           <PrimitiveTokenAddDialog />
         </div>
       </div>
 
-      <div className="h-[calc(100vh-8rem)] overflow-auto rounded-none border border-border">
+      <div className="h-[calc(100vh-12rem)] overflow-auto rounded-none border border-border">
         <Table className="border-separate border-spacing-0">
           <TableHeader className="[&_tr]:border-border">
             {table.getHeaderGroups().map((headerGroup) => (
@@ -94,6 +97,9 @@ export const PrimitiveTokens = () => {
             ))}
           </TableBody>
         </Table>
+      </div>
+      <div className="flex-1 text-sm text-muted-foreground">
+        <strong>Total:</strong> {table.getFilteredRowModel().rows.length} tokens
       </div>
     </div>
   );
