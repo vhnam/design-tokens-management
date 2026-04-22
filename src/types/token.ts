@@ -2,7 +2,15 @@ export type TokenLayer = 'primitive' | 'semantic' | 'component';
 
 export type TokenTheme = 'light' | 'dark';
 
-export type TokenType = 'color' | 'dimension' | 'fontFamily' | 'fontWeight' | 'duration' | 'cubicBezier' | 'number';
+export enum TokenType {
+  Color = 'color',
+  Dimension = 'dimension',
+  FontFamily = 'fontFamily',
+  FontWeight = 'fontWeight',
+  Duration = 'duration',
+  CubicBezier = 'cubicBezier',
+  Number = 'number',
+}
 
 export type PrimitiveToken = {
   id: string;

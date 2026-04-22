@@ -1,32 +1,42 @@
-import type { TokenType } from '@/types/token';
+import { TokenType } from '@/types/token';
+
+export const TOKEN_TYPE_LIST: TokenType[] = [
+  TokenType.Color,
+  TokenType.Dimension,
+  TokenType.FontFamily,
+  TokenType.FontWeight,
+  TokenType.Duration,
+  TokenType.CubicBezier,
+  TokenType.Number,
+];
 
 export const TOKEN_TYPE_OPTIONS: { label: string; value: TokenType }[] = [
   {
     label: 'Color',
-    value: 'color',
+    value: TokenType.Color,
   },
   {
     label: 'Dimension',
-    value: 'dimension',
+    value: TokenType.Dimension,
   },
   {
     label: 'Font Family',
-    value: 'fontFamily',
+    value: TokenType.FontFamily,
   },
   {
     label: 'Font Weight',
-    value: 'fontWeight',
+    value: TokenType.FontWeight,
   },
   {
     label: 'Duration',
-    value: 'duration',
+    value: TokenType.Duration,
   },
   {
     label: 'Cubic Bezier',
-    value: 'cubicBezier',
+    value: TokenType.CubicBezier,
   },
   {
     label: 'Number',
-    value: 'number',
+    value: TokenType.Number,
   },
 ];

@@ -9,10 +9,12 @@
   "importOrder": [
     "<BUILTIN_MODULES>",
     "<THIRD_PARTY_MODULES>",
+    "^@/contants/(.*)$",
     "^@/db(/.*)?$",
     "^@/integrations/(.*)$",
     "^@/lib/(.*)$",
     "^@/types/(.*)$",
+    "^@/schemas/(.*)$",
     "^@/stores/(.*)$",
     "^@/layouts/(.*)$",
     "^@/features/(.*)$",

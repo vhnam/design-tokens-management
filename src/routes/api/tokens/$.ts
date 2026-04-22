@@ -2,17 +2,17 @@ import { createFileRoute } from '@tanstack/react-router';
 import { eq, inArray } from 'drizzle-orm';
 
 import { db } from '@/db';
-import type { TokenType } from '@/db/schema';
-import { primitiveTokens } from '@/db/schema';
+import { primitiveTokens } from '@/db/tokens.table';
+import { TokenType } from '@/types/token';
 
 const TOKEN_TYPES = new Set<TokenType>([
-  'color',
-  'dimension',
-  'fontFamily',
-  'fontWeight',
-  'duration',
-  'cubicBezier',
-  'number',
+  TokenType.Color,
+  TokenType.Dimension,
+  TokenType.FontFamily,
+  TokenType.FontWeight,
+  TokenType.Duration,
+  TokenType.CubicBezier,
+  TokenType.Number,
 ]);
 
 function isTokenType(value: unknown): value is TokenType {

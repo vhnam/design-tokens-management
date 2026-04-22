@@ -1,9 +1,13 @@
-import { TOKEN_TYPE_OPTIONS } from '@/contants/token';
-import { useForm } from '@tanstack/react-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
-import type { TokenType } from '@/types/token';
+import { TOKEN_TYPE_OPTIONS } from '@/contants/token';
+
+import { TokenType } from '@/types/token';
+
+import { type PrimitiveTokenSchemaType, primitiveTokenSchema } from '@/schemas/primitive-token.schema';
 
 import { Button } from '@/components/primitives/button';
 import {
@@ -16,169 +20,79 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/primitives/dialog';
-import { Input } from '@/components/primitives/input';
-import { Label } from '@/components/primitives/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/primitives/select';
+
+import { InputField } from '@/components/composites/input-field';
+import { SelectField } from '@/components/composites/select-field';
 
 import { useCreatePrimitiveToken } from './primitive-tokens.actions';
 
 export const PrimitiveTokenAddDialog = () => {
   const [open, setOpen] = useState(false);
-  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const createToken = useCreatePrimitiveToken();
 
-  const form = useForm({
+  const form = useForm<PrimitiveTokenSchemaType>({
     defaultValues: {
       name: '',
       value: '',
-      type: 'color' as TokenType,
+      type: TokenType.Color,
       description: '',
     },
-    onSubmit: async ({ value }) => {
-      setSubmitError(null);
-      try {
-        await createToken.mutateAsync({
-          name: value.name.trim(),
-          value: value.value.trim(),
-          type: value.type,
-          description: value.description.trim(),
-        });
-        form.reset();
-        setOpen(false);
-        toast.success('Token created successfully');
-      } catch (error) {
-        setSubmitError(error instanceof Error ? error.message : 'Something went wrong');
-      }
-    },
+    resolver: zodResolver(primitiveTokenSchema as never) as never,
+  });
+
+  const handleOpenChange = (nextOpen: boolean) => {
+    setOpen(nextOpen);
+    if (!nextOpen) {
+      form.reset();
+    }
+  };
+
+  const onSubmit = form.handleSubmit(async (value) => {
+    try {
+      await createToken.mutateAsync({
+        name: value.name.trim(),
+        value: value.value.trim(),
+        type: value.type,
+        description: (value.description ?? '').trim(),
+      });
+      form.reset();
+      setOpen(false);
+      toast.success('Token created successfully');
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : 'Something went wrong');
+    }
   });
 
   return (
-    <Dialog
-      open={open}
-      onOpenChange={(nextOpen) => {
-        setOpen(nextOpen);
-        if (!nextOpen) {
-          form.reset();
-          setSubmitError(null);
-        }
-      }}
-    >
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger render={<Button type="button">Add token</Button>} />
       <DialogContent showCloseButton={false}>
         <DialogHeader>
           <DialogTitle>Add token</DialogTitle>
-          <DialogDescription>Create a new primitive token in the library.</DialogDescription>
+          <DialogDescription>Create a new primitive token.</DialogDescription>
         </DialogHeader>
 
-        <form
-          className="grid gap-4"
-          onSubmit={(event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            void form.handleSubmit();
-          }}
-        >
-          <form.Field
-            name="name"
-            children={(field) => (
-              <div className="grid gap-2">
-                <Label htmlFor={field.name}>Name</Label>
-                <Input
-                  id={field.name}
-                  name={field.name}
-                  type="text"
-                  autoComplete="off"
-                  required
-                  placeholder="e.g. --color-blue-500"
-                  value={field.state.value}
-                  onBlur={field.handleBlur}
-                  onChange={(event) => field.handleChange(event.target.value)}
-                />
-              </div>
-            )}
-          />
+        <form className="grid gap-4" onSubmit={onSubmit}>
+          <InputField control={form.control} name="name" label="Name" placeholder="e.g. --color-blue-500" />
 
-          <form.Field
-            name="value"
-            children={(field) => (
-              <div className="grid gap-2">
-                <Label htmlFor={field.name}>Value</Label>
-                <Input
-                  id={field.name}
-                  name={field.name}
-                  type="text"
-                  autoComplete="off"
-                  required
-                  placeholder="e.g. #3b82f6 or 1rem"
-                  value={field.state.value}
-                  onBlur={field.handleBlur}
-                  onChange={(event) => field.handleChange(event.target.value)}
-                />
-              </div>
-            )}
-          />
+          <InputField control={form.control} name="value" label="Value" placeholder="e.g. --color-blue-500" />
 
-          <form.Field
-            name="type"
-            children={(field) => (
-              <div className="grid gap-2">
-                <Label htmlFor={field.name}>Type</Label>
-                <Select
-                  items={TOKEN_TYPE_OPTIONS}
-                  name={field.name}
-                  required
-                  value={field.state.value}
-                  onValueChange={(value) => {
-                    if (value != null) field.handleChange(value);
-                  }}
-                >
-                  <SelectTrigger id={field.name} className="w-full" onBlur={field.handleBlur}>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {TOKEN_TYPE_OPTIONS.map((tokenType) => (
-                      <SelectItem key={tokenType.value} value={tokenType.value}>
-                        {tokenType.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            )}
-          />
+          <SelectField control={form.control} name="type" label="Type" items={TOKEN_TYPE_OPTIONS} />
 
-          <form.Field
+          <InputField
+            control={form.control}
             name="description"
-            children={(field) => (
-              <div className="grid gap-2">
-                <Label htmlFor={field.name}>Description (optional)</Label>
-                <Input
-                  id={field.name}
-                  name={field.name}
-                  type="text"
-                  autoComplete="off"
-                  placeholder="Optional"
-                  value={field.state.value}
-                  onBlur={field.handleBlur}
-                  onChange={(event) => field.handleChange(event.target.value)}
-                />
-              </div>
-            )}
+            label="Description"
+            optional
+            placeholder="The description of the token."
           />
-
-          {submitError ? <p className="text-xs text-destructive">{submitError}</p> : null}
 
           <DialogFooter>
             <DialogClose render={<Button type="button" variant="outline" />}>Cancel</DialogClose>
-            <form.Subscribe
-              selector={(state) => [state.isSubmitting, createToken.isPending] as const}
-              children={([isSubmitting, isPending]) => (
-                <Button type="submit" disabled={isSubmitting || isPending}>
-                  {isSubmitting || isPending ? 'Saving…' : 'Add token'}
-                </Button>
-              )}
-            />
+            <Button type="submit" disabled={form.formState.isSubmitting || createToken.isPending}>
+              {form.formState.isSubmitting || createToken.isPending ? 'Saving…' : 'Add token'}
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>

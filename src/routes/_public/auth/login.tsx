@@ -1,13 +1,17 @@
-import { useForm } from '@tanstack/react-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Link, createFileRoute, useNavigate } from '@tanstack/react-router';
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
 import { authClient } from '@/lib/auth-client';
 
+import { type LoginSchemaType, loginSchema } from '@/schemas/login.schema';
+
 import { Button } from '@/components/primitives/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/primitives/card';
-import { Input } from '@/components/primitives/input';
-import { Label } from '@/components/primitives/label';
+import { Separator } from '@/components/primitives/separator';
+
+import { InputField } from '@/components/composites/input-field';
 
 export const Route = createFileRoute('/_public/auth/login')({
   component: RouteComponent,
@@ -15,28 +19,27 @@ export const Route = createFileRoute('/_public/auth/login')({
 
 function RouteComponent() {
   const navigate = useNavigate();
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const form = useForm({
+  const form = useForm<LoginSchemaType>({
+    resolver: zodResolver(loginSchema as never) as never,
     defaultValues: {
       email: '',
       password: '',
     },
-    onSubmit: async ({ value }) => {
-      setErrorMessage(null);
+  });
 
-      const { error } = await authClient.signIn.email({
-        email: value.email.trim(),
-        password: value.password,
-      });
+  const onSubmit = form.handleSubmit(async (value) => {
+    const { error } = await authClient.signIn.email({
+      email: value.email.trim(),
+      password: value.password,
+    });
 
-      if (error) {
-        setErrorMessage(error.message ?? 'Unable to login. Please try again.');
-        return;
-      }
+    if (error) {
+      toast.error(error.message ?? 'Unable to login. Please try again.');
+      return;
+    }
 
-      await navigate({ to: '/' });
-    },
+    await navigate({ to: '/' });
   });
 
   return (
@@ -47,66 +50,38 @@ function RouteComponent() {
           <CardDescription>Login to your account to get started</CardDescription>
         </CardHeader>
         <CardContent>
-          <form
-            onSubmit={(event) => {
-              event.preventDefault();
-              event.stopPropagation();
-              void form.handleSubmit();
-            }}
-          >
+          <form onSubmit={onSubmit}>
             <div className="flex flex-col gap-6">
-              <form.Field
+              <InputField
+                control={form.control}
                 name="email"
-                children={(field) => (
-                  <div className="grid gap-2">
-                    <Label htmlFor={field.name}>Email</Label>
-                    <Input
-                      id={field.name}
-                      name={field.name}
-                      type="email"
-                      placeholder="john.doe@example.com"
-                      required
-                      value={field.state.value}
-                      onBlur={field.handleBlur}
-                      onChange={(event) => field.handleChange(event.target.value)}
-                    />
-                  </div>
-                )}
+                label="Email"
+                type="email"
+                placeholder="john.doe@example.com"
+                autoComplete="email"
               />
-              <form.Field
+
+              <InputField
+                control={form.control}
                 name="password"
-                children={(field) => (
-                  <div className="grid gap-2">
-                    <div className="flex items-center justify-between">
-                      <Label htmlFor={field.name}>Password</Label>
-                      <Link to="/auth/forgot-password" className="text-accent-foreground underline decoration-dotted">
-                        Forgot your password?
-                      </Link>
-                    </div>
-                    <Input
-                      id={field.name}
-                      name={field.name}
-                      type="password"
-                      required
-                      placeholder="********"
-                      value={field.state.value}
-                      onBlur={field.handleBlur}
-                      onChange={(event) => field.handleChange(event.target.value)}
-                    />
-                  </div>
-                )}
+                label="Password"
+                type="password"
+                placeholder="********"
+                autoComplete="current-password"
               />
-              {errorMessage ? <p className="text-sm text-destructive">{errorMessage}</p> : null}
             </div>
             <CardFooter className="mt-6 flex-col gap-2 px-0">
-              <form.Subscribe
-                selector={(state) => state.isSubmitting}
-                children={(isSubmitting) => (
-                  <Button type="submit" className="w-full" disabled={isSubmitting}>
-                    {isSubmitting ? 'Logging in...' : 'Login'}
-                  </Button>
-                )}
-              />
+              <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
+                {form.formState.isSubmitting ? 'Logging in...' : 'Login'}
+              </Button>
+              <Link to="/auth/forgot-password" className="text-accent-foreground underline decoration-dotted">
+                Forgot your password?
+              </Link>
+              <Separator className="my-4 relative !w-[80%] mx-auto">
+                <span className="text-muted-foreground absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-background px-2">
+                  or
+                </span>
+              </Separator>
               <div>
                 Don't have an account?{' '}
                 <Button

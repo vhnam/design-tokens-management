@@ -1,4 +1,3 @@
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
 import { useMemo } from 'react';
 
@@ -52,12 +51,7 @@ export const PrimitiveTokens = () => {
     getRowId: (row) => row.id,
   });
 
-  if (isLoading)
-    return (
-      <div className="flex items-center justify-center h-full">
-        <DotLottieReact src="/animations/loading.lottie" loop autoplay className="size-10" />
-      </div>
-    );
+  if (isLoading) return <div className="flex items-center justify-center h-full">Loading…</div>;
 
   if (error) return <div>Error: {error.message}</div>;
 

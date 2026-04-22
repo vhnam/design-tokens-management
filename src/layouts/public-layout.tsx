@@ -10,7 +10,7 @@ export default function PublicLayout({ children }: PropsWithChildren) {
   if (isPending) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <DotLottieReact src="/animations/loading.lottie" loop autoplay className="size-10" />
+        <DotLottieReact src="/animations/loading.lottie" loop autoplay className="size-40" />
       </div>
     );
   }

@@ -4,6 +4,8 @@ import type { PropsWithChildren } from 'react';
 
 import TanstackQueryProvider from '@/integrations/tanstack-query/root-provider';
 
+import NotFound from '@/features/system/not-found';
+
 import { Toaster } from '@/components/primitives/sonner';
 import { TooltipProvider } from '@/components/primitives/tooltip';
 
@@ -34,6 +36,7 @@ export const Route = createRootRouteWithContext<{
   }),
   component: RootComponent,
   shellComponent: RootDocument,
+  notFoundComponent: NotFound,
 });
 
 function RootDocument({ children }: PropsWithChildren) {

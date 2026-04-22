@@ -43,7 +43,7 @@ export const DescriptionCell = ({ row }: TableCell) => {
   return <span className="inline-flex items-center cursor-default py-1 text-muted-foreground">{text || '—'}</span>;
 };
 
-export const ActionsCell = ({ row }: TableCell) => {
+export const ActionsCell = ({ row: _row }: TableCell) => {
   return (
     <div className="inline-flex items-center gap-2 py-1">
       <Tooltip>
