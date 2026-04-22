@@ -15,8 +15,8 @@ import {
   DialogTrigger,
 } from '@/components/primitives/dialog';
 
-import { useDeletePrimitiveTokens } from './primitive-tokens.actions';
 import { usePrimitiveTokensTableStore } from './primitive-tokens-table.store';
+import { useDeletePrimitiveTokens } from './primitive-tokens.actions';
 
 interface RemovePrimitiveTokenDialogProps {
   tokens: PrimitiveToken[];

@@ -1,0 +1,1 @@
+DROP INDEX `primitive_tokens_name_unique`;

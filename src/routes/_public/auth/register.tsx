@@ -1,5 +1,5 @@
 import { useForm } from '@tanstack/react-form';
-import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
+import { Link, createFileRoute, useNavigate } from '@tanstack/react-router';
 import { useState } from 'react';
 
 import { authClient } from '@/lib/auth-client';

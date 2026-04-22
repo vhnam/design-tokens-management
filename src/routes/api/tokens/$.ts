@@ -50,8 +50,7 @@ export const Route = createFileRoute('/api/tokens/$')({
         const { name, value, type, description } = body as Record<string, unknown>;
         const nameStr = typeof name === 'string' ? name.trim() : '';
         const valueStr = typeof value === 'string' ? value.trim() : '';
-        const descriptionStr =
-          typeof description === 'string' && description.trim() !== '' ? description.trim() : null;
+        const descriptionStr = typeof description === 'string' && description.trim() !== '' ? description.trim() : null;
 
         if (!nameStr || !valueStr) {
           return new Response(JSON.stringify({ error: 'Name and value are required' }), {
@@ -151,8 +150,7 @@ export const Route = createFileRoute('/api/tokens/$')({
               headers: { 'Content-Type': 'application/json' },
             });
           }
-          patch.description =
-            typeof description === 'string' && description.trim() !== '' ? description.trim() : null;
+          patch.description = typeof description === 'string' && description.trim() !== '' ? description.trim() : null;
         }
 
         const hasTokenField =
@@ -170,11 +168,7 @@ export const Route = createFileRoute('/api/tokens/$')({
 
         patch.updatedAt = new Date();
 
-        const rows = await db
-          .update(primitiveTokens)
-          .set(patch)
-          .where(eq(primitiveTokens.id, idStr))
-          .returning();
+        const rows = await db.update(primitiveTokens).set(patch).where(eq(primitiveTokens.id, idStr)).returning();
 
         if (rows.length === 0) {
           return new Response(JSON.stringify({ error: 'Token not found' }), {

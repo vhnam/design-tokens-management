@@ -1,6 +1,5 @@
-import { create } from 'zustand';
-
 import { toast } from 'sonner';
+import { create } from 'zustand';
 
 export type EditableColumn = 'name' | 'value' | 'type' | 'description';
 

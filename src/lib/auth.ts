@@ -1,7 +1,9 @@
-import { authSchema, db } from '@/db';
-import { betterAuth, type StripEmptyObjects } from 'better-auth';
+import { betterAuth } from 'better-auth';
+import type { StripEmptyObjects } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { tanstackStartCookies } from 'better-auth/tanstack-start';
+
+import { authSchema, db } from '@/db';
 
 export interface Session {
   user: StripEmptyObjects<{

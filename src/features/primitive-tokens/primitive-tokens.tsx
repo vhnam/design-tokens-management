@@ -1,16 +1,12 @@
-import {
-  createColumnHelper,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from '@tanstack/react-table';
+import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
 import type { Row, Table as TanstackTable } from '@tanstack/react-table';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { toast } from 'sonner';
 
+import type { TokenType } from '@/db/schema';
+
 import { cn } from '@/lib/utils';
 
-import type { TokenType } from '@/db/schema';
 import type { PrimitiveToken } from '@/types/token';
 
 import { Badge } from '@/components/primitives/badge';
@@ -18,10 +14,10 @@ import { Input } from '@/components/primitives/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/primitives/table';
 
 import { AddPrimitiveTokenDialog } from './add-primitive-token-dialog';
+import { usePrimitiveTokensTableStore } from './primitive-tokens-table.store';
 import { usePrimitiveTokensActions, useUpdatePrimitiveToken } from './primitive-tokens.actions';
 import type { UpdatePrimitiveTokenInput } from './primitive-tokens.actions';
 import { RemovePrimitiveTokenDialog } from './remove-primitive-token-dialog';
-import { usePrimitiveTokensTableStore } from './primitive-tokens-table.store';
 
 const columnHelper = createColumnHelper<PrimitiveToken>();
 
@@ -243,7 +239,10 @@ function ValueCell({ row, table }: { row: Row<PrimitiveToken>; table: TanstackTa
         tryBeginEdit(row.original.id, 'value', value);
       }}
     >
-      <span className="inline-block size-4 shrink-0 rounded-full border border-border" style={{ backgroundColor: value }}>
+      <span
+        className="inline-block size-4 shrink-0 rounded-full border border-border"
+        style={{ backgroundColor: value }}
+      >
         &nbsp;
       </span>
       {value}
@@ -394,10 +393,7 @@ export const PrimitiveTokens = () => {
     } satisfies TableMeta,
   });
 
-  const selectedTokens = useMemo(
-    () => tableData.filter((t) => selectedIds.includes(t.id)),
-    [tableData, selectedIds],
-  );
+  const selectedTokens = useMemo(() => tableData.filter((t) => selectedIds.includes(t.id)), [tableData, selectedIds]);
 
   const showDelete = selectedIds.length > 1;
 

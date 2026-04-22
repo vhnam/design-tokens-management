@@ -1,4 +1,5 @@
-import { connect, type Database } from '@tursodatabase/sync';
+import { connect } from '@tursodatabase/sync';
+import type { Database } from '@tursodatabase/sync';
 import BetterSqlite3 from 'better-sqlite3';
 
 function hasLocalAppTables(path: string) {

@@ -1,7 +1,8 @@
 'use client';
 
 import { Columns3CogIcon, TerminalSquareIcon } from 'lucide-react';
-import { forwardRef, type ComponentProps, type Ref } from 'react';
+import { forwardRef } from 'react';
+import type { ComponentProps, Ref } from 'react';
 
 import type { Session } from '@/lib/auth';
 
