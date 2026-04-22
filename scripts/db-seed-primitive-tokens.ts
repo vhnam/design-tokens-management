@@ -20,6 +20,8 @@ const rawTokens = JSON.parse(readFileSync(jsonUrl, 'utf8')) as Array<
 await db.delete(primitiveTokens);
 
 const result =
-  rawTokens.length === 0 ? [] : await db.insert(primitiveTokens).values(rawTokens).returning({ id: primitiveTokens.id });
+  rawTokens.length === 0
+    ? []
+    : await db.insert(primitiveTokens).values(rawTokens).returning({ id: primitiveTokens.id });
 
 console.log(`[db:seed:primitive-tokens] Seeded ${result.length} rows into primitive_tokens.`);

@@ -7,7 +7,8 @@ import { TOKEN_TYPE_OPTIONS } from '@/contants/token';
 
 import { TokenType } from '@/types/token';
 
-import { type PrimitiveTokenSchemaType, primitiveTokenSchema } from '@/schemas/primitive-token.schema';
+import { primitiveTokenSchema } from '@/schemas/primitive-token.schema';
+import type { PrimitiveTokenSchemaType } from '@/schemas/primitive-token.schema';
 
 import { Button } from '@/components/primitives/button';
 import {

@@ -1,8 +1,10 @@
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { Navigate } from '@tanstack/react-router';
 import type { PropsWithChildren } from 'react';
 
 import { authClient } from '@/lib/auth-client';
+
+import { LottiePlayer } from '@/components/primitives/lottie-player';
+import { Toaster } from '@/components/primitives/sonner';
 
 export default function PublicLayout({ children }: PropsWithChildren) {
   const { data: session, isPending } = authClient.useSession();
@@ -10,7 +12,7 @@ export default function PublicLayout({ children }: PropsWithChildren) {
   if (isPending) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <DotLottieReact src="/animations/loading.lottie" loop autoplay className="size-40" />
+        <LottiePlayer src="/animations/loading.lottie" className="size-40" />
       </div>
     );
   }
@@ -19,5 +21,10 @@ export default function PublicLayout({ children }: PropsWithChildren) {
     return <Navigate to="/" />;
   }
 
-  return <>{children}</>;
+  return (
+    <>
+      <Toaster />
+      {children}
+    </>
+  );
 }

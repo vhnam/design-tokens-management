@@ -5,7 +5,8 @@ import { toast } from 'sonner';
 
 import { authClient } from '@/lib/auth-client';
 
-import { type LoginSchemaType, loginSchema } from '@/schemas/login.schema';
+import { loginSchema } from '@/schemas/login.schema';
+import type { LoginSchemaType } from '@/schemas/login.schema';
 
 import { Button } from '@/components/primitives/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/primitives/card';

@@ -3,6 +3,7 @@ import { eq, inArray } from 'drizzle-orm';
 
 import { db } from '@/db';
 import { primitiveTokens } from '@/db/tokens.table';
+
 import { TokenType } from '@/types/token';
 
 const TOKEN_TYPES = new Set<TokenType>([
