@@ -1,7 +1,8 @@
 import { sql } from 'drizzle-orm';
-import { index, integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { index, integer, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core';
 
-import type { TokenLayer, TokenTheme, TokenType } from '@/types/token';
+import { TokenLayer, TokenTheme } from '@/enums/token';
+import type { SemanticTokenGroup, TokenType } from '@/enums/token';
 
 const timestampColumns = {
   createdAt: integer('created_at', { mode: 'timestamp' }).default(sql`(unixepoch())`),
@@ -30,10 +31,14 @@ export const semanticTokens = sqliteTable(
   'semantic_tokens',
   {
     ...baseColumns,
-    theme: text('theme').$type<TokenTheme>().notNull().default('light'),
+    group: text('group').$type<SemanticTokenGroup>().notNull(),
+    theme: text('theme').$type<TokenTheme>().notNull().default(TokenTheme.Light),
     ...timestampColumns,
   },
-  (t) => [index('semantic_theme_idx').on(t.theme), index('semantic_name_idx').on(t.name)],
+  (t) => [
+    uniqueIndex('semantic_theme_group_name_uniq').on(t.theme, t.group, t.name),
+    index('semantic_theme_group_idx').on(t.theme, t.group),
+  ],
 );
 
 // Layer 3a — brand overrides on semantic tokens
@@ -41,9 +46,9 @@ export const brandOverrides = sqliteTable(
   'brand_overrides',
   {
     ...baseColumns,
-    theme: text('theme').$type<TokenTheme>().notNull().default('light'),
+    theme: text('theme').$type<TokenTheme>().notNull().default(TokenTheme.Light),
     brand: text('brand').notNull(),
-    layer: text('layer').$type<TokenLayer>().notNull().default('semantic'),
+    layer: text('layer').$type<TokenLayer>().notNull().default(TokenLayer.Semantic),
     ...timestampColumns,
   },
   (t) => [index('override_brand_idx').on(t.brand), index('override_name_brand_idx').on(t.name, t.brand)],
@@ -54,7 +59,7 @@ export const componentTokens = sqliteTable(
   'component_tokens',
   {
     ...baseColumns,
-    theme: text('theme').$type<TokenTheme>().notNull().default('light'),
+    theme: text('theme').$type<TokenTheme>().notNull().default(TokenTheme.Light),
     brand: text('brand').notNull().default('default'),
     component: text('component').notNull(),
     ...timestampColumns,

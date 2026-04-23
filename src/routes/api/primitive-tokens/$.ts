@@ -4,7 +4,7 @@ import { eq, inArray } from 'drizzle-orm';
 import { db } from '@/db';
 import { primitiveTokens } from '@/db/tokens.table';
 
-import { TokenType } from '@/types/token';
+import { TokenType } from '@/enums/token';
 
 const TOKEN_TYPES = new Set<TokenType>([
   TokenType.Color,

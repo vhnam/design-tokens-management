@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 
 import { TOKEN_TYPE_OPTIONS } from '@/contants/token';
 
-import { TokenType } from '@/types/token';
+import { TokenType } from '@/enums/token';
 
 import { primitiveTokenSchema } from '@/schemas/primitive-token.schema';
 import type { PrimitiveTokenSchemaType } from '@/schemas/primitive-token.schema';

@@ -29,6 +29,13 @@
       "when": 1776843832502,
       "tag": "0003_faithful_menace",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1776942940387,
+      "tag": "0004_classy_post",
+      "breakpoints": true
     }
   ]
 }

@@ -2,7 +2,7 @@ import { z } from 'zod/v4';
 
 import { TOKEN_TYPE_LIST } from '@/contants/token';
 
-import { TokenType } from '@/types/token';
+import { TokenType } from '@/enums/token';
 
 export const primitiveTokenSchema = z.object({
   name: z.string().min(1, 'Name is mandatory').max(255, 'Name must be less than 255 characters'),

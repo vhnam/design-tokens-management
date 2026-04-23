@@ -2,7 +2,7 @@ import type { QueryClient } from '@tanstack/react-query';
 import { HeadContent, Outlet, Scripts, createRootRouteWithContext, useRouter } from '@tanstack/react-router';
 import type { PropsWithChildren } from 'react';
 
-import TanstackQueryProvider from '@/integrations/tanstack-query/root-provider';
+import { TanstackQueryProvider } from '@/integrations/tanstack-query';
 
 import NotFound from '@/features/system/not-found';
 

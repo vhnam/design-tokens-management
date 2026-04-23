@@ -4,7 +4,7 @@ import { Columns3CogIcon, TerminalSquareIcon } from 'lucide-react';
 import { forwardRef } from 'react';
 import type { ComponentProps, Ref } from 'react';
 
-import type { Session } from '@/lib/auth';
+import type { UserSession } from '@/types/auth';
 
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } from '@/components/primitives/sidebar';
 
@@ -69,7 +69,7 @@ const data = {
 };
 
 interface AppSidebarProps extends ComponentProps<typeof Sidebar> {
-  session: Session;
+  session: UserSession;
   onLogout: () => void;
 }
 

@@ -7,6 +7,6 @@ type TanstackQueryProviderProps = PropsWithChildren<{
 
 export const tanstackQueryClient = new QueryClient();
 
-export default function TanstackQueryProvider({ children, queryClient }: TanstackQueryProviderProps) {
+export const TanstackQueryProvider = ({ children, queryClient }: TanstackQueryProviderProps) => {
   return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
-}
+};

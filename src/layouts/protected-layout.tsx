@@ -1,7 +1,7 @@
 import { Navigate } from '@tanstack/react-router';
 import type { PropsWithChildren } from 'react';
 
-import { authClient } from '@/lib/auth-client';
+import { authClient } from '@/integrations/better-auth/auth-client';
 
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList } from '@/components/primitives/breadcrumb';
 import { LottiePlayer } from '@/components/primitives/lottie-player';

@@ -1,4 +1,4 @@
-import { TokenType } from '@/types/token';
+import { TokenType } from '@/enums/token';
 
 export const TOKEN_TYPE_LIST: TokenType[] = [
   TokenType.Color,

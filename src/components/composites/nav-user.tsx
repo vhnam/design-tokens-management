@@ -1,6 +1,6 @@
 import { ChevronsUpDownIcon, LogOutIcon, UserIcon } from 'lucide-react';
 
-import type { Session } from '@/lib/auth';
+import type { User } from '@/types/auth';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/primitives/avatar';
 import {
@@ -15,7 +15,7 @@ import {
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/primitives/sidebar';
 
 interface NavUserProps {
-  user: Session['user'];
+  user: User;
   onLogout: () => void;
 }
 
