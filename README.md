@@ -1,6 +1,6 @@
 # Design Tokens Management
 
-A TanStack Start app for managing multi-layer design tokens with SQLite persistence, Better Auth authentication, and a Tailwind-based component system.
+Design Tokens Management is a TanStack Start app for managing multi-layer design tokens with SQLite persistence, Better Auth authentication, and a Tailwind-based component system.
 
 ## Tech Stack
 
@@ -17,6 +17,19 @@ A TanStack Start app for managing multi-layer design tokens with SQLite persiste
 - Node.js 22+
 - pnpm 9+
 
+## Quick Start
+
+```bash
+pnpm install
+cp .env.example .env.local
+cp .env.example .env
+pnpm db::generate
+pnpm db:migrate
+pnpm dev
+```
+
+App runs at `http://localhost:3000`.
+
 ## Getting Started
 
 1. Install dependencies:
@@ -25,13 +38,18 @@ A TanStack Start app for managing multi-layer design tokens with SQLite persiste
    pnpm install
    ```
 
-2. Create local environment variables:
+2. Create environment variable files:
 
    ```bash
    cp .env.example .env.local
+   cp .env.example .env
    ```
 
-3. Fill required values in `.env.local`:
+   Why both files:
+   - `.env.local` is used by the app and local scripts.
+   - `.env` is used by commands that explicitly load `.env` (for example `pnpm db:sync`).
+
+3. Fill required values:
    - `BETTER_AUTH_URL` (for local dev: `http://localhost:3000`)
    - `BETTER_AUTH_SECRET` (generate with `npx -y @better-auth/cli secret`)
    - `DATABASE_URL` (for local SQLite: `dev.db`)
@@ -63,17 +81,15 @@ A TanStack Start app for managing multi-layer design tokens with SQLite persiste
    pnpm db:seed:primitives
    ```
 
-7. Start development server:
+7. Start the development server:
 
    ```bash
    pnpm dev
    ```
 
-App runs at `http://localhost:3000`.
-
 ## Scripts
 
-- `pnpm dev`: Start local development server on port `3000`
+- `pnpm dev`: Start local development server (default `http://localhost:3000`)
 - `pnpm build`: Build for production
 - `pnpm preview`: Preview production build locally
 - `pnpm test`: Run tests with Vitest
@@ -88,6 +104,11 @@ App runs at `http://localhost:3000`.
 - `pnpm db:studio`: Open Drizzle Studio
 - `pnpm db:sync`: Sync local and cloud database state
 - `pnpm db:seed:primitives`: Seed primitive tokens from `src/assets/primitive-tokens-tailwind-v4-colors.json`
+
+## API
+
+- Primitive tokens API route: `src/routes/api/primitive-tokens/$.ts`
+- Auth API route: `src/routes/api/auth/$.ts`
 
 ## Authentication
 
