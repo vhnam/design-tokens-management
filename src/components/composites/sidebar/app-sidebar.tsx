@@ -1,14 +1,22 @@
 'use client';
 
-import { Columns3CogIcon, TerminalSquareIcon } from 'lucide-react';
+import { Columns3CogIcon, HelpCircleIcon, TerminalSquareIcon } from 'lucide-react';
 import { forwardRef } from 'react';
 import type { ComponentProps, Ref } from 'react';
 
 import type { UserSession } from '@/types/auth';
 
-import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } from '@/components/primitives/sidebar';
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarRail,
+  SidebarSeparator,
+} from '@/components/primitives/sidebar';
 
 import { NavMain } from '@/components/composites/sidebar/nav-main';
+import { NavSecondary } from '@/components/composites/sidebar/nav-secondary';
 import { NavUser } from '@/components/composites/sidebar/nav-user';
 import { WorkspaceSwitcher } from '@/components/composites/sidebar/workspace-switcher';
 
@@ -41,20 +49,16 @@ const data = {
         },
         {
           title: 'Component Tokens',
-          url: '#',
+          url: '/tokens/component-tokens',
         },
       ],
     },
     {
-      title: 'Configuration',
+      title: 'Branding',
       url: '#',
       icon: <Columns3CogIcon />,
       isActive: true,
       items: [
-        {
-          title: 'Workspaces',
-          url: '#',
-        },
         {
           title: 'Brands',
           url: '#',
@@ -64,6 +68,14 @@ const data = {
           url: '#',
         },
       ],
+    },
+  ],
+  navSecondary: [
+    {
+      title: 'Help',
+      url: '/help',
+      icon: HelpCircleIcon,
+      isActive: false,
     },
   ],
 };
@@ -81,8 +93,10 @@ export const AppSidebar = forwardRef<ComponentProps<typeof Sidebar>, AppSidebarP
           <WorkspaceSwitcher workspaces={data.workspaces} />
         </SidebarHeader>
         <SidebarContent>
-          <NavMain title="Platform" items={data.navMain} />
+          <NavMain items={data.navMain} />
+          <NavSecondary className="mt-auto" items={data.navSecondary} />
         </SidebarContent>
+        <SidebarSeparator className="mx-0" />
         <SidebarFooter>
           <NavUser user={session.user} onLogout={onLogout} />
         </SidebarFooter>

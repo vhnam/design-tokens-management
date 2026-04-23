@@ -1,4 +1,5 @@
-import { ChevronsUpDownIcon, LogOutIcon, UserIcon } from 'lucide-react';
+import { Link } from '@tanstack/react-router';
+import { BoxesIcon, ChevronsUpDownIcon, LogOutIcon, UserIcon } from 'lucide-react';
 
 import type { User } from '@/types/auth';
 
@@ -19,28 +20,41 @@ interface NavUserProps {
   onLogout: () => void;
 }
 
-export function NavUser({ user, onLogout }: NavUserProps) {
-  const { isMobile } = useSidebar();
+interface UserProfileProps {
+  user: User;
+  showEmail?: boolean;
+}
 
+const UserProfile = ({ user, showEmail = false }: UserProfileProps) => {
   const fallbackName = user.name
     .split(' ')
     .map((name) => name.charAt(0).toUpperCase())
     .join('');
 
   return (
+    <>
+      <Avatar>
+        <AvatarImage src={user.image ?? ''} alt={user.name} />
+        <AvatarFallback className="bg-accent text-accent-foreground">{fallbackName}</AvatarFallback>
+      </Avatar>
+      <div className="grid flex-1 text-left text-sm leading-tight">
+        <span className="truncate font-medium">{user.name}</span>
+        {showEmail && <span className="truncate text-xs text-muted-foreground">{user.email}</span>}
+      </div>
+    </>
+  );
+};
+
+export function NavUser({ user, onLogout }: NavUserProps) {
+  const { isMobile } = useSidebar();
+
+  return (
     <SidebarMenu>
       <SidebarMenuItem>
         <DropdownMenu>
           <DropdownMenuTrigger render={<SidebarMenuButton size="lg" className="aria-expanded:bg-muted" />}>
-            <Avatar>
-              <AvatarImage src={user.image ?? ''} alt={user.name} />
-              <AvatarFallback className="bg-accent text-accent-foreground">{fallbackName}</AvatarFallback>
-            </Avatar>
-            <div className="grid flex-1 text-left text-sm leading-tight">
-              <span className="truncate font-medium">{user.name}</span>
-              <span className="truncate text-xs">{user.email}</span>
-            </div>
-            <ChevronsUpDownIcon className="ml-auto size-4" />
+            <UserProfile user={user} />
+            <ChevronsUpDownIcon className="ml-auto size-6" />
           </DropdownMenuTrigger>
           <DropdownMenuContent
             className="min-w-56 rounded-lg"
@@ -51,23 +65,28 @@ export function NavUser({ user, onLogout }: NavUserProps) {
             <DropdownMenuGroup>
               <DropdownMenuLabel className="p-0 font-normal">
                 <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                  <Avatar>
-                    <AvatarImage src={user.image ?? ''} alt={user.name} />
-                    <AvatarFallback>{fallbackName}</AvatarFallback>
-                  </Avatar>
-                  <div className="grid flex-1 text-left text-sm leading-tight">
-                    <span className="truncate font-medium">{user.name}</span>
-                    <span className="truncate text-xs">{user.email}</span>
-                  </div>
+                  <UserProfile user={user} showEmail />
                 </div>
               </DropdownMenuLabel>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <UserIcon />
-                Account
-              </DropdownMenuItem>
+              <DropdownMenuItem
+                render={
+                  <Link to="/settings/profile">
+                    <UserIcon />
+                    Profile
+                  </Link>
+                }
+              />
+              <DropdownMenuItem
+                render={
+                  <Link to="/settings/workspaces">
+                    <BoxesIcon />
+                    Workspaces
+                  </Link>
+                }
+              />
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={onLogout}>

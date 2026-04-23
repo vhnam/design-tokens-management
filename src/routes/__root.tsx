@@ -4,6 +4,8 @@ import type { PropsWithChildren } from 'react';
 
 import { TanstackQueryProvider } from '@/integrations/tanstack-query';
 
+import { ThemeProvider } from '@/lib/theme';
+
 import NotFound from '@/features/system/not-found';
 
 import { TooltipProvider } from '@/components/primitives/tooltip';
@@ -40,7 +42,7 @@ export const Route = createRootRouteWithContext<{
 
 function RootDocument({ children }: PropsWithChildren) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
@@ -57,9 +59,11 @@ function RootComponent() {
 
   return (
     <TanstackQueryProvider queryClient={options.context.queryClient}>
-      <TooltipProvider>
-        <Outlet />
-      </TooltipProvider>
+      <ThemeProvider defaultTheme="system" storageKey="theme">
+        <TooltipProvider>
+          <Outlet />
+        </TooltipProvider>
+      </ThemeProvider>
     </TanstackQueryProvider>
   );
 }

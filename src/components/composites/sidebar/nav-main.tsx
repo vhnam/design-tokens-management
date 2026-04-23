@@ -1,4 +1,5 @@
 import { ChevronRightIcon } from 'lucide-react';
+import type { ComponentPropsWithoutRef, ReactNode } from 'react';
 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/primitives/collapsible';
 import {
@@ -12,12 +13,12 @@ import {
   SidebarMenuSubItem,
 } from '@/components/primitives/sidebar';
 
-interface NavMainProps {
-  title: string;
+interface NavMainProps extends ComponentPropsWithoutRef<typeof SidebarGroup> {
+  title?: string;
   items: {
     title: string;
     url: string;
-    icon?: React.ReactNode;
+    icon?: ReactNode;
     isActive?: boolean;
     items?: {
       title: string;
@@ -26,9 +27,9 @@ interface NavMainProps {
   }[];
 }
 
-export function NavMain({ title, items }: NavMainProps) {
+export const NavMain = ({ title, items, ...props }: NavMainProps) => {
   return (
-    <SidebarGroup>
+    <SidebarGroup {...props}>
       <SidebarGroupLabel>{title}</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
@@ -41,7 +42,9 @@ export function NavMain({ title, items }: NavMainProps) {
             <CollapsibleTrigger render={<SidebarMenuButton tooltip={item.title} />}>
               {item.icon}
               <span>{item.title}</span>
-              <ChevronRightIcon className="ml-auto transition-transform duration-200 group-data-open/collapsible:rotate-90" />
+              {item.items && item.items.length > 0 && (
+                <ChevronRightIcon className="ml-auto transition-transform duration-200 group-data-open/collapsible:rotate-90" />
+              )}
             </CollapsibleTrigger>
             <CollapsibleContent>
               <SidebarMenuSub>
@@ -59,4 +62,4 @@ export function NavMain({ title, items }: NavMainProps) {
       </SidebarMenu>
     </SidebarGroup>
   );
-}
+};

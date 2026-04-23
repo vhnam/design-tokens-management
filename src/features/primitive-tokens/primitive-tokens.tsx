@@ -68,7 +68,7 @@ export const PrimitiveTokens = () => {
         </div>
       </div>
 
-      <div className="max-h-[calc(100vh-12rem)] overflow-auto rounded-none border border-border">
+      <div className="max-h-[calc(100vh-10rem)] overflow-auto rounded-none border border-border">
         <Table className="border-separate border-spacing-0">
           <TableHeader className="[&_tr]:border-border">
             {table.getHeaderGroups().map((headerGroup) => (
