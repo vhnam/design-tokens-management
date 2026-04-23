@@ -12,10 +12,20 @@ if (!process.env.DATABASE_URL) {
 const { db } = await import(new URL('../src/db/index.ts', import.meta.url).href);
 const { primitiveTokens } = await import(new URL('../src/db/tokens.table.ts', import.meta.url).href);
 
-const jsonUrl = new URL('../src/assets/primitive-tokens-tailwind-v4-colors.json', import.meta.url);
-const rawTokens = JSON.parse(readFileSync(jsonUrl, 'utf8')) as Array<
-  Omit<typeof primitiveTokens.$inferInsert, 'id' | 'createdAt' | 'updatedAt'>
->;
+type TokenRow = Omit<typeof primitiveTokens.$inferInsert, 'id' | 'createdAt' | 'updatedAt'>;
+
+const tokenFiles = [
+  '../src/assets/primitive-tokens-tailwind-v4-colors.json',
+  '../src/assets/primitive-tokens-tailwind-v4-typography.json',
+  '../src/assets/primitive-tokens-tailwind-v4-sizing.json',
+  '../src/assets/primitive-tokens-tailwind-v4-motion.json',
+  '../src/assets/primitive-tokens-tailwind-v4-shadows.json',
+];
+
+const rawTokens = tokenFiles.flatMap((file) => {
+  const url = new URL(file, import.meta.url);
+  return JSON.parse(readFileSync(url, 'utf8')) as Array<TokenRow>;
+});
 
 await db.delete(primitiveTokens);
 

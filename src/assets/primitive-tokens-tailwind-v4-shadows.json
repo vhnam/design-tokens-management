@@ -1,0 +1,128 @@
+[
+  {
+    "name": "--shadow-2xs",
+    "value": "0 1px rgb(0 0 0 / 0.05)",
+    "type": "shadow",
+    "description": "Tailwind v4 @theme box shadow — 2xs"
+  },
+  {
+    "name": "--shadow-xs",
+    "value": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+    "type": "shadow",
+    "description": "Tailwind v4 @theme box shadow — xs"
+  },
+  {
+    "name": "--shadow-sm",
+    "value": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+    "type": "shadow",
+    "description": "Tailwind v4 @theme box shadow — sm"
+  },
+  {
+    "name": "--shadow-md",
+    "value": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+    "type": "shadow",
+    "description": "Tailwind v4 @theme box shadow — md"
+  },
+  {
+    "name": "--shadow-lg",
+    "value": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+    "type": "shadow",
+    "description": "Tailwind v4 @theme box shadow — lg"
+  },
+  {
+    "name": "--shadow-xl",
+    "value": "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+    "type": "shadow",
+    "description": "Tailwind v4 @theme box shadow — xl"
+  },
+  {
+    "name": "--shadow-2xl",
+    "value": "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+    "type": "shadow",
+    "description": "Tailwind v4 @theme box shadow — 2xl"
+  },
+  {
+    "name": "--inset-shadow-2xs",
+    "value": "inset 0 1px rgb(0 0 0 / 0.05)",
+    "type": "shadow",
+    "description": "Tailwind v4 @theme inset shadow — 2xs"
+  },
+  {
+    "name": "--inset-shadow-xs",
+    "value": "inset 0 1px 1px rgb(0 0 0 / 0.05)",
+    "type": "shadow",
+    "description": "Tailwind v4 @theme inset shadow — xs"
+  },
+  {
+    "name": "--inset-shadow-sm",
+    "value": "inset 0 2px 4px rgb(0 0 0 / 0.05)",
+    "type": "shadow",
+    "description": "Tailwind v4 @theme inset shadow — sm"
+  },
+  {
+    "name": "--drop-shadow-xs",
+    "value": "0 1px 1px rgb(0 0 0 / 0.05)",
+    "type": "shadow",
+    "description": "Tailwind v4 @theme drop shadow — xs"
+  },
+  {
+    "name": "--drop-shadow-sm",
+    "value": "0 1px 2px rgb(0 0 0 / 0.15)",
+    "type": "shadow",
+    "description": "Tailwind v4 @theme drop shadow — sm"
+  },
+  {
+    "name": "--drop-shadow-md",
+    "value": "0 3px 3px rgb(0 0 0 / 0.12)",
+    "type": "shadow",
+    "description": "Tailwind v4 @theme drop shadow — md"
+  },
+  {
+    "name": "--drop-shadow-lg",
+    "value": "0 4px 4px rgb(0 0 0 / 0.15)",
+    "type": "shadow",
+    "description": "Tailwind v4 @theme drop shadow — lg"
+  },
+  {
+    "name": "--drop-shadow-xl",
+    "value": "0 9px 7px rgb(0 0 0 / 0.1)",
+    "type": "shadow",
+    "description": "Tailwind v4 @theme drop shadow — xl"
+  },
+  {
+    "name": "--drop-shadow-2xl",
+    "value": "0 25px 25px rgb(0 0 0 / 0.15)",
+    "type": "shadow",
+    "description": "Tailwind v4 @theme drop shadow — 2xl"
+  },
+  {
+    "name": "--text-shadow-2xs",
+    "value": "0 1px 0 rgb(0 0 0 / 0.15)",
+    "type": "shadow",
+    "description": "Tailwind v4 @theme text shadow — 2xs"
+  },
+  {
+    "name": "--text-shadow-xs",
+    "value": "0 1px 1px rgb(0 0 0 / 0.2)",
+    "type": "shadow",
+    "description": "Tailwind v4 @theme text shadow — xs"
+  },
+  {
+    "name": "--text-shadow-sm",
+    "value": "0 1px 0 rgb(0 0 0 / 0.075), 0 1px 1px rgb(0 0 0 / 0.075), 0 2px 2px rgb(0 0 0 / 0.075)",
+    "type": "shadow",
+    "description": "Tailwind v4 @theme text shadow — sm"
+  },
+  {
+    "name": "--text-shadow-md",
+    "value": "0 1px 1px rgb(0 0 0 / 0.1), 0 1px 2px rgb(0 0 0 / 0.1), 0 2px 4px rgb(0 0 0 / 0.1)",
+    "type": "shadow",
+    "description": "Tailwind v4 @theme text shadow — md"
+  },
+  {
+    "name": "--text-shadow-lg",
+    "value": "0 1px 2px rgb(0 0 0 / 0.1), 0 3px 2px rgb(0 0 0 / 0.1), 0 4px 8px rgb(0 0 0 / 0.1)",
+    "type": "shadow",
+    "description": "Tailwind v4 @theme text shadow — lg"
+  }
+]

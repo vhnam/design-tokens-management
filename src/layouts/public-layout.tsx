@@ -4,7 +4,6 @@ import type { PropsWithChildren } from 'react';
 import { authClient } from '@/integrations/better-auth/auth-client';
 
 import { LottiePlayer } from '@/components/primitives/lottie-player';
-import { Toaster } from '@/components/primitives/sonner';
 
 export default function PublicLayout({ children }: PropsWithChildren) {
   const { data: session, isPending } = authClient.useSession();
@@ -21,10 +20,5 @@ export default function PublicLayout({ children }: PropsWithChildren) {
     return <Navigate to="/" />;
   }
 
-  return (
-    <>
-      <Toaster />
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }

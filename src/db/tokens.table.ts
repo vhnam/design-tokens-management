@@ -1,13 +1,9 @@
-import { sql } from 'drizzle-orm';
-import { index, integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { index, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
 import { TokenLayer, TokenTheme } from '@/enums/token';
 import type { TokenType } from '@/enums/token';
 
-const timestampColumns = {
-  createdAt: integer('created_at', { mode: 'timestamp' }).default(sql`(unixepoch())`),
-  updatedAt: integer('updated_at', { mode: 'timestamp' }).default(sql`(unixepoch())`),
-};
+import { timestampColumns } from './base.table';
 
 // shared column factories
 const baseColumns = {
@@ -67,23 +63,3 @@ export const componentTokens = sqliteTable(
     index('component_brand_theme_idx').on(t.brand, t.theme),
   ],
 );
-
-export const brands = sqliteTable('brands', {
-  id: text('id')
-    .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
-  workspaceId: text('workspace_id').notNull(),
-  name: text('name').notNull(), // "Brand A" — display name
-  slug: text('slug').notNull(), // "brand-a" — used as FK in component/override tables
-  ...timestampColumns,
-});
-
-export const workspaces = sqliteTable('workspaces', {
-  id: text('id')
-    .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
-  name: text('name').notNull(),
-  brands: text('brands').notNull().default('["default"]'), // JSON array
-  themes: text('themes').notNull().default('["light","dark"]'), // JSON array
-  ...timestampColumns,
-});

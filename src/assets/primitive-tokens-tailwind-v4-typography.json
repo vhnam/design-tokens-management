@@ -1,0 +1,218 @@
+[
+  {
+    "name": "--font-sans",
+    "value": "ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'",
+    "type": "fontFamily",
+    "description": "Tailwind v4 @theme font family — sans-serif"
+  },
+  {
+    "name": "--font-serif",
+    "value": "ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif",
+    "type": "fontFamily",
+    "description": "Tailwind v4 @theme font family — serif"
+  },
+  {
+    "name": "--font-mono",
+    "value": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
+    "type": "fontFamily",
+    "description": "Tailwind v4 @theme font family — monospace"
+  },
+  {
+    "name": "--font-weight-thin",
+    "value": "100",
+    "type": "fontWeight",
+    "description": "Tailwind v4 @theme font weight — thin"
+  },
+  {
+    "name": "--font-weight-extralight",
+    "value": "200",
+    "type": "fontWeight",
+    "description": "Tailwind v4 @theme font weight — extralight"
+  },
+  {
+    "name": "--font-weight-light",
+    "value": "300",
+    "type": "fontWeight",
+    "description": "Tailwind v4 @theme font weight — light"
+  },
+  {
+    "name": "--font-weight-normal",
+    "value": "400",
+    "type": "fontWeight",
+    "description": "Tailwind v4 @theme font weight — normal"
+  },
+  {
+    "name": "--font-weight-medium",
+    "value": "500",
+    "type": "fontWeight",
+    "description": "Tailwind v4 @theme font weight — medium"
+  },
+  {
+    "name": "--font-weight-semibold",
+    "value": "600",
+    "type": "fontWeight",
+    "description": "Tailwind v4 @theme font weight — semibold"
+  },
+  {
+    "name": "--font-weight-bold",
+    "value": "700",
+    "type": "fontWeight",
+    "description": "Tailwind v4 @theme font weight — bold"
+  },
+  {
+    "name": "--font-weight-extrabold",
+    "value": "800",
+    "type": "fontWeight",
+    "description": "Tailwind v4 @theme font weight — extrabold"
+  },
+  {
+    "name": "--font-weight-black",
+    "value": "900",
+    "type": "fontWeight",
+    "description": "Tailwind v4 @theme font weight — black"
+  },
+  {
+    "name": "--text-xs",
+    "value": "{\"fontSize\":\"0.75rem\",\"lineHeight\":\"calc(1 / 0.75)\"}",
+    "type": "typography",
+    "description": "Tailwind v4 @theme typography — xs (12px)"
+  },
+  {
+    "name": "--text-sm",
+    "value": "{\"fontSize\":\"0.875rem\",\"lineHeight\":\"calc(1.25 / 0.875)\"}",
+    "type": "typography",
+    "description": "Tailwind v4 @theme typography — sm (14px)"
+  },
+  {
+    "name": "--text-base",
+    "value": "{\"fontSize\":\"1rem\",\"lineHeight\":\"calc(1.5 / 1)\"}",
+    "type": "typography",
+    "description": "Tailwind v4 @theme typography — base (16px)"
+  },
+  {
+    "name": "--text-lg",
+    "value": "{\"fontSize\":\"1.125rem\",\"lineHeight\":\"calc(1.75 / 1.125)\"}",
+    "type": "typography",
+    "description": "Tailwind v4 @theme typography — lg (18px)"
+  },
+  {
+    "name": "--text-xl",
+    "value": "{\"fontSize\":\"1.25rem\",\"lineHeight\":\"calc(1.75 / 1.25)\"}",
+    "type": "typography",
+    "description": "Tailwind v4 @theme typography — xl (20px)"
+  },
+  {
+    "name": "--text-2xl",
+    "value": "{\"fontSize\":\"1.5rem\",\"lineHeight\":\"calc(2 / 1.5)\"}",
+    "type": "typography",
+    "description": "Tailwind v4 @theme typography — 2xl (24px)"
+  },
+  {
+    "name": "--text-3xl",
+    "value": "{\"fontSize\":\"1.875rem\",\"lineHeight\":\"calc(2.25 / 1.875)\"}",
+    "type": "typography",
+    "description": "Tailwind v4 @theme typography — 3xl (30px)"
+  },
+  {
+    "name": "--text-4xl",
+    "value": "{\"fontSize\":\"2.25rem\",\"lineHeight\":\"calc(2.5 / 2.25)\"}",
+    "type": "typography",
+    "description": "Tailwind v4 @theme typography — 4xl (36px)"
+  },
+  {
+    "name": "--text-5xl",
+    "value": "{\"fontSize\":\"3rem\",\"lineHeight\":\"1\"}",
+    "type": "typography",
+    "description": "Tailwind v4 @theme typography — 5xl (48px)"
+  },
+  {
+    "name": "--text-6xl",
+    "value": "{\"fontSize\":\"3.75rem\",\"lineHeight\":\"1\"}",
+    "type": "typography",
+    "description": "Tailwind v4 @theme typography — 6xl (60px)"
+  },
+  {
+    "name": "--text-7xl",
+    "value": "{\"fontSize\":\"4.5rem\",\"lineHeight\":\"1\"}",
+    "type": "typography",
+    "description": "Tailwind v4 @theme typography — 7xl (72px)"
+  },
+  {
+    "name": "--text-8xl",
+    "value": "{\"fontSize\":\"6rem\",\"lineHeight\":\"1\"}",
+    "type": "typography",
+    "description": "Tailwind v4 @theme typography — 8xl (96px)"
+  },
+  {
+    "name": "--text-9xl",
+    "value": "{\"fontSize\":\"8rem\",\"lineHeight\":\"1\"}",
+    "type": "typography",
+    "description": "Tailwind v4 @theme typography — 9xl (128px)"
+  },
+  {
+    "name": "--tracking-tighter",
+    "value": "-0.05em",
+    "type": "dimension",
+    "description": "Tailwind v4 @theme letter spacing — tighter"
+  },
+  {
+    "name": "--tracking-tight",
+    "value": "-0.025em",
+    "type": "dimension",
+    "description": "Tailwind v4 @theme letter spacing — tight"
+  },
+  {
+    "name": "--tracking-normal",
+    "value": "0em",
+    "type": "dimension",
+    "description": "Tailwind v4 @theme letter spacing — normal"
+  },
+  {
+    "name": "--tracking-wide",
+    "value": "0.025em",
+    "type": "dimension",
+    "description": "Tailwind v4 @theme letter spacing — wide"
+  },
+  {
+    "name": "--tracking-wider",
+    "value": "0.05em",
+    "type": "dimension",
+    "description": "Tailwind v4 @theme letter spacing — wider"
+  },
+  {
+    "name": "--tracking-widest",
+    "value": "0.1em",
+    "type": "dimension",
+    "description": "Tailwind v4 @theme letter spacing — widest"
+  },
+  {
+    "name": "--leading-tight",
+    "value": "1.25",
+    "type": "number",
+    "description": "Tailwind v4 @theme line height — tight"
+  },
+  {
+    "name": "--leading-snug",
+    "value": "1.375",
+    "type": "number",
+    "description": "Tailwind v4 @theme line height — snug"
+  },
+  {
+    "name": "--leading-normal",
+    "value": "1.5",
+    "type": "number",
+    "description": "Tailwind v4 @theme line height — normal"
+  },
+  {
+    "name": "--leading-relaxed",
+    "value": "1.625",
+    "type": "number",
+    "description": "Tailwind v4 @theme line height — relaxed"
+  },
+  {
+    "name": "--leading-loose",
+    "value": "2",
+    "type": "number",
+    "description": "Tailwind v4 @theme line height — loose"
+  }
+]

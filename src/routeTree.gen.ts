@@ -13,6 +13,7 @@ import { Route as PublicRouteImport } from './routes/_public'
 import { Route as ProtectedRouteImport } from './routes/_protected'
 import { Route as ProtectedIndexRouteImport } from './routes/_protected/index'
 import { Route as ProtectedHelpRouteImport } from './routes/_protected/help'
+import { Route as ApiWorkspacesSplatRouteImport } from './routes/api/workspaces/$'
 import { Route as ApiSemanticTokensSplatRouteImport } from './routes/api/semantic-tokens/$'
 import { Route as ApiPrimitiveTokensSplatRouteImport } from './routes/api/primitive-tokens/$'
 import { Route as ApiComponentTokensSplatRouteImport } from './routes/api/component-tokens/$'
@@ -43,6 +44,11 @@ const ProtectedHelpRoute = ProtectedHelpRouteImport.update({
   id: '/help',
   path: '/help',
   getParentRoute: () => ProtectedRoute,
+} as any)
+const ApiWorkspacesSplatRoute = ApiWorkspacesSplatRouteImport.update({
+  id: '/api/workspaces/$',
+  path: '/api/workspaces/$',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ApiSemanticTokensSplatRoute = ApiSemanticTokensSplatRouteImport.update({
   id: '/api/semantic-tokens/$',
@@ -126,6 +132,7 @@ export interface FileRoutesByFullPath {
   '/api/component-tokens/$': typeof ApiComponentTokensSplatRoute
   '/api/primitive-tokens/$': typeof ApiPrimitiveTokensSplatRoute
   '/api/semantic-tokens/$': typeof ApiSemanticTokensSplatRoute
+  '/api/workspaces/$': typeof ApiWorkspacesSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof ProtectedIndexRoute
@@ -142,6 +149,7 @@ export interface FileRoutesByTo {
   '/api/component-tokens/$': typeof ApiComponentTokensSplatRoute
   '/api/primitive-tokens/$': typeof ApiPrimitiveTokensSplatRoute
   '/api/semantic-tokens/$': typeof ApiSemanticTokensSplatRoute
+  '/api/workspaces/$': typeof ApiWorkspacesSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -161,6 +169,7 @@ export interface FileRoutesById {
   '/api/component-tokens/$': typeof ApiComponentTokensSplatRoute
   '/api/primitive-tokens/$': typeof ApiPrimitiveTokensSplatRoute
   '/api/semantic-tokens/$': typeof ApiSemanticTokensSplatRoute
+  '/api/workspaces/$': typeof ApiWorkspacesSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -179,6 +188,7 @@ export interface FileRouteTypes {
     | '/api/component-tokens/$'
     | '/api/primitive-tokens/$'
     | '/api/semantic-tokens/$'
+    | '/api/workspaces/$'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -195,6 +205,7 @@ export interface FileRouteTypes {
     | '/api/component-tokens/$'
     | '/api/primitive-tokens/$'
     | '/api/semantic-tokens/$'
+    | '/api/workspaces/$'
   id:
     | '__root__'
     | '/_protected'
@@ -213,6 +224,7 @@ export interface FileRouteTypes {
     | '/api/component-tokens/$'
     | '/api/primitive-tokens/$'
     | '/api/semantic-tokens/$'
+    | '/api/workspaces/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -222,6 +234,7 @@ export interface RootRouteChildren {
   ApiComponentTokensSplatRoute: typeof ApiComponentTokensSplatRoute
   ApiPrimitiveTokensSplatRoute: typeof ApiPrimitiveTokensSplatRoute
   ApiSemanticTokensSplatRoute: typeof ApiSemanticTokensSplatRoute
+  ApiWorkspacesSplatRoute: typeof ApiWorkspacesSplatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -253,6 +266,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/help'
       preLoaderRoute: typeof ProtectedHelpRouteImport
       parentRoute: typeof ProtectedRoute
+    }
+    '/api/workspaces/$': {
+      id: '/api/workspaces/$'
+      path: '/api/workspaces/$'
+      fullPath: '/api/workspaces/$'
+      preLoaderRoute: typeof ApiWorkspacesSplatRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/api/semantic-tokens/$': {
       id: '/api/semantic-tokens/$'
@@ -387,6 +407,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiComponentTokensSplatRoute: ApiComponentTokensSplatRoute,
   ApiPrimitiveTokensSplatRoute: ApiPrimitiveTokensSplatRoute,
   ApiSemanticTokensSplatRoute: ApiSemanticTokensSplatRoute,
+  ApiWorkspacesSplatRoute: ApiWorkspacesSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

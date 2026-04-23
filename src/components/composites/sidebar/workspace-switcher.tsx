@@ -3,6 +3,9 @@
 import { ChevronsUpDownIcon, PlusIcon } from 'lucide-react';
 import { useState } from 'react';
 
+import type { Workspace } from '@/types/workspace';
+
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/primitives/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,14 +19,13 @@ import {
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/primitives/sidebar';
 
 interface TeamSwitcherProps {
-  workspaces: {
-    name: string;
-  }[];
+  workspaces: Workspace[];
 }
 
 export const WorkspaceSwitcher = ({ workspaces }: TeamSwitcherProps) => {
   const { isMobile } = useSidebar();
-  const [activeWorkspace, setActiveWorkspace] = useState<{ name: string }>(workspaces[0]);
+  const [activeWorkspace, setActiveWorkspace] = useState<Workspace>(workspaces[0]);
+
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -36,9 +38,10 @@ export const WorkspaceSwitcher = ({ workspaces }: TeamSwitcherProps) => {
               />
             }
           >
-            <div className="flex font-heading aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-              {activeWorkspace.name.charAt(0).toUpperCase()}
-            </div>
+            <Avatar>
+              <AvatarImage src={activeWorkspace.image ?? ''} alt={activeWorkspace.name} />
+              <AvatarFallback>{activeWorkspace.name.charAt(0).toUpperCase()}</AvatarFallback>
+            </Avatar>
             <div className="grid flex-1 text-left text-sm leading-tight font-heading">
               <span className="truncate font-medium">{activeWorkspace.name}</span>
             </div>
@@ -58,9 +61,10 @@ export const WorkspaceSwitcher = ({ workspaces }: TeamSwitcherProps) => {
                   onClick={() => setActiveWorkspace(workspace)}
                   className="gap-2 p-2"
                 >
-                  <div className="flex size-6 items-center justify-center rounded-md border">
-                    {workspace.name.charAt(0).toUpperCase()}
-                  </div>
+                  <Avatar size="sm">
+                    <AvatarImage src={workspace.image ?? ''} alt={workspace.name} />
+                    <AvatarFallback>{workspace.name.charAt(0).toUpperCase()}</AvatarFallback>
+                  </Avatar>
                   {workspace.name}
                   <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut>
                 </DropdownMenuItem>

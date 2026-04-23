@@ -1,6 +1,10 @@
 import type { Row } from '@tanstack/react-table';
 import { PencilIcon, TrashIcon } from 'lucide-react';
 
+import { TOKEN_TYPE_LABELS } from '@/contants/token';
+
+import { TokenType } from '@/enums/token';
+
 import type { PrimitiveToken } from '@/types/token';
 
 import { usePrimitiveTokensTableStore } from '@/stores/primitive-tokens-table.store';
@@ -20,10 +24,12 @@ export const NameCell = ({ row }: TableCell) => {
 export const ValueCell = ({ row }: TableCell) => {
   const value = row.original.value;
   return (
-    <div className="inline-flex cursor-default items-center gap-2 py-1">
-      <span className="inline-block size-6 shrink-0 rounded border border-border" style={{ backgroundColor: value }}>
-        &nbsp;
-      </span>
+    <div className="flex cursor-default items-center gap-2 py-1">
+      {row.original.type === TokenType.Color && (
+        <span className="inline-block size-6 shrink-0 rounded border border-border" style={{ backgroundColor: value }}>
+          &nbsp;
+        </span>
+      )}
       {value}
     </div>
   );
@@ -31,15 +37,15 @@ export const ValueCell = ({ row }: TableCell) => {
 
 export const TypeCell = ({ row }: TableCell) => {
   return (
-    <span className="inline-flex cursor-default items-center py-1">
-      <Badge variant="outline">{row.original.type}</Badge>
+    <span className="flex cursor-default items-center py-1">
+      <Badge variant="outline">{TOKEN_TYPE_LABELS[row.original.type]}</Badge>
     </span>
   );
 };
 
 export const DescriptionCell = ({ row }: TableCell) => {
   const text = row.original.description;
-  return <span className="inline-flex items-center cursor-default py-1 text-muted-foreground">{text || '—'}</span>;
+  return <span className="flex items-center cursor-default py-1 text-muted-foreground">{text || '—'}</span>;
 };
 
 export const ActionsCell = ({ row }: TableCell) => {
@@ -54,7 +60,7 @@ export const ActionsCell = ({ row }: TableCell) => {
   };
 
   return (
-    <div className="inline-flex items-center gap-2 py-1">
+    <div className="flex items-center justify-end gap-2 py-1">
       <Tooltip>
         <TooltipTrigger
           render={

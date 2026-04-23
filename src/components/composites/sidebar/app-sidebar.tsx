@@ -5,6 +5,7 @@ import { forwardRef } from 'react';
 import type { ComponentProps, Ref } from 'react';
 
 import type { UserSession } from '@/types/auth';
+import type { Workspace } from '@/types/workspace';
 
 import {
   Sidebar,
@@ -21,17 +22,6 @@ import { NavUser } from '@/components/composites/sidebar/nav-user';
 import { WorkspaceSwitcher } from '@/components/composites/sidebar/workspace-switcher';
 
 const data = {
-  workspaces: [
-    {
-      name: 'Acme Inc',
-    },
-    {
-      name: 'Acme Corp.',
-    },
-    {
-      name: 'Evil Corp.',
-    },
-  ],
   navMain: [
     {
       title: 'Tokens',
@@ -82,15 +72,16 @@ const data = {
 
 interface AppSidebarProps extends ComponentProps<typeof Sidebar> {
   session: UserSession;
+  workspaces: Workspace[];
   onLogout: () => void;
 }
 
 export const AppSidebar = forwardRef<ComponentProps<typeof Sidebar>, AppSidebarProps>(
-  ({ session, onLogout, ...props }, ref) => {
+  ({ session, workspaces, onLogout, ...props }, ref) => {
     return (
       <Sidebar collapsible="icon" {...props} ref={ref as Ref<HTMLDivElement>}>
         <SidebarHeader>
-          <WorkspaceSwitcher workspaces={data.workspaces} />
+          <WorkspaceSwitcher workspaces={workspaces} />
         </SidebarHeader>
         <SidebarSeparator className="mx-0" />
         <SidebarContent>

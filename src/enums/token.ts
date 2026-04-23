@@ -17,4 +17,8 @@ export enum TokenType {
   Duration = 'duration',
   CubicBezier = 'cubicBezier',
   Number = 'number',
+  Typography = 'typography',
+  Shadow = 'shadow',
+  Border = 'border',
+  Gradient = 'gradient',
 }

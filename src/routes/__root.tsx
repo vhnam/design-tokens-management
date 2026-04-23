@@ -8,6 +8,7 @@ import { ThemeProvider } from '@/lib/theme';
 
 import NotFound from '@/features/system/not-found';
 
+import { Toaster } from '@/components/primitives/sonner';
 import { TooltipProvider } from '@/components/primitives/tooltip';
 
 import appCss from '@/styles.css?url';
@@ -63,6 +64,7 @@ function RootComponent() {
         <TooltipProvider>
           <Outlet />
         </TooltipProvider>
+        <Toaster />
       </ThemeProvider>
     </TanstackQueryProvider>
   );
