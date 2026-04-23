@@ -8,7 +8,7 @@ import { LottiePlayer } from '@/components/primitives/lottie-player';
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/primitives/sidebar';
 import { Toaster } from '@/components/primitives/sonner';
 
-import { AppSidebar } from '@/components/composites/app-sidebar';
+import { AppSidebar } from '@/components/composites/sidebar/app-sidebar';
 
 export default function ProtectedLayout({ children }: PropsWithChildren) {
   const { data: session, isPending } = authClient.useSession();

@@ -23,8 +23,8 @@ import {
   DialogTrigger,
 } from '@/components/primitives/dialog';
 
-import { InputField } from '@/components/composites/input-field';
-import { SelectField } from '@/components/composites/select-field';
+import { InputField } from '@/components/composites/field/input-field';
+import { SelectField } from '@/components/composites/field/select-field';
 
 import { useCreatePrimitiveToken } from './primitive-tokens.actions';
 

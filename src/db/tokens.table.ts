@@ -1,8 +1,8 @@
 import { sql } from 'drizzle-orm';
-import { index, integer, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core';
+import { index, integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
 import { TokenLayer, TokenTheme } from '@/enums/token';
-import type { SemanticTokenGroup, TokenType } from '@/enums/token';
+import type { TokenType } from '@/enums/token';
 
 const timestampColumns = {
   createdAt: integer('created_at', { mode: 'timestamp' }).default(sql`(unixepoch())`),
@@ -31,14 +31,11 @@ export const semanticTokens = sqliteTable(
   'semantic_tokens',
   {
     ...baseColumns,
-    group: text('group').$type<SemanticTokenGroup>().notNull(),
+    group: text('group').notNull(),
     theme: text('theme').$type<TokenTheme>().notNull().default(TokenTheme.Light),
     ...timestampColumns,
   },
-  (t) => [
-    uniqueIndex('semantic_theme_group_name_uniq').on(t.theme, t.group, t.name),
-    index('semantic_theme_group_idx').on(t.theme, t.group),
-  ],
+  (t) => [index('semantic_theme_group_name_idx').on(t.theme, t.group, t.name)],
 );
 
 // Layer 3a — brand overrides on semantic tokens

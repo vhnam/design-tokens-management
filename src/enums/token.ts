@@ -18,11 +18,3 @@ export enum TokenType {
   CubicBezier = 'cubicBezier',
   Number = 'number',
 }
-
-export enum SemanticTokenGroup {
-  Surface = 'surface', // background
-  Content = 'content', // foreground / text / icon
-  Border = 'border', // strokes / dividers
-  Interactive = 'interactive', // brand / action colors
-  Feedback = 'feedback', // status communication
-}

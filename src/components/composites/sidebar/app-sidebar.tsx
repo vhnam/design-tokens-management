@@ -8,9 +8,9 @@ import type { UserSession } from '@/types/auth';
 
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } from '@/components/primitives/sidebar';
 
-import { NavMain } from '@/components/composites/nav-main';
-import { NavUser } from '@/components/composites/nav-user';
-import { WorkspaceSwitcher } from '@/components/composites/workspace-switcher';
+import { NavMain } from '@/components/composites/sidebar/nav-main';
+import { NavUser } from '@/components/composites/sidebar/nav-user';
+import { WorkspaceSwitcher } from '@/components/composites/sidebar/workspace-switcher';
 
 const data = {
   workspaces: [
