@@ -36,10 +36,10 @@ export const WorkspaceSwitcher = ({ workspaces }: TeamSwitcherProps) => {
               />
             }
           >
-            <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+            <div className="flex font-heading aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
               {activeWorkspace.name.charAt(0).toUpperCase()}
             </div>
-            <div className="grid flex-1 text-left text-sm leading-tight">
+            <div className="grid flex-1 text-left text-sm leading-tight font-heading">
               <span className="truncate font-medium">{activeWorkspace.name}</span>
             </div>
             <ChevronsUpDownIcon className="ml-auto" />

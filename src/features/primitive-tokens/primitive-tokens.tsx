@@ -60,7 +60,7 @@ export const PrimitiveTokens = () => {
     <div className="h-full space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">Primitive Tokens</h1>
+          <h1 className="text-2xl font-bold font-heading">Primitive Tokens</h1>
           <p className="text-sm text-muted-foreground">Foundation-level design tokens</p>
         </div>
         <div className="flex items-center gap-2">

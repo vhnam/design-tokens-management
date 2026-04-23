@@ -70,7 +70,7 @@ export const ComponentTokens = () => {
     <div className="h-full space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">Component Tokens</h1>
+          <h1 className="text-2xl font-bold font-heading">Component Tokens</h1>
           <p className="text-sm text-muted-foreground">Component-specific tokens referencing semantic values</p>
         </div>
       </div>

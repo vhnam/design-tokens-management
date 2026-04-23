@@ -65,7 +65,7 @@ export const SemanticTokens = () => {
     <div className="h-full space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">Semantic Tokens</h1>
+          <h1 className="text-2xl font-bold font-heading">Semantic Tokens</h1>
           <p className="text-sm text-muted-foreground">Context-aware tokens referencing primitive values</p>
         </div>
       </div>

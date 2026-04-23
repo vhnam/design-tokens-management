@@ -92,6 +92,7 @@ export const AppSidebar = forwardRef<ComponentProps<typeof Sidebar>, AppSidebarP
         <SidebarHeader>
           <WorkspaceSwitcher workspaces={data.workspaces} />
         </SidebarHeader>
+        <SidebarSeparator className="mx-0" />
         <SidebarContent>
           <NavMain items={data.navMain} />
           <NavSecondary className="mt-auto" items={data.navSecondary} />
