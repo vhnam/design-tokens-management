@@ -1,9 +1,10 @@
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
-import { type ComponentProps, useId, useState } from 'react';
+import { useId, useState } from 'react';
+import type { ComponentProps } from 'react';
 import { Controller } from 'react-hook-form';
 
 import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/primitives/field';
-import { Input } from '@/components/primitives/input';
+import type { Input } from '@/components/primitives/input';
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/primitives/input-group';
 
 interface PasswordFieldProps extends Omit<ComponentProps<typeof Input>, 'name' | 'type'> {

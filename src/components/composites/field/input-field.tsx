@@ -1,4 +1,5 @@
-import { type ComponentProps, useId } from 'react';
+import { useId } from 'react';
+import type { ComponentProps } from 'react';
 import { Controller } from 'react-hook-form';
 
 import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/primitives/field';
