@@ -17,5 +17,12 @@ export type PrimitiveToken = {
   name: string;
   value: string;
   type: TokenType;
-  description: string;
+  description?: string;
+};
+
+export type SemanticToken = {
+  id: string;
+  semanticToken: string;
+  primitiveToken: PrimitiveToken;
+  description?: string;
 };

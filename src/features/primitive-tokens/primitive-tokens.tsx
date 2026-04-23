@@ -5,16 +5,17 @@ import { cn } from '@/lib/utils';
 
 import type { PrimitiveToken } from '@/types/token';
 
+import { LottiePlayer } from '@/components/primitives/lottie-player';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/primitives/table';
 
 import { PrimitiveTokenAddDialog } from './primitive-token-add-dialog';
 import { ActionsCell, DescriptionCell, NameCell, TypeCell, ValueCell } from './primitive-tokens-table';
-import { usePrimitiveTokensActions } from './primitive-tokens.actions';
+import { useGetPrimitiveTokens } from './primitive-tokens.actions';
 
 const columnHelper = createColumnHelper<PrimitiveToken>();
 
 export const PrimitiveTokens = () => {
-  const { data, isLoading, error } = usePrimitiveTokensActions();
+  const { data, isLoading, error } = useGetPrimitiveTokens();
 
   const tableData = useMemo(() => (Array.isArray(data) ? (data as PrimitiveToken[]) : []), [data]);
 
@@ -67,7 +68,7 @@ export const PrimitiveTokens = () => {
         </div>
       </div>
 
-      <div className="h-[calc(100vh-12rem)] overflow-auto rounded-none border border-border">
+      <div className="max-h-[calc(100vh-12rem)] overflow-auto rounded-none border border-border">
         <Table className="border-separate border-spacing-0">
           <TableHeader className="[&_tr]:border-border">
             {table.getHeaderGroups().map((headerGroup) => (
@@ -86,15 +87,26 @@ export const PrimitiveTokens = () => {
             ))}
           </TableHeader>
           <TableBody className="[&_tr:last-child]:border-0">
-            {table.getRowModel().rows.map((row) => (
-              <TableRow key={row.id} className={cn('border-b border-border transition-colors hover:bg-muted/40')}>
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id} className="p-3 align-middle">
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
-                ))}
+            {table.getRowModel().rows.length === 0 ? (
+              <TableRow className="hover:bg-transparent">
+                <TableCell colSpan={table.getAllColumns().length} className="p-6">
+                  <div className="flex items-center justify-center flex-col">
+                    <LottiePlayer src="/animations/no-data.lottie" loop autoplay className="size-40" />
+                    <p className="text-sm text-muted-foreground">No data found</p>
+                  </div>
+                </TableCell>
               </TableRow>
-            ))}
+            ) : (
+              table.getRowModel().rows.map((row) => (
+                <TableRow key={row.id} className={cn('border-b border-border transition-colors hover:bg-muted/40')}>
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id} className="p-3 align-middle">
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            )}
           </TableBody>
         </Table>
       </div>

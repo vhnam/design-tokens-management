@@ -29,19 +29,19 @@ export const PrimitiveTokenRemoveDialog = ({ tokens }: PrimitiveTokenRemoveDialo
   const deleteTokens = useDeletePrimitiveTokens();
 
   const handleDelete = useCallback(() => {
-    deleteTokens.mutate(
-      tokens.map((token) => token.id),
-      {
-        onSuccess: () => {
-          setOpen(false);
-          usePrimitiveTokensTableStore.getState().clearSelection();
-          toast.success('Tokens deleted successfully');
-        },
-        onError: (error) => {
-          toast.error(error.message);
-        },
-      },
-    );
+    // deleteTokens.mutate(
+    //   {id: }
+    //   {
+    //     onSuccess: () => {
+    //       setOpen(false);
+    //       usePrimitiveTokensTableStore.getState().clearSelection();
+    //       toast.success('Tokens deleted successfully');
+    //     },
+    //     onError: (error) => {
+    //       toast.error(error.message);
+    //     },
+    //   },
+    // );
   }, [deleteTokens, tokens, setOpen]);
 
   return (

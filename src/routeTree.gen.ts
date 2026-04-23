@@ -12,7 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as PublicRouteImport } from './routes/_public'
 import { Route as ProtectedRouteImport } from './routes/_protected'
 import { Route as ProtectedIndexRouteImport } from './routes/_protected/index'
-import { Route as ApiTokensSplatRouteImport } from './routes/api/tokens/$'
+import { Route as ApiSemanticTokensSplatRouteImport } from './routes/api/semantic-tokens/$'
+import { Route as ApiPrimitiveTokensSplatRouteImport } from './routes/api/primitive-tokens/$'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as PublicAuthRegisterRouteImport } from './routes/_public/auth/register'
 import { Route as PublicAuthLoginRouteImport } from './routes/_public/auth/login'
@@ -33,9 +34,14 @@ const ProtectedIndexRoute = ProtectedIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ProtectedRoute,
 } as any)
-const ApiTokensSplatRoute = ApiTokensSplatRouteImport.update({
-  id: '/api/tokens/$',
-  path: '/api/tokens/$',
+const ApiSemanticTokensSplatRoute = ApiSemanticTokensSplatRouteImport.update({
+  id: '/api/semantic-tokens/$',
+  path: '/api/semantic-tokens/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPrimitiveTokensSplatRoute = ApiPrimitiveTokensSplatRouteImport.update({
+  id: '/api/primitive-tokens/$',
+  path: '/api/primitive-tokens/$',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
@@ -80,7 +86,8 @@ export interface FileRoutesByFullPath {
   '/auth/login': typeof PublicAuthLoginRoute
   '/auth/register': typeof PublicAuthRegisterRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/api/tokens/$': typeof ApiTokensSplatRoute
+  '/api/primitive-tokens/$': typeof ApiPrimitiveTokensSplatRoute
+  '/api/semantic-tokens/$': typeof ApiSemanticTokensSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof ProtectedIndexRoute
@@ -90,7 +97,8 @@ export interface FileRoutesByTo {
   '/auth/login': typeof PublicAuthLoginRoute
   '/auth/register': typeof PublicAuthRegisterRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/api/tokens/$': typeof ApiTokensSplatRoute
+  '/api/primitive-tokens/$': typeof ApiPrimitiveTokensSplatRoute
+  '/api/semantic-tokens/$': typeof ApiSemanticTokensSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -103,7 +111,8 @@ export interface FileRoutesById {
   '/_public/auth/login': typeof PublicAuthLoginRoute
   '/_public/auth/register': typeof PublicAuthRegisterRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/api/tokens/$': typeof ApiTokensSplatRoute
+  '/api/primitive-tokens/$': typeof ApiPrimitiveTokensSplatRoute
+  '/api/semantic-tokens/$': typeof ApiSemanticTokensSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -115,7 +124,8 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/auth/register'
     | '/api/auth/$'
-    | '/api/tokens/$'
+    | '/api/primitive-tokens/$'
+    | '/api/semantic-tokens/$'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -125,7 +135,8 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/auth/register'
     | '/api/auth/$'
-    | '/api/tokens/$'
+    | '/api/primitive-tokens/$'
+    | '/api/semantic-tokens/$'
   id:
     | '__root__'
     | '/_protected'
@@ -137,14 +148,16 @@ export interface FileRouteTypes {
     | '/_public/auth/login'
     | '/_public/auth/register'
     | '/api/auth/$'
-    | '/api/tokens/$'
+    | '/api/primitive-tokens/$'
+    | '/api/semantic-tokens/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   ProtectedRoute: typeof ProtectedRouteWithChildren
   PublicRoute: typeof PublicRouteWithChildren
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
-  ApiTokensSplatRoute: typeof ApiTokensSplatRoute
+  ApiPrimitiveTokensSplatRoute: typeof ApiPrimitiveTokensSplatRoute
+  ApiSemanticTokensSplatRoute: typeof ApiSemanticTokensSplatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -170,11 +183,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedIndexRouteImport
       parentRoute: typeof ProtectedRoute
     }
-    '/api/tokens/$': {
-      id: '/api/tokens/$'
-      path: '/api/tokens/$'
-      fullPath: '/api/tokens/$'
-      preLoaderRoute: typeof ApiTokensSplatRouteImport
+    '/api/semantic-tokens/$': {
+      id: '/api/semantic-tokens/$'
+      path: '/api/semantic-tokens/$'
+      fullPath: '/api/semantic-tokens/$'
+      preLoaderRoute: typeof ApiSemanticTokensSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/primitive-tokens/$': {
+      id: '/api/primitive-tokens/$'
+      path: '/api/primitive-tokens/$'
+      fullPath: '/api/primitive-tokens/$'
+      preLoaderRoute: typeof ApiPrimitiveTokensSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/auth/$': {
@@ -257,7 +277,8 @@ const rootRouteChildren: RootRouteChildren = {
   ProtectedRoute: ProtectedRouteWithChildren,
   PublicRoute: PublicRouteWithChildren,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
-  ApiTokensSplatRoute: ApiTokensSplatRoute,
+  ApiPrimitiveTokensSplatRoute: ApiPrimitiveTokensSplatRoute,
+  ApiSemanticTokensSplatRoute: ApiSemanticTokensSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

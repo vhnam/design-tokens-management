@@ -20,7 +20,7 @@ function isTokenType(value: unknown): value is TokenType {
   return typeof value === 'string' && TOKEN_TYPES.has(value as TokenType);
 }
 
-export const Route = createFileRoute('/api/tokens/$')({
+export const Route = createFileRoute('/api/primitive-tokens/$')({
   server: {
     handlers: {
       GET: async () => {

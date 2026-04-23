@@ -37,6 +37,7 @@
     "@tanstack/react-table": "^8.21.3",
     "@tanstack/router-plugin": "^1.167.22",
     "@tursodatabase/sync": "^0.5.3",
+    "axios": "^1.15.2",
     "better-auth": "^1.6.5",
     "better-sqlite3": "^12.9.0",
     "class-variance-authority": "^0.7.1",
