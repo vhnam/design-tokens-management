@@ -1,3 +1,4 @@
+import { useId } from 'react';
 import { Controller } from 'react-hook-form';
 
 import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/primitives/field';
@@ -22,25 +23,29 @@ interface SelectFieldProps {
   control: any;
   optional?: boolean;
   items: SelectItem[];
+  id?: string;
 }
 
-export const SelectField = ({ name, label, description, control, items }: SelectFieldProps) => {
+export const SelectField = ({ name, label, description, control, items, id, optional = false }: SelectFieldProps) => {
+  const fieldId = id ?? useId();
+
   return (
     <Controller
       control={control}
       name={name}
       render={({ field, fieldState }) => (
         <Field>
-          <FieldLabel>{label}</FieldLabel>
+          <FieldLabel htmlFor={fieldId}>
+            {label} {optional && <span className="text-xs text-muted-foreground">(optional)</span>}
+          </FieldLabel>
           <Select
             items={items}
-            name={field.name}
             value={field.value}
             onValueChange={(value) => {
               field.onChange(value);
             }}
           >
-            <SelectTrigger id={field.name} className="w-full" onBlur={field.onBlur}>
+            <SelectTrigger id={fieldId} className="w-full" onBlur={field.onBlur}>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>

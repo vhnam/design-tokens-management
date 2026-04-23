@@ -2,9 +2,9 @@ import { type ComponentProps, useId } from 'react';
 import { Controller } from 'react-hook-form';
 
 import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/primitives/field';
-import { Input } from '@/components/primitives/input';
+import { Textarea } from '@/components/primitives/textarea';
 
-interface InputFieldProps extends Omit<ComponentProps<typeof Input>, 'name'> {
+interface TextareaFieldProps extends Omit<ComponentProps<typeof Textarea>, 'name'> {
   name: string;
   label: string;
   description?: string;
@@ -12,7 +12,16 @@ interface InputFieldProps extends Omit<ComponentProps<typeof Input>, 'name'> {
   optional?: boolean;
 }
 
-export const InputField = ({ control, name, label, id, description, optional = false, ...props }: InputFieldProps) => {
+export const TextareaField = ({
+  control,
+  name,
+  label,
+  description,
+  optional = false,
+  rows = 3,
+  id,
+  ...props
+}: TextareaFieldProps) => {
   const fieldId = id ?? useId();
 
   return (
@@ -24,7 +33,7 @@ export const InputField = ({ control, name, label, id, description, optional = f
           <FieldLabel htmlFor={fieldId}>
             {label} {optional && <span className="text-xs text-muted-foreground">(optional)</span>}
           </FieldLabel>
-          <Input {...props} {...field} id={fieldId} />
+          <Textarea {...props} {...field} rows={rows} id={fieldId} />
           {description && <FieldDescription>{description}</FieldDescription>}
           {fieldState.error && <FieldError>{fieldState.error.message}</FieldError>}
         </Field>

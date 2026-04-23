@@ -25,6 +25,7 @@ import {
 
 import { InputField } from '@/components/composites/field/input-field';
 import { SelectField } from '@/components/composites/field/select-field';
+import { TextareaField } from '@/components/composites/field/textarea-field';
 
 import { useCreatePrimitiveToken } from './primitive-tokens.actions';
 
@@ -35,10 +36,10 @@ export const PrimitiveTokenAddDialog = () => {
 
   const form = useForm<PrimitiveTokenSchemaType>({
     defaultValues: {
-      name: '',
-      value: '',
-      type: TokenType.Color,
-      description: '',
+      tokenName: '',
+      tokenValue: '',
+      tokenType: TokenType.Color,
+      tokenDescription: '',
     },
     resolver: zodResolver(primitiveTokenSchema as never) as never,
   });
@@ -53,10 +54,10 @@ export const PrimitiveTokenAddDialog = () => {
   const onSubmit = form.handleSubmit(async (value) => {
     try {
       await createToken.mutateAsync({
-        name: value.name.trim(),
-        value: value.value.trim(),
-        type: value.type,
-        description: (value.description ?? '').trim(),
+        name: value.tokenName.trim(),
+        value: value.tokenValue.trim(),
+        type: value.tokenType,
+        description: (value.tokenDescription ?? '').trim(),
       });
       form.reset();
       setOpen(false);
@@ -78,22 +79,23 @@ export const PrimitiveTokenAddDialog = () => {
       <DialogContent showCloseButton={false}>
         <DialogHeader>
           <DialogTitle>Add token</DialogTitle>
-          <DialogDescription>Create a new primitive token.</DialogDescription>
+          <DialogDescription>Create a new primitive token</DialogDescription>
         </DialogHeader>
 
         <form className="grid gap-4" onSubmit={onSubmit}>
-          <InputField control={form.control} name="name" label="Name" placeholder="e.g. --color-blue-500" />
+          <InputField control={form.control} name="tokenName" label="Name" placeholder="e.g. --color-blue-500" />
 
-          <InputField control={form.control} name="value" label="Value" placeholder="e.g. --color-blue-500" />
+          <InputField control={form.control} name="tokenValue" label="Value" placeholder="e.g. --color-blue-500" />
 
-          <SelectField control={form.control} name="type" label="Type" items={TOKEN_TYPE_OPTIONS} />
+          <SelectField control={form.control} name="tokenType" label="Type" items={TOKEN_TYPE_OPTIONS} />
 
-          <InputField
+          <TextareaField
             control={form.control}
-            name="description"
+            name="tokenDescription"
             label="Description"
             optional
             placeholder="The description of the token."
+            className="min-block-[3.5rlh] min-inline-[20ch] max-inline-[50ch]"
           />
 
           <DialogFooter>

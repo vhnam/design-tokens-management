@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router';
-import { type LucideIcon } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import type { ComponentPropsWithoutRef } from 'react';
 
 import {

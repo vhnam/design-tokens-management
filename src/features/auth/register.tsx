@@ -12,6 +12,7 @@ import { Button } from '@/components/primitives/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/primitives/card';
 
 import { InputField } from '@/components/composites/field/input-field';
+import { PasswordField } from '@/components/composites/field/password-field';
 
 export const Register = () => {
   const navigate = useNavigate();
@@ -68,11 +69,10 @@ export const Register = () => {
                 autoComplete="email"
               />
 
-              <InputField
+              <PasswordField
                 control={form.control}
                 name="password"
                 label="Password"
-                type="password"
                 placeholder="********"
                 autoComplete="new-password"
               />

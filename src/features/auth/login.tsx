@@ -13,6 +13,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Separator } from '@/components/primitives/separator';
 
 import { InputField } from '@/components/composites/field/input-field';
+import { PasswordField } from '@/components/composites/field/password-field';
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -58,11 +59,10 @@ export const Login = () => {
                 autoComplete="email"
               />
 
-              <InputField
+              <PasswordField
                 control={form.control}
                 name="password"
                 label="Password"
-                type="password"
                 placeholder="********"
                 autoComplete="current-password"
               />
