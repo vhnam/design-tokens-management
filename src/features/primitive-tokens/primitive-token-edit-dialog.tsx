@@ -1,15 +1,14 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { PlusIcon } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { TOKEN_TYPE_OPTIONS } from '@/contants/token';
 
-import { TokenType } from '@/enums/token';
-
 import { primitiveTokenSchema } from '@/schemas/primitive-token.schema';
 import type { PrimitiveTokenSchemaType } from '@/schemas/primitive-token.schema';
+
+import { usePrimitiveTokensTableStore } from '@/stores/primitive-tokens-table.store';
 
 import { Button } from '@/components/primitives/button';
 import {
@@ -20,40 +19,41 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from '@/components/primitives/dialog';
 
 import { InputField } from '@/components/composites/field/input-field';
 import { SelectField } from '@/components/composites/field/select-field';
 import { TextareaField } from '@/components/composites/field/textarea-field';
 
-import { useCreatePrimitiveToken } from './primitive-tokens.actions';
+import { useUpdatePrimitiveToken } from './primitive-tokens.actions';
 
-export const PrimitiveTokenAddDialog = () => {
-  const [open, setOpen] = useState(false);
+interface PrimitiveTokenEditDialogProps {
+  isOpen: boolean;
+}
 
-  const createToken = useCreatePrimitiveToken();
+export const PrimitiveTokenEditDialog = ({ isOpen }: PrimitiveTokenEditDialogProps) => {
+  const updateToken = useUpdatePrimitiveToken();
+  const { selectedToken, closeEditDialog } = usePrimitiveTokensTableStore();
 
   const form = useForm<PrimitiveTokenSchemaType>({
-    defaultValues: {
-      tokenName: '',
-      tokenValue: '',
-      tokenType: TokenType.Color,
-      tokenDescription: '',
-    },
     resolver: zodResolver(primitiveTokenSchema as never) as never,
   });
 
-  const handleOpenChange = (nextOpen: boolean) => {
-    setOpen(nextOpen);
-    if (!nextOpen) {
-      form.reset();
+  useEffect(() => {
+    if (selectedToken) {
+      form.reset({
+        tokenName: selectedToken.name,
+        tokenValue: selectedToken.value,
+        tokenType: selectedToken.type,
+        tokenDescription: selectedToken.description ?? '',
+      });
     }
-  };
+  }, [selectedToken]);
 
   const onSubmit = form.handleSubmit((value) => {
-    createToken.mutate(
+    updateToken.mutate(
       {
+        id: selectedToken!.id,
         name: value.tokenName.trim(),
         value: value.tokenValue.trim(),
         type: value.tokenType,
@@ -61,9 +61,9 @@ export const PrimitiveTokenAddDialog = () => {
       },
       {
         onSuccess: () => {
-          setOpen(false);
           form.reset();
-          toast.success('Token created successfully');
+          closeEditDialog();
+          toast.success('Token updated successfully');
         },
         onError: (error) => {
           toast.error(error instanceof Error ? error.message : 'Something went wrong');
@@ -73,18 +73,11 @@ export const PrimitiveTokenAddDialog = () => {
   });
 
   return (
-    <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogTrigger
-        render={
-          <Button type="button">
-            <PlusIcon className="size-4" /> Add token
-          </Button>
-        }
-      />
+    <Dialog open={isOpen}>
       <DialogContent showCloseButton={false}>
         <DialogHeader>
-          <DialogTitle>Add token</DialogTitle>
-          <DialogDescription>Create a new primitive token</DialogDescription>
+          <DialogTitle>Edit token</DialogTitle>
+          <DialogDescription>Edit the selected primitive token</DialogDescription>
         </DialogHeader>
 
         <form className="grid gap-4" onSubmit={onSubmit}>
@@ -104,9 +97,16 @@ export const PrimitiveTokenAddDialog = () => {
           />
 
           <DialogFooter>
-            <DialogClose render={<Button type="button" variant="outline" />}>Cancel</DialogClose>
-            <Button type="submit" disabled={form.formState.isSubmitting || createToken.isPending}>
-              {form.formState.isSubmitting || createToken.isPending ? 'Saving…' : 'Add token'}
+            <DialogClose
+              onClick={closeEditDialog}
+              render={
+                <Button type="button" variant="outline" disabled={updateToken.isPending}>
+                  Cancel
+                </Button>
+              }
+            />
+            <Button type="submit" disabled={form.formState.isSubmitting || updateToken.isPending}>
+              {form.formState.isSubmitting || updateToken.isPending ? 'Saving…' : 'Update token'}
             </Button>
           </DialogFooter>
         </form>

@@ -17,6 +17,6 @@ export const useUpdatePrimitiveToken = () => {
   return useUpdatePrimitiveTokenMutation();
 };
 
-export const useDeletePrimitiveTokens = () => {
+export const useDeletePrimitiveToken = () => {
   return useDeletePrimitiveTokenMutation();
 };

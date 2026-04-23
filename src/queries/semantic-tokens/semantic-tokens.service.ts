@@ -14,12 +14,12 @@ export const getSemanticTokens = async () => {
 };
 
 export const createSemanticToken = async (payload: CreateSemanticTokenPayload) => {
-  const response = await axios.post(API_ENDPOINT, { data: payload });
+  const response = await axios.post(API_ENDPOINT, payload);
   return response.data;
 };
 
 export const updateSemanticToken = async (payload: UpdateSemanticTokenPayload) => {
-  const response = await axios.patch(API_ENDPOINT, { data: payload });
+  const response = await axios.patch(API_ENDPOINT, payload);
   return response.data;
 };
 

@@ -3,6 +3,8 @@ import { PencilIcon, TrashIcon } from 'lucide-react';
 
 import type { PrimitiveToken } from '@/types/token';
 
+import { usePrimitiveTokensTableStore } from '@/stores/primitive-tokens-table.store';
+
 import { Badge } from '@/components/primitives/badge';
 import { Button } from '@/components/primitives/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/primitives/tooltip';
@@ -40,13 +42,23 @@ export const DescriptionCell = ({ row }: TableCell) => {
   return <span className="inline-flex items-center cursor-default py-1 text-muted-foreground">{text || '—'}</span>;
 };
 
-export const ActionsCell = ({ row: _row }: TableCell) => {
+export const ActionsCell = ({ row }: TableCell) => {
+  const { openEditDialog, openDeleteDialog } = usePrimitiveTokensTableStore();
+
+  const handleEdit = () => {
+    openEditDialog(row.original);
+  };
+
+  const handleDelete = () => {
+    openDeleteDialog(row.original);
+  };
+
   return (
     <div className="inline-flex items-center gap-2 py-1">
       <Tooltip>
         <TooltipTrigger
           render={
-            <Button variant="secondary" size="icon">
+            <Button variant="secondary" size="icon" onClick={handleEdit}>
               <PencilIcon className="size-4" />
             </Button>
           }
@@ -56,7 +68,7 @@ export const ActionsCell = ({ row: _row }: TableCell) => {
       <Tooltip>
         <TooltipTrigger
           render={
-            <Button variant="destructive" size="icon">
+            <Button variant="destructive" size="icon" onClick={handleDelete}>
               <TrashIcon className="size-4" />
             </Button>
           }

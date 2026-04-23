@@ -1,7 +1,5 @@
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { toast } from 'sonner';
-
-import type { PrimitiveToken } from '@/types/token';
 
 import { usePrimitiveTokensTableStore } from '@/stores/primitive-tokens-table.store';
 
@@ -14,59 +12,53 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from '@/components/primitives/dialog';
 
-import { useDeletePrimitiveTokens } from './primitive-tokens.actions';
+import { useDeletePrimitiveToken } from './primitive-tokens.actions';
 
 interface PrimitiveTokenRemoveDialogProps {
-  tokens: PrimitiveToken[];
+  isOpen: boolean;
 }
 
-export const PrimitiveTokenRemoveDialog = ({ tokens }: PrimitiveTokenRemoveDialogProps) => {
-  const [open, setOpen] = useState(false);
-
-  const deleteTokens = useDeletePrimitiveTokens();
+export const PrimitiveTokenRemoveDialog = ({ isOpen }: PrimitiveTokenRemoveDialogProps) => {
+  const deleteToken = useDeletePrimitiveToken();
+  const { selectedToken, closeDeleteDialog } = usePrimitiveTokensTableStore();
 
   const handleDelete = useCallback(() => {
-    // deleteTokens.mutate(
-    //   {id: }
-    //   {
-    //     onSuccess: () => {
-    //       setOpen(false);
-    //       usePrimitiveTokensTableStore.getState().clearSelection();
-    //       toast.success('Tokens deleted successfully');
-    //     },
-    //     onError: (error) => {
-    //       toast.error(error.message);
-    //     },
-    //   },
-    // );
-  }, [deleteTokens, tokens, setOpen]);
+    deleteToken.mutate(
+      { id: selectedToken!.id },
+      {
+        onSuccess: () => {
+          closeDeleteDialog();
+          toast.success('Token deleted successfully');
+        },
+        onError: (error) => {
+          toast.error(error.message);
+        },
+      },
+    );
+  }, [selectedToken]);
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger
-        render={
-          <Button type="button" variant="destructive" disabled={deleteTokens.isPending}>
-            Delete
-          </Button>
-        }
-      />
-      <DialogContent>
+    <Dialog open={isOpen}>
+      <DialogContent showCloseButton={false}>
         <DialogHeader>
           <DialogTitle>Remove Primitive Token</DialogTitle>
         </DialogHeader>
-        <DialogDescription>Are you sure you want to remove the selected primitive tokens?</DialogDescription>
+        <DialogDescription>
+          Are you sure you want to remove the selected primitive token{' '}
+          <code className="p-1 text-destructive bg-secondary/30">{selectedToken?.name}</code>?
+        </DialogDescription>
         <DialogFooter>
           <DialogClose
+            onClick={closeDeleteDialog}
             render={
-              <Button type="button" variant="outline">
+              <Button type="button" variant="outline" disabled={deleteToken.isPending}>
                 Cancel
               </Button>
             }
           />
-          <Button type="button" variant="destructive" onClick={handleDelete}>
+          <Button type="button" variant="destructive" onClick={handleDelete} disabled={deleteToken.isPending}>
             Confirm deletion
           </Button>
         </DialogFooter>

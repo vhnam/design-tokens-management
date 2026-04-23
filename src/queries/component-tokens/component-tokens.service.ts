@@ -14,12 +14,12 @@ export const getComponentTokens = async () => {
 };
 
 export const createComponentToken = async (payload: CreateComponentTokenPayload) => {
-  const response = await axios.post(API_ENDPOINT, { data: payload });
+  const response = await axios.post(API_ENDPOINT, payload);
   return response.data;
 };
 
 export const updateComponentToken = async (payload: UpdateComponentTokenPayload) => {
-  const response = await axios.patch(API_ENDPOINT, { data: payload });
+  const response = await axios.patch(API_ENDPOINT, payload);
   return response.data;
 };
 

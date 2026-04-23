@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { eq, inArray } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 
 import { db } from '@/db';
 import { primitiveTokens } from '@/db/tokens.table';
@@ -203,22 +203,16 @@ export const Route = createFileRoute('/api/primitive-tokens/$')({
           });
         }
 
-        const { ids } = body as Record<string, unknown>;
-        if (!Array.isArray(ids) || ids.length === 0) {
-          return new Response(JSON.stringify({ error: 'ids must be a non-empty array' }), {
+        const { id } = body as Record<string, unknown>;
+        const idStr = typeof id === 'string' ? id.trim() : '';
+        if (!idStr) {
+          return new Response(JSON.stringify({ error: 'id is required' }), {
             status: 400,
             headers: { 'Content-Type': 'application/json' },
           });
         }
 
-        if (!ids.every((id): id is string => typeof id === 'string' && id.trim() !== '')) {
-          return new Response(JSON.stringify({ error: 'Each id must be a non-empty string' }), {
-            status: 400,
-            headers: { 'Content-Type': 'application/json' },
-          });
-        }
-
-        await db.delete(primitiveTokens).where(inArray(primitiveTokens.id, ids));
+        await db.delete(primitiveTokens).where(eq(primitiveTokens.id, idStr));
 
         return new Response(null, { status: 204 });
       },

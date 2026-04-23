@@ -5,10 +5,14 @@ import { cn } from '@/lib/utils';
 
 import type { PrimitiveToken } from '@/types/token';
 
+import { usePrimitiveTokensTableStore } from '@/stores/primitive-tokens-table.store';
+
 import { LottiePlayer } from '@/components/primitives/lottie-player';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/primitives/table';
 
 import { PrimitiveTokenAddDialog } from './primitive-token-add-dialog';
+import { PrimitiveTokenEditDialog } from './primitive-token-edit-dialog';
+import { PrimitiveTokenRemoveDialog } from './primitive-token-remove-dialog';
 import { ActionsCell, DescriptionCell, NameCell, TypeCell, ValueCell } from './primitive-tokens-table';
 import { useGetPrimitiveTokens } from './primitive-tokens.actions';
 
@@ -16,6 +20,7 @@ const columnHelper = createColumnHelper<PrimitiveToken>();
 
 export const PrimitiveTokens = () => {
   const { data, isLoading, error } = useGetPrimitiveTokens();
+  const { isOpenDeleteDialog, isOpenEditDialog } = usePrimitiveTokensTableStore();
 
   const tableData = useMemo(() => (Array.isArray(data) ? (data as PrimitiveToken[]) : []), [data]);
 
@@ -113,6 +118,9 @@ export const PrimitiveTokens = () => {
       <div className="flex-1 text-sm text-muted-foreground">
         <strong>Total:</strong> {table.getFilteredRowModel().rows.length} tokens
       </div>
+
+      <PrimitiveTokenRemoveDialog isOpen={isOpenDeleteDialog} />
+      <PrimitiveTokenEditDialog isOpen={isOpenEditDialog} />
     </div>
   );
 };

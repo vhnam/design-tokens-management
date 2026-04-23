@@ -1,1 +1,1 @@
-export { tanstackQueryClient, TanstackQueryProvider } from './root-provider';
+export { TanstackQueryProvider } from './root-provider';
