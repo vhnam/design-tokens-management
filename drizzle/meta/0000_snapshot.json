@@ -85,17 +85,12 @@
       "indexes": {
         "override_brand_idx": {
           "name": "override_brand_idx",
-          "columns": [
-            "brand"
-          ],
+          "columns": ["brand"],
           "isUnique": false
         },
         "override_name_brand_idx": {
           "name": "override_name_brand_idx",
-          "columns": [
-            "name",
-            "brand"
-          ],
+          "columns": ["name", "brand"],
           "isUnique": false
         }
       },
@@ -239,24 +234,17 @@
       "indexes": {
         "component_brand_idx": {
           "name": "component_brand_idx",
-          "columns": [
-            "brand"
-          ],
+          "columns": ["brand"],
           "isUnique": false
         },
         "component_name_idx": {
           "name": "component_name_idx",
-          "columns": [
-            "component"
-          ],
+          "columns": ["component"],
           "isUnique": false
         },
         "component_brand_theme_idx": {
           "name": "component_brand_theme_idx",
-          "columns": [
-            "brand",
-            "theme"
-          ],
+          "columns": ["brand", "theme"],
           "isUnique": false
         }
       },
@@ -399,11 +387,7 @@
       "indexes": {
         "semantic_theme_group_name_idx": {
           "name": "semantic_theme_group_name_idx",
-          "columns": [
-            "theme",
-            "group",
-            "name"
-          ],
+          "columns": ["theme", "group", "name"],
           "isUnique": false
         }
       },
@@ -567,9 +551,7 @@
       "indexes": {
         "account_userId_idx": {
           "name": "account_userId_idx",
-          "columns": [
-            "user_id"
-          ],
+          "columns": ["user_id"],
           "isUnique": false
         }
       },
@@ -578,12 +560,8 @@
           "name": "account_user_id_user_id_fk",
           "tableFrom": "account",
           "tableTo": "user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -656,16 +634,12 @@
       "indexes": {
         "session_token_unique": {
           "name": "session_token_unique",
-          "columns": [
-            "token"
-          ],
+          "columns": ["token"],
           "isUnique": true
         },
         "session_userId_idx": {
           "name": "session_userId_idx",
-          "columns": [
-            "user_id"
-          ],
+          "columns": ["user_id"],
           "isUnique": false
         }
       },
@@ -674,12 +648,8 @@
           "name": "session_user_id_user_id_fk",
           "tableFrom": "session",
           "tableTo": "user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -747,9 +717,7 @@
       "indexes": {
         "user_email_unique": {
           "name": "user_email_unique",
-          "columns": [
-            "email"
-          ],
+          "columns": ["email"],
           "isUnique": true
         }
       },
@@ -809,9 +777,7 @@
       "indexes": {
         "verification_identifier_idx": {
           "name": "verification_identifier_idx",
-          "columns": [
-            "identifier"
-          ],
+          "columns": ["identifier"],
           "isUnique": false
         }
       },

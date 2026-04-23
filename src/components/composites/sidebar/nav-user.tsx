@@ -34,7 +34,7 @@ export function NavUser({ user, onLogout }: NavUserProps) {
           <DropdownMenuTrigger render={<SidebarMenuButton size="lg" className="aria-expanded:bg-muted" />}>
             <Avatar>
               <AvatarImage src={user.image ?? ''} alt={user.name} />
-              <AvatarFallback>{fallbackName}</AvatarFallback>
+              <AvatarFallback className="bg-accent text-accent-foreground">{fallbackName}</AvatarFallback>
             </Avatar>
             <div className="grid flex-1 text-left text-sm leading-tight">
               <span className="truncate font-medium">{user.name}</span>

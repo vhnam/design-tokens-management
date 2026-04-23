@@ -12,7 +12,7 @@ import { Button } from '@/components/primitives/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/primitives/card';
 import { Separator } from '@/components/primitives/separator';
 
-import { InputField } from '@/components/composites/input-field';
+import { InputField } from '@/components/composites/field/input-field';
 
 export const Login = () => {
   const navigate = useNavigate();

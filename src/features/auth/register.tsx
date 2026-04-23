@@ -11,7 +11,7 @@ import type { RegisterSchemaType } from '@/schemas/register.schema';
 import { Button } from '@/components/primitives/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/primitives/card';
 
-import { InputField } from '@/components/composites/input-field';
+import { InputField } from '@/components/composites/field/input-field';
 
 export const Register = () => {
   const navigate = useNavigate();
