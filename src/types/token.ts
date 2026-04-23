@@ -14,3 +14,10 @@ export type SemanticToken = {
   primitiveToken: PrimitiveToken;
   description?: string;
 };
+
+export type ComponentToken = {
+  id: string;
+  componentToken: string;
+  semanticToken: SemanticToken;
+  description?: string;
+};
