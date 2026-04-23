@@ -17,6 +17,7 @@ import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as PublicAuthRegisterRouteImport } from './routes/_public/auth/register'
 import { Route as PublicAuthLoginRouteImport } from './routes/_public/auth/login'
 import { Route as PublicAuthForgotPasswordRouteImport } from './routes/_public/auth/forgot-password'
+import { Route as ProtectedTokensSemanticTokensRouteImport } from './routes/_protected/tokens/semantic-tokens'
 import { Route as ProtectedTokensPrimitiveTokensRouteImport } from './routes/_protected/tokens/primitive-tokens'
 
 const PublicRoute = PublicRouteImport.update({
@@ -58,6 +59,12 @@ const PublicAuthForgotPasswordRoute =
     path: '/auth/forgot-password',
     getParentRoute: () => PublicRoute,
   } as any)
+const ProtectedTokensSemanticTokensRoute =
+  ProtectedTokensSemanticTokensRouteImport.update({
+    id: '/tokens/semantic-tokens',
+    path: '/tokens/semantic-tokens',
+    getParentRoute: () => ProtectedRoute,
+  } as any)
 const ProtectedTokensPrimitiveTokensRoute =
   ProtectedTokensPrimitiveTokensRouteImport.update({
     id: '/tokens/primitive-tokens',
@@ -68,6 +75,7 @@ const ProtectedTokensPrimitiveTokensRoute =
 export interface FileRoutesByFullPath {
   '/': typeof ProtectedIndexRoute
   '/tokens/primitive-tokens': typeof ProtectedTokensPrimitiveTokensRoute
+  '/tokens/semantic-tokens': typeof ProtectedTokensSemanticTokensRoute
   '/auth/forgot-password': typeof PublicAuthForgotPasswordRoute
   '/auth/login': typeof PublicAuthLoginRoute
   '/auth/register': typeof PublicAuthRegisterRoute
@@ -77,6 +85,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof ProtectedIndexRoute
   '/tokens/primitive-tokens': typeof ProtectedTokensPrimitiveTokensRoute
+  '/tokens/semantic-tokens': typeof ProtectedTokensSemanticTokensRoute
   '/auth/forgot-password': typeof PublicAuthForgotPasswordRoute
   '/auth/login': typeof PublicAuthLoginRoute
   '/auth/register': typeof PublicAuthRegisterRoute
@@ -89,6 +98,7 @@ export interface FileRoutesById {
   '/_public': typeof PublicRouteWithChildren
   '/_protected/': typeof ProtectedIndexRoute
   '/_protected/tokens/primitive-tokens': typeof ProtectedTokensPrimitiveTokensRoute
+  '/_protected/tokens/semantic-tokens': typeof ProtectedTokensSemanticTokensRoute
   '/_public/auth/forgot-password': typeof PublicAuthForgotPasswordRoute
   '/_public/auth/login': typeof PublicAuthLoginRoute
   '/_public/auth/register': typeof PublicAuthRegisterRoute
@@ -100,6 +110,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/tokens/primitive-tokens'
+    | '/tokens/semantic-tokens'
     | '/auth/forgot-password'
     | '/auth/login'
     | '/auth/register'
@@ -109,6 +120,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/tokens/primitive-tokens'
+    | '/tokens/semantic-tokens'
     | '/auth/forgot-password'
     | '/auth/login'
     | '/auth/register'
@@ -120,6 +132,7 @@ export interface FileRouteTypes {
     | '/_public'
     | '/_protected/'
     | '/_protected/tokens/primitive-tokens'
+    | '/_protected/tokens/semantic-tokens'
     | '/_public/auth/forgot-password'
     | '/_public/auth/login'
     | '/_public/auth/register'
@@ -192,6 +205,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicAuthForgotPasswordRouteImport
       parentRoute: typeof PublicRoute
     }
+    '/_protected/tokens/semantic-tokens': {
+      id: '/_protected/tokens/semantic-tokens'
+      path: '/tokens/semantic-tokens'
+      fullPath: '/tokens/semantic-tokens'
+      preLoaderRoute: typeof ProtectedTokensSemanticTokensRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
     '/_protected/tokens/primitive-tokens': {
       id: '/_protected/tokens/primitive-tokens'
       path: '/tokens/primitive-tokens'
@@ -205,11 +225,13 @@ declare module '@tanstack/react-router' {
 interface ProtectedRouteChildren {
   ProtectedIndexRoute: typeof ProtectedIndexRoute
   ProtectedTokensPrimitiveTokensRoute: typeof ProtectedTokensPrimitiveTokensRoute
+  ProtectedTokensSemanticTokensRoute: typeof ProtectedTokensSemanticTokensRoute
 }
 
 const ProtectedRouteChildren: ProtectedRouteChildren = {
   ProtectedIndexRoute: ProtectedIndexRoute,
   ProtectedTokensPrimitiveTokensRoute: ProtectedTokensPrimitiveTokensRoute,
+  ProtectedTokensSemanticTokensRoute: ProtectedTokensSemanticTokensRoute,
 }
 
 const ProtectedRouteWithChildren = ProtectedRoute._addFileChildren(

@@ -37,7 +37,7 @@ const data = {
         },
         {
           title: 'Semantic Tokens',
-          url: '#',
+          url: '/tokens/semantic-tokens',
         },
         {
           title: 'Component Tokens',
