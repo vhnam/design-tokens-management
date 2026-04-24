@@ -1,41 +1,25 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { PlusIcon } from 'lucide-react';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-
-import { TOKEN_TYPE_OPTIONS } from '@/contants/token';
 
 import { TokenType } from '@/enums/token';
 
 import { primitiveTokenSchema } from '@/schemas/primitive-token.schema';
 import type { PrimitiveTokenSchemaType } from '@/schemas/primitive-token.schema';
 
+import { usePrimitiveTokensTableStore } from '@/stores/primitive-tokens-table.store';
 import { useWorkspaceStore } from '@/stores/workspace.store';
 
-import { Button } from '@/components/primitives/button';
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/primitives/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/primitives/dialog';
 
-import { InputField } from '@/components/composites/field/input-field';
-import { SelectField } from '@/components/composites/field/select-field';
-import { TextareaField } from '@/components/composites/field/textarea-field';
-
+import PrimitiveTokenForm from './primitive-token-form';
 import { useCreatePrimitiveToken } from './primitive-tokens.actions';
 
 export const PrimitiveTokenAddDialog = () => {
-  const [open, setOpen] = useState(false);
+  const createToken = useCreatePrimitiveToken();
 
   const { activeWorkspace } = useWorkspaceStore();
-  const createToken = useCreatePrimitiveToken();
+  const { isOpenAddDialog, closeAddDialog } = usePrimitiveTokensTableStore();
 
   const form = useForm<PrimitiveTokenSchemaType>({
     defaultValues: {
@@ -47,14 +31,7 @@ export const PrimitiveTokenAddDialog = () => {
     resolver: zodResolver(primitiveTokenSchema as never) as never,
   });
 
-  const handleOpenChange = (nextOpen: boolean) => {
-    setOpen(nextOpen);
-    if (!nextOpen) {
-      form.reset();
-    }
-  };
-
-  const onSubmit = form.handleSubmit((value) => {
+  const onSubmit = (value: PrimitiveTokenSchemaType) => {
     createToken.mutate(
       {
         workspaceId: activeWorkspace?.id ?? '',
@@ -65,7 +42,7 @@ export const PrimitiveTokenAddDialog = () => {
       },
       {
         onSuccess: () => {
-          setOpen(false);
+          closeAddDialog();
           form.reset();
           toast.success('Token created successfully');
         },
@@ -74,46 +51,22 @@ export const PrimitiveTokenAddDialog = () => {
         },
       },
     );
-  });
+  };
 
   return (
-    <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogTrigger
-        render={
-          <Button type="button">
-            <PlusIcon className="size-4" /> Add token
-          </Button>
-        }
-      />
+    <Dialog open={isOpenAddDialog}>
       <DialogContent showCloseButton={false}>
         <DialogHeader>
           <DialogTitle>Add token</DialogTitle>
           <DialogDescription>Create a new primitive token</DialogDescription>
         </DialogHeader>
 
-        <form className="grid gap-4" onSubmit={onSubmit}>
-          <InputField control={form.control} name="tokenName" label="Name" placeholder="e.g. --color-blue-500" />
-
-          <InputField control={form.control} name="tokenValue" label="Value" placeholder="e.g. --color-blue-500" />
-
-          <SelectField control={form.control} name="tokenType" label="Type" items={TOKEN_TYPE_OPTIONS} />
-
-          <TextareaField
-            control={form.control}
-            name="tokenDescription"
-            label="Description"
-            optional
-            placeholder="The description of the token."
-            className="min-block-[3.5rlh] min-inline-[20ch] max-inline-[50ch]"
-          />
-
-          <DialogFooter>
-            <DialogClose render={<Button type="button" variant="outline" />}>Cancel</DialogClose>
-            <Button type="submit" disabled={form.formState.isSubmitting || createToken.isPending}>
-              {form.formState.isSubmitting || createToken.isPending ? 'Saving…' : 'Add token'}
-            </Button>
-          </DialogFooter>
-        </form>
+        <PrimitiveTokenForm
+          form={form}
+          isPending={createToken.isPending}
+          onClose={closeAddDialog}
+          onSubmit={onSubmit}
+        />
       </DialogContent>
     </Dialog>
   );

@@ -95,7 +95,7 @@ async function seedingWorkspace(workspaceData: (typeof WORKSPACE_NAMES)[number])
         return [];
       }
 
-      return [candidate as Omit<TokenRow, 'workspaceId'>];
+      return [candidate];
     });
   });
 

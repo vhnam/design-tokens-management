@@ -5,6 +5,7 @@ import {
   getFilteredRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+import { PlusIcon } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
 import { cn } from '@/lib/utils';
@@ -13,6 +14,9 @@ import type { TokenType } from '@/enums/token';
 
 import type { PrimitiveToken } from '@/types/token';
 
+import { usePrimitiveTokensTableStore } from '@/stores/primitive-tokens-table.store';
+
+import { Button } from '@/components/primitives/button';
 import { LottiePlayer } from '@/components/primitives/lottie-player';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/primitives/table';
 
@@ -36,6 +40,7 @@ export const PrimitiveTokens = () => {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const { data, isFetching, error } = useGetPrimitiveTokens();
+  const { openAddDialog } = usePrimitiveTokensTableStore();
 
   const tableData = useMemo(() => (Array.isArray(data) ? (data as PrimitiveToken[]) : []), [data]);
 
@@ -93,7 +98,9 @@ export const PrimitiveTokens = () => {
           <p className="text-sm text-muted-foreground">Foundation-level design tokens</p>
         </div>
         <div className="flex items-center gap-2">
-          <PrimitiveTokenAddDialog />
+          <Button type="button" onClick={openAddDialog}>
+            <PlusIcon className="size-4" /> Add token
+          </Button>
         </div>
       </div>
 
@@ -161,6 +168,7 @@ export const PrimitiveTokens = () => {
         <strong>Total:</strong> {table.getFilteredRowModel().rows.length} tokens
       </div>
 
+      <PrimitiveTokenAddDialog />
       <PrimitiveTokenDeleteDialog />
       <PrimitiveTokenEditDialog />
     </div>

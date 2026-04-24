@@ -10,50 +10,60 @@ export const TOKEN_TYPE_LIST: TokenType[] = [
   TokenType.Number,
 ];
 
-export const TOKEN_TYPE_OPTIONS: { label: string; value: TokenType }[] = [
+export const TOKEN_TYPE_OPTIONS: { group: string; items: { label: string; value: TokenType }[] }[] = [
   {
-    label: 'Color',
-    value: TokenType.Color,
+    group: 'Simple tokens',
+    items: [
+      {
+        label: 'Color',
+        value: TokenType.Color,
+      },
+      {
+        label: 'Dimension',
+        value: TokenType.Dimension,
+      },
+      {
+        label: 'Font Family',
+        value: TokenType.FontFamily,
+      },
+      {
+        label: 'Font Weight',
+        value: TokenType.FontWeight,
+      },
+      {
+        label: 'Duration',
+        value: TokenType.Duration,
+      },
+      {
+        label: 'Cubic Bezier',
+        value: TokenType.CubicBezier,
+      },
+      {
+        label: 'Number',
+        value: TokenType.Number,
+      },
+    ],
   },
   {
-    label: 'Dimension',
-    value: TokenType.Dimension,
-  },
-  {
-    label: 'Font Family',
-    value: TokenType.FontFamily,
-  },
-  {
-    label: 'Font Weight',
-    value: TokenType.FontWeight,
-  },
-  {
-    label: 'Duration',
-    value: TokenType.Duration,
-  },
-  {
-    label: 'Cubic Bezier',
-    value: TokenType.CubicBezier,
-  },
-  {
-    label: 'Number',
-    value: TokenType.Number,
-  },
-  {
-    label: 'Typography',
-    value: TokenType.Typography,
-  },
-  {
-    label: 'Shadow',
-    value: TokenType.Shadow,
-  },
-  {
-    label: 'Border',
-    value: TokenType.Border,
-  },
-  {
-    label: 'Gradient',
-    value: TokenType.Gradient,
+    group: 'Composite tokens',
+    items: [
+      {
+        label: 'Typography',
+        value: TokenType.Typography,
+      },
+      {
+        label: 'Shadow',
+        value: TokenType.Shadow,
+      },
+      {
+        label: 'Border',
+        value: TokenType.Border,
+      },
+      {
+        label: 'Gradient',
+        value: TokenType.Gradient,
+      },
+    ],
   },
 ];
 

@@ -10,8 +10,10 @@ interface PrimitiveTokensTableState {
 }
 
 interface PrimitiveTokensTableActions {
+  openAddDialog: () => void;
   openEditDialog: (token: PrimitiveToken) => void;
   openRemoveDialog: (token: PrimitiveToken) => void;
+  closeAddDialog: () => void;
   closeEditDialog: () => void;
   closeDeleteDialog: () => void;
 }
@@ -27,11 +29,17 @@ const initialState: PrimitiveTokensTableState = {
 
 export const usePrimitiveTokensTableStore = create<PrimitiveTokensTableStore>((set) => ({
   ...initialState,
+  openAddDialog: () => {
+    set({ isOpenAddDialog: true });
+  },
   openEditDialog: (token: PrimitiveToken) => {
     set({ selectedToken: token, isOpenEditDialog: true });
   },
   openRemoveDialog: (token: PrimitiveToken) => {
     set({ selectedToken: token, isOpenDeleteDialog: true });
+  },
+  closeAddDialog: () => {
+    set({ isOpenAddDialog: false });
   },
   closeEditDialog: () => {
     set({ selectedToken: null, isOpenEditDialog: false });

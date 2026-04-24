@@ -3,28 +3,14 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
-import { TOKEN_TYPE_OPTIONS } from '@/contants/token';
-
 import { primitiveTokenSchema } from '@/schemas/primitive-token.schema';
 import type { PrimitiveTokenSchemaType } from '@/schemas/primitive-token.schema';
 
 import { usePrimitiveTokensTableStore } from '@/stores/primitive-tokens-table.store';
 
-import { Button } from '@/components/primitives/button';
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/primitives/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/primitives/dialog';
 
-import { InputField } from '@/components/composites/field/input-field';
-import { SelectField } from '@/components/composites/field/select-field';
-import { TextareaField } from '@/components/composites/field/textarea-field';
-
+import PrimitiveTokenForm from './primitive-token-form';
 import { useUpdatePrimitiveToken } from './primitive-tokens.actions';
 
 export const PrimitiveTokenEditDialog = () => {
@@ -46,7 +32,7 @@ export const PrimitiveTokenEditDialog = () => {
     }
   }, [selectedToken]);
 
-  const onSubmit = form.handleSubmit((value) => {
+  const onSubmit = (value: PrimitiveTokenSchemaType) => {
     updateToken.mutate(
       {
         id: selectedToken!.id,
@@ -66,7 +52,7 @@ export const PrimitiveTokenEditDialog = () => {
         },
       },
     );
-  });
+  };
 
   return (
     <Dialog open={isOpenEditDialog}>
@@ -76,36 +62,12 @@ export const PrimitiveTokenEditDialog = () => {
           <DialogDescription>Edit the selected primitive token</DialogDescription>
         </DialogHeader>
 
-        <form className="grid gap-4" onSubmit={onSubmit}>
-          <InputField control={form.control} name="tokenName" label="Name" placeholder="e.g. --color-blue-500" />
-
-          <InputField control={form.control} name="tokenValue" label="Value" placeholder="e.g. --color-blue-500" />
-
-          <SelectField control={form.control} name="tokenType" label="Type" items={TOKEN_TYPE_OPTIONS} />
-
-          <TextareaField
-            control={form.control}
-            name="tokenDescription"
-            label="Description"
-            optional
-            placeholder="The description of the token."
-            className="min-block-[3.5rlh] min-inline-[20ch] max-inline-[50ch]"
-          />
-
-          <DialogFooter>
-            <DialogClose
-              onClick={closeEditDialog}
-              render={
-                <Button type="button" variant="outline" disabled={updateToken.isPending}>
-                  Cancel
-                </Button>
-              }
-            />
-            <Button type="submit" disabled={form.formState.isSubmitting || updateToken.isPending}>
-              {form.formState.isSubmitting || updateToken.isPending ? 'Saving…' : 'Update token'}
-            </Button>
-          </DialogFooter>
-        </form>
+        <PrimitiveTokenForm
+          form={form}
+          isPending={updateToken.isPending}
+          onClose={closeEditDialog}
+          onSubmit={onSubmit}
+        />
       </DialogContent>
     </Dialog>
   );
