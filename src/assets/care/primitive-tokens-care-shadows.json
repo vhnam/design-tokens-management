@@ -1,0 +1,26 @@
+[
+  {
+    "name": "--shadow-elevation-0",
+    "value": "0 0 1px rgb(0 0 0 / 0.04), 0 0 2px rgb(0 0 0 / 0.06), 0 4px 8px rgb(0 0 0 / 0.04)",
+    "type": "shadow",
+    "description": "Care @theme elevation shadow — level 0 (subtle)"
+  },
+  {
+    "name": "--shadow-elevation-1",
+    "value": "0 0 1px rgb(0 0 0 / 0.04), 0 2px 6px rgb(0 0 0 / 0.04), 0 10px 20px rgb(0 0 0 / 0.04)",
+    "type": "shadow",
+    "description": "Care @theme elevation shadow — level 1 (low)"
+  },
+  {
+    "name": "--shadow-elevation-2",
+    "value": "0 0 1px rgb(0 0 0 / 0.04), 0 2px 6px rgb(0 0 0 / 0.04), 0 16px 30px rgb(0 0 0 / 0.08)",
+    "type": "shadow",
+    "description": "Care @theme elevation shadow — level 2 (medium)"
+  },
+  {
+    "name": "--shadow-elevation-3",
+    "value": "0 0 1px rgb(0 0 0 / 0.02), 0 4px 8px rgb(0 0 0 / 0.03), 0 16px 24px rgb(0 0 0 / 0.03), 0 30px 50px rgb(0 0 0 / 0.07)",
+    "type": "shadow",
+    "description": "Care @theme elevation shadow — level 3 (high)"
+  }
+]

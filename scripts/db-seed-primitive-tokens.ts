@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 
 import { config } from 'dotenv';
 import { eq } from 'drizzle-orm';
@@ -14,42 +14,106 @@ const { db } = await import(new URL('../src/db/index.ts', import.meta.url).href)
 const { primitiveTokens } = await import(new URL('../src/db/tokens.table.ts', import.meta.url).href);
 const { workspaces } = await import(new URL('../src/db/workspace.table.ts', import.meta.url).href);
 
-const WORKSPACE_NAME = 'TailwindCSS';
-
-const [tailwindWorkspace] = await db.select().from(workspaces).where(eq(workspaces.name, WORKSPACE_NAME));
-
-if (!tailwindWorkspace) {
-  console.error(`Workspace "${WORKSPACE_NAME}" not found. Run db-seed-workspaces first.`);
-  process.exit(1);
-}
-
-type TokenRow = Omit<typeof primitiveTokens.$inferInsert, 'id' | 'createdAt' | 'updatedAt'>;
-
-const tokenFiles = [
-  '../src/assets/primitive-tokens-tailwind-v4-colors.json',
-  '../src/assets/primitive-tokens-tailwind-v4-typography.json',
-  '../src/assets/primitive-tokens-tailwind-v4-sizing.json',
-  '../src/assets/primitive-tokens-tailwind-v4-motion.json',
-  '../src/assets/primitive-tokens-tailwind-v4-shadows.json',
+const WORKSPACE_NAMES = [
+  {
+    name: 'TailwindCSS',
+    slug: 'tailwind-v4',
+  },
+  {
+    name: 'Care',
+    slug: 'care',
+  },
+  // {
+  //   name: 'Chakra UI',
+  //   slug: 'chakra-ui',
+  // },
+  // {
+  //   name: 'Mantine',
+  //   slug: 'mantine',
+  // },
 ];
 
-const rawTokens = tokenFiles.flatMap((file) => {
-  const url = new URL(file, import.meta.url);
-  return JSON.parse(readFileSync(url, 'utf8')) as Array<Omit<TokenRow, 'workspaceId'>>;
-});
+for (const workspaceData of WORKSPACE_NAMES) {
+  const [workspace] = await db.select().from(workspaces).where(eq(workspaces.name, workspaceData.name));
+  if (!workspace) {
+    console.error(`Workspace "${workspaceData.name}" not found. Run db-seed-workspaces first.`);
+    process.exit(1);
+  }
+}
 
-const tokensWithWorkspace: TokenRow[] = rawTokens.map((token) => ({
-  ...token,
-  workspaceId: tailwindWorkspace.id,
-}));
+async function seedingWorkspace(workspaceData: (typeof WORKSPACE_NAMES)[number]) {
+  const [workspace] = await db.select().from(workspaces).where(eq(workspaces.name, workspaceData.name));
+  if (!workspace) {
+    console.error(`Workspace "${workspaceData.name}" not found. Run db-seed-workspaces first.`);
+    process.exit(1);
+  }
 
-await db.delete(primitiveTokens).where(eq(primitiveTokens.workspaceId, tailwindWorkspace.id));
+  type TokenRow = Omit<typeof primitiveTokens.$inferInsert, 'id' | 'createdAt' | 'updatedAt'>;
+  const tokensDirectory = new URL(`../src/assets/${workspaceData.slug}/`, import.meta.url);
+  let tokenFiles: string[] = [];
+  try {
+    tokenFiles = readdirSync(tokensDirectory, { withFileTypes: true })
+      .filter((entry) => entry.isFile() && entry.name.endsWith('.json') && entry.name.startsWith('primitive-tokens-'))
+      .map((entry) => entry.name)
+      .sort();
+  } catch {
+    console.error(
+      `Token directory for workspace "${workspaceData.name}" not found at src/assets/${workspaceData.slug}.`,
+    );
+    process.exit(1);
+  }
 
-const result =
-  tokensWithWorkspace.length === 0
-    ? []
-    : await db.insert(primitiveTokens).values(tokensWithWorkspace).returning({ id: primitiveTokens.id });
+  const isNonEmptyString = (value: unknown): value is string => typeof value === 'string' && value.trim().length > 0;
 
-console.log(
-  `[db:seed:primitive-tokens] Seeded ${result.length} rows into primitive_tokens for workspace "${WORKSPACE_NAME}" (${tailwindWorkspace.id}).`,
-);
+  const rawTokens = tokenFiles.flatMap((file) => {
+    const url = new URL(file, tokensDirectory);
+    const parsed = JSON.parse(readFileSync(url, 'utf8'));
+    if (!Array.isArray(parsed)) {
+      console.warn(
+        `[db:seed:primitive-tokens] Skipping non-array JSON file "${file}" for workspace "${workspaceData.name}".`,
+      );
+      return [];
+    }
+
+    return parsed.flatMap((token, index) => {
+      if (typeof token !== 'object' || token === null) {
+        console.warn(
+          `[db:seed:primitive-tokens] Skipping invalid token at ${file}[${index}] for workspace "${workspaceData.name}" (expected object).`,
+        );
+        return [];
+      }
+
+      const candidate = token as Partial<Omit<TokenRow, 'workspaceId'>>;
+      if (
+        !isNonEmptyString(candidate.name) ||
+        !isNonEmptyString(candidate.value) ||
+        !isNonEmptyString(candidate.type)
+      ) {
+        console.warn(
+          `[db:seed:primitive-tokens] Skipping invalid token at ${file}[${index}] for workspace "${workspaceData.name}" (requires non-empty name, value, and type).`,
+        );
+        return [];
+      }
+
+      return [candidate as Omit<TokenRow, 'workspaceId'>];
+    });
+  });
+
+  const tokensWithWorkspace: TokenRow[] = rawTokens.map((token) => ({
+    ...token,
+    workspaceId: workspace.id,
+  }));
+
+  await db.delete(primitiveTokens).where(eq(primitiveTokens.workspaceId, workspace.id));
+
+  const result =
+    tokensWithWorkspace.length === 0
+      ? []
+      : await db.insert(primitiveTokens).values(tokensWithWorkspace).returning({ id: primitiveTokens.id });
+
+  console.log(
+    `[db:seed:primitive-tokens] Seeded ${result.length} rows into primitive_tokens for workspace "${workspaceData.name}" (${workspace.id}).`,
+  );
+}
+
+await Promise.all(WORKSPACE_NAMES.map((workspaceData) => seedingWorkspace(workspaceData)));

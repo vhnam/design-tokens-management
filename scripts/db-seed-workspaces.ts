@@ -30,6 +30,12 @@ const rawWorkspaces = [
     brands: ['default'],
     themes: ['light', 'dark'],
   },
+  {
+    name: 'Care',
+    image: 'https://avatars.slack-edge.com/2025-04-04/8704509673861_8d73c671ec094e04f86d_102.png',
+    brands: ['default'],
+    themes: ['light'],
+  },
 ];
 
 const workspaceRows = rawWorkspaces.map((workspace) => ({

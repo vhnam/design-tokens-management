@@ -1,0 +1,110 @@
+[
+  {
+    "name": "--spacing-xxxsmall",
+    "value": "0.125rem",
+    "type": "dimension",
+    "description": "Care @theme spacing — xxxsmall (2px)"
+  },
+  {
+    "name": "--spacing-xxsmall",
+    "value": "0.25rem",
+    "type": "dimension",
+    "description": "Care @theme spacing — xxsmall (4px)"
+  },
+  {
+    "name": "--spacing-xsmall",
+    "value": "0.5rem",
+    "type": "dimension",
+    "description": "Care @theme spacing — xsmall (8px)"
+  },
+  {
+    "name": "--spacing-small",
+    "value": "0.625rem",
+    "type": "dimension",
+    "description": "Care @theme spacing — small (10px)"
+  },
+  {
+    "name": "--spacing-medium",
+    "value": "1rem",
+    "type": "dimension",
+    "description": "Care @theme spacing — medium (16px)"
+  },
+  {
+    "name": "--spacing-large",
+    "value": "1.5rem",
+    "type": "dimension",
+    "description": "Care @theme spacing — large (24px)"
+  },
+  {
+    "name": "--spacing-xlarge",
+    "value": "2rem",
+    "type": "dimension",
+    "description": "Care @theme spacing — xlarge (32px)"
+  },
+  {
+    "name": "--spacing-xxlarge",
+    "value": "3rem",
+    "type": "dimension",
+    "description": "Care @theme spacing — xxlarge (48px)"
+  },
+  {
+    "name": "--spacing-xxxlarge",
+    "value": "4rem",
+    "type": "dimension",
+    "description": "Care @theme spacing — xxxlarge (64px)"
+  },
+  {
+    "name": "--radius-xxsmall",
+    "value": "0.125rem",
+    "type": "dimension",
+    "description": "Care @theme border radius — xxsmall (2px)"
+  },
+  {
+    "name": "--radius-xsmall",
+    "value": "0.25rem",
+    "type": "dimension",
+    "description": "Care @theme border radius — xsmall (4px)"
+  },
+  {
+    "name": "--radius-small",
+    "value": "0.5rem",
+    "type": "dimension",
+    "description": "Care @theme border radius — small (8px)"
+  },
+  {
+    "name": "--radius-medium",
+    "value": "1rem",
+    "type": "dimension",
+    "description": "Care @theme border radius — medium (16px)"
+  },
+  {
+    "name": "--radius-large",
+    "value": "1.5rem",
+    "type": "dimension",
+    "description": "Care @theme border radius — large (24px)"
+  },
+  {
+    "name": "--radius-xlarge",
+    "value": "2rem",
+    "type": "dimension",
+    "description": "Care @theme border radius — xlarge (32px)"
+  },
+  {
+    "name": "--border-width-small",
+    "value": "1px",
+    "type": "dimension",
+    "description": "Care @theme border width — small (1px)"
+  },
+  {
+    "name": "--border-width-medium",
+    "value": "2px",
+    "type": "dimension",
+    "description": "Care @theme border width — medium (2px)"
+  },
+  {
+    "name": "--border-width-large",
+    "value": "3px",
+    "type": "dimension",
+    "description": "Care @theme border width — large (3px)"
+  }
+]

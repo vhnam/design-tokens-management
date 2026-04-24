@@ -1,0 +1,416 @@
+[
+  {
+    "name": "--color-neutral-00",
+    "value": "#ffffff",
+    "type": "color",
+    "description": "Care @theme color — neutral 00"
+  },
+  {
+    "name": "--color-neutral-50",
+    "value": "#f7f8f8",
+    "type": "color",
+    "description": "Care @theme color — neutral 50"
+  },
+  {
+    "name": "--color-neutral-100",
+    "value": "#e5e7e7",
+    "type": "color",
+    "description": "Care @theme color — neutral 100"
+  },
+  {
+    "name": "--color-neutral-200",
+    "value": "#d1d6d5",
+    "type": "color",
+    "description": "Care @theme color — neutral 200"
+  },
+  {
+    "name": "--color-neutral-300",
+    "value": "#bcc2c2",
+    "type": "color",
+    "description": "Care @theme color — neutral 300"
+  },
+  {
+    "name": "--color-neutral-400",
+    "value": "#a9b1b1",
+    "type": "color",
+    "description": "Care @theme color — neutral 400"
+  },
+  {
+    "name": "--color-neutral-500",
+    "value": "#949e9d",
+    "type": "color",
+    "description": "Care @theme color — neutral 500"
+  },
+  {
+    "name": "--color-neutral-600",
+    "value": "#6d7878",
+    "type": "color",
+    "description": "Care @theme color — neutral 600"
+  },
+  {
+    "name": "--color-neutral-700",
+    "value": "#525b5a",
+    "type": "color",
+    "description": "Care @theme color — neutral 700"
+  },
+  {
+    "name": "--color-neutral-800",
+    "value": "#383e3d",
+    "type": "color",
+    "description": "Care @theme color — neutral 800"
+  },
+  {
+    "name": "--color-neutral-900",
+    "value": "#1d2020",
+    "type": "color",
+    "description": "Care @theme color — neutral 900"
+  },
+  {
+    "name": "--color-neutral-950",
+    "value": "#0f1010",
+    "type": "color",
+    "description": "Care @theme color — neutral 950"
+  },
+  {
+    "name": "--color-neutral-1000",
+    "value": "#000000",
+    "type": "color",
+    "description": "Care @theme color — neutral 1000"
+  },
+  {
+    "name": "--color-brand-50",
+    "value": "#edf7f7",
+    "type": "color",
+    "description": "Care @theme color — brand 50"
+  },
+  {
+    "name": "--color-brand-100",
+    "value": "#dbf0f0",
+    "type": "color",
+    "description": "Care @theme color — brand 100"
+  },
+  {
+    "name": "--color-brand-200",
+    "value": "#b8e0e0",
+    "type": "color",
+    "description": "Care @theme color — brand 200"
+  },
+  {
+    "name": "--color-brand-300",
+    "value": "#94d1d1",
+    "type": "color",
+    "description": "Care @theme color — brand 300"
+  },
+  {
+    "name": "--color-brand-400",
+    "value": "#70c2c2",
+    "type": "color",
+    "description": "Care @theme color — brand 400"
+  },
+  {
+    "name": "--color-brand-500",
+    "value": "#4db3b3",
+    "type": "color",
+    "description": "Care @theme color — brand 500"
+  },
+  {
+    "name": "--color-brand-600",
+    "value": "#357c7c",
+    "type": "color",
+    "description": "Care @theme color — brand 600"
+  },
+  {
+    "name": "--color-brand-700",
+    "value": "#285d5d",
+    "type": "color",
+    "description": "Care @theme color — brand 700"
+  },
+  {
+    "name": "--color-brand-800",
+    "value": "#1a3d3d",
+    "type": "color",
+    "description": "Care @theme color — brand 800"
+  },
+  {
+    "name": "--color-brand-900",
+    "value": "#0e2020",
+    "type": "color",
+    "description": "Care @theme color — brand 900"
+  },
+  {
+    "name": "--color-brand-950",
+    "value": "#081212",
+    "type": "color",
+    "description": "Care @theme color — brand 950"
+  },
+  {
+    "name": "--color-red-50",
+    "value": "#fce8e8",
+    "type": "color",
+    "description": "Care @theme color — red 50"
+  },
+  {
+    "name": "--color-red-100",
+    "value": "#fad1d1",
+    "type": "color",
+    "description": "Care @theme color — red 100"
+  },
+  {
+    "name": "--color-red-200",
+    "value": "#f5a8a8",
+    "type": "color",
+    "description": "Care @theme color — red 200"
+  },
+  {
+    "name": "--color-red-300",
+    "value": "#f07a7a",
+    "type": "color",
+    "description": "Care @theme color — red 300"
+  },
+  {
+    "name": "--color-red-400",
+    "value": "#ec5555",
+    "type": "color",
+    "description": "Care @theme color — red 400"
+  },
+  {
+    "name": "--color-red-500",
+    "value": "#e82f2f",
+    "type": "color",
+    "description": "Care @theme color — red 500"
+  },
+  {
+    "name": "--color-red-600",
+    "value": "#a11212",
+    "type": "color",
+    "description": "Care @theme color — red 600"
+  },
+  {
+    "name": "--color-red-700",
+    "value": "#77140d",
+    "type": "color",
+    "description": "Care @theme color — red 700"
+  },
+  {
+    "name": "--color-red-800",
+    "value": "#4e0909",
+    "type": "color",
+    "description": "Care @theme color — red 800"
+  },
+  {
+    "name": "--color-red-900",
+    "value": "#290505",
+    "type": "color",
+    "description": "Care @theme color — red 900"
+  },
+  {
+    "name": "--color-red-950",
+    "value": "#170303",
+    "type": "color",
+    "description": "Care @theme color — red 950"
+  },
+  {
+    "name": "--color-yellow-50",
+    "value": "#fef8e7",
+    "type": "color",
+    "description": "Care @theme color — yellow 50"
+  },
+  {
+    "name": "--color-yellow-100",
+    "value": "#fcf1cf",
+    "type": "color",
+    "description": "Care @theme color — yellow 100"
+  },
+  {
+    "name": "--color-yellow-200",
+    "value": "#fae39e",
+    "type": "color",
+    "description": "Care @theme color — yellow 200"
+  },
+  {
+    "name": "--color-yellow-300",
+    "value": "#f7d56e",
+    "type": "color",
+    "description": "Care @theme color — yellow 300"
+  },
+  {
+    "name": "--color-yellow-400",
+    "value": "#f5c73d",
+    "type": "color",
+    "description": "Care @theme color — yellow 400"
+  },
+  {
+    "name": "--color-yellow-500",
+    "value": "#f2b90d",
+    "type": "color",
+    "description": "Care @theme color — yellow 500"
+  },
+  {
+    "name": "--color-yellow-600",
+    "value": "#aa8109",
+    "type": "color",
+    "description": "Care @theme color — yellow 600"
+  },
+  {
+    "name": "--color-yellow-700",
+    "value": "#7e6007",
+    "type": "color",
+    "description": "Care @theme color — yellow 700"
+  },
+  {
+    "name": "--color-yellow-800",
+    "value": "#523f04",
+    "type": "color",
+    "description": "Care @theme color — yellow 800"
+  },
+  {
+    "name": "--color-yellow-900",
+    "value": "#2c2102",
+    "type": "color",
+    "description": "Care @theme color — yellow 900"
+  },
+  {
+    "name": "--color-yellow-950",
+    "value": "#181201",
+    "type": "color",
+    "description": "Care @theme color — yellow 950"
+  },
+  {
+    "name": "--color-green-50",
+    "value": "#ecf9ec",
+    "type": "color",
+    "description": "Care @theme color — green 50"
+  },
+  {
+    "name": "--color-green-100",
+    "value": "#d9f2d9",
+    "type": "color",
+    "description": "Care @theme color — green 100"
+  },
+  {
+    "name": "--color-green-200",
+    "value": "#b3e5b2",
+    "type": "color",
+    "description": "Care @theme color — green 200"
+  },
+  {
+    "name": "--color-green-300",
+    "value": "#8dd98c",
+    "type": "color",
+    "description": "Care @theme color — green 300"
+  },
+  {
+    "name": "--color-green-400",
+    "value": "#68cc66",
+    "type": "color",
+    "description": "Care @theme color — green 400"
+  },
+  {
+    "name": "--color-green-500",
+    "value": "#42bf40",
+    "type": "color",
+    "description": "Care @theme color — green 500"
+  },
+  {
+    "name": "--color-green-600",
+    "value": "#2e862d",
+    "type": "color",
+    "description": "Care @theme color — green 600"
+  },
+  {
+    "name": "--color-green-700",
+    "value": "#226321",
+    "type": "color",
+    "description": "Care @theme color — green 700"
+  },
+  {
+    "name": "--color-green-800",
+    "value": "#164116",
+    "type": "color",
+    "description": "Care @theme color — green 800"
+  },
+  {
+    "name": "--color-green-900",
+    "value": "#0c220b",
+    "type": "color",
+    "description": "Care @theme color — green 900"
+  },
+  {
+    "name": "--color-green-950",
+    "value": "#071306",
+    "type": "color",
+    "description": "Care @theme color — green 950"
+  },
+  {
+    "name": "--color-blue-50",
+    "value": "#e5f5ff",
+    "type": "color",
+    "description": "Care @theme color — blue 50"
+  },
+  {
+    "name": "--color-blue-100",
+    "value": "#ccebff",
+    "type": "color",
+    "description": "Care @theme color — blue 100"
+  },
+  {
+    "name": "--color-blue-200",
+    "value": "#99d6ff",
+    "type": "color",
+    "description": "Care @theme color — blue 200"
+  },
+  {
+    "name": "--color-blue-300",
+    "value": "#66c2ff",
+    "type": "color",
+    "description": "Care @theme color — blue 300"
+  },
+  {
+    "name": "--color-blue-400",
+    "value": "#33adff",
+    "type": "color",
+    "description": "Care @theme color — blue 400"
+  },
+  {
+    "name": "--color-blue-500",
+    "value": "#0099ff",
+    "type": "color",
+    "description": "Care @theme color — blue 500"
+  },
+  {
+    "name": "--color-blue-600",
+    "value": "#006bb2",
+    "type": "color",
+    "description": "Care @theme color — blue 600"
+  },
+  {
+    "name": "--color-blue-700",
+    "value": "#005085",
+    "type": "color",
+    "description": "Care @theme color — blue 700"
+  },
+  {
+    "name": "--color-blue-800",
+    "value": "#003457",
+    "type": "color",
+    "description": "Care @theme color — blue 800"
+  },
+  {
+    "name": "--color-blue-900",
+    "value": "#001c2e",
+    "type": "color",
+    "description": "Care @theme color — blue 900"
+  },
+  {
+    "name": "--color-blue-950",
+    "value": "#000f1a",
+    "type": "color",
+    "description": "Care @theme color — blue 950"
+  },
+  {
+    "name": "--gradient-skeleton",
+    "value": "linear-gradient(90deg, #f7f8f8 0%, #e5e7e7 50%, #f7f8f8 100%)",
+    "type": "gradient",
+    "description": "Care @theme gradient — skeleton loading animation"
+  }
+]

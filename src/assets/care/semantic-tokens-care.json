@@ -1,0 +1,582 @@
+[
+  {
+    "semanticToken": "--color-semantic-canvas-subtle",
+    "primitiveToken": "color.neutral.00",
+    "value": "{color.neutral.00}",
+    "description": "Care semantic color token — canvas subtle",
+    "rawValue": "#ffffff"
+  },
+  {
+    "semanticToken": "--color-semantic-canvas-moderate",
+    "primitiveToken": "color.neutral.50",
+    "value": "{color.neutral.50}",
+    "description": "Care semantic color token — canvas moderate",
+    "rawValue": "#f7f8f8"
+  },
+  {
+    "semanticToken": "--color-semantic-canvas-disabled",
+    "primitiveToken": "color.neutral.100",
+    "value": "{color.neutral.100}",
+    "description": "Care semantic color token — canvas disabled",
+    "rawValue": "#e5e7e7"
+  },
+  {
+    "semanticToken": "--color-semantic-text-neutral-subtler",
+    "primitiveToken": "color.neutral.00",
+    "value": "{color.neutral.00}",
+    "description": "Care semantic color token — text neutral subtler",
+    "rawValue": "#ffffff"
+  },
+  {
+    "semanticToken": "--color-semantic-text-neutral-disabled",
+    "primitiveToken": "color.neutral.400",
+    "value": "{color.neutral.400}",
+    "description": "Care semantic color token — text neutral disabled",
+    "rawValue": "#a9b1b1"
+  },
+  {
+    "semanticToken": "--color-semantic-text-neutral-moderate",
+    "primitiveToken": "color.neutral.600",
+    "value": "{color.neutral.600}",
+    "description": "Care semantic color token — text neutral moderate",
+    "rawValue": "#6d7878"
+  },
+  {
+    "semanticToken": "--color-semantic-text-neutral-bold",
+    "primitiveToken": "color.neutral.700",
+    "value": "{color.neutral.700}",
+    "description": "Care semantic color token — text neutral bold",
+    "rawValue": "#525b5a"
+  },
+  {
+    "semanticToken": "--color-semantic-text-neutral-bolder",
+    "primitiveToken": "color.neutral.900",
+    "value": "{color.neutral.900}",
+    "description": "Care semantic color token — text neutral bolder",
+    "rawValue": "#1d2020"
+  },
+  {
+    "semanticToken": "--color-semantic-brand-subtle-hovered",
+    "primitiveToken": "color.brand.50",
+    "value": "{color.brand.50}",
+    "description": "Care semantic color token — brand subtle hovered",
+    "rawValue": "#edf7f7"
+  },
+  {
+    "semanticToken": "--color-semantic-brand-subtle",
+    "primitiveToken": "color.brand.100",
+    "value": "{color.brand.100}",
+    "description": "Care semantic color token — brand subtle",
+    "rawValue": "#dbf0f0"
+  },
+  {
+    "semanticToken": "--color-semantic-brand-subtle-pressed",
+    "primitiveToken": "color.brand.200",
+    "value": "{color.brand.200}",
+    "description": "Care semantic color token — brand subtle pressed",
+    "rawValue": "#b8e0e0"
+  },
+  {
+    "semanticToken": "--color-semantic-brand-bold-hovered",
+    "primitiveToken": "color.brand.500",
+    "value": "{color.brand.500}",
+    "description": "Care semantic color token — brand bold hovered",
+    "rawValue": "#4db3b3"
+  },
+  {
+    "semanticToken": "--color-semantic-brand-bold",
+    "primitiveToken": "color.brand.600",
+    "value": "{color.brand.600}",
+    "description": "Care semantic color token — brand bold",
+    "rawValue": "#357c7c"
+  },
+  {
+    "semanticToken": "--color-semantic-brand-bold-pressed",
+    "primitiveToken": "color.brand.700",
+    "value": "{color.brand.700}",
+    "description": "Care semantic color token — brand bold pressed",
+    "rawValue": "#285d5d"
+  },
+  {
+    "semanticToken": "--color-semantic-negative-bold-hovered",
+    "primitiveToken": "color.red.500",
+    "value": "{color.red.500}",
+    "description": "Care semantic color token — negative bold hovered",
+    "rawValue": "#e82f2f"
+  },
+  {
+    "semanticToken": "--color-semantic-negative-bold",
+    "primitiveToken": "color.red.600",
+    "value": "{color.red.600}",
+    "description": "Care semantic color token — negative bold",
+    "rawValue": "#a11212"
+  },
+  {
+    "semanticToken": "--color-semantic-negative-bold-pressed",
+    "primitiveToken": "color.red.700",
+    "value": "{color.red.700}",
+    "description": "Care semantic color token — negative bold pressed",
+    "rawValue": "#77140d"
+  },
+  {
+    "semanticToken": "--color-semantic-border-subtle",
+    "primitiveToken": "color.neutral.200",
+    "value": "{color.neutral.200}",
+    "description": "Care semantic color token — border subtle",
+    "rawValue": "#d1d6d5"
+  },
+  {
+    "semanticToken": "--color-semantic-border-moderate",
+    "primitiveToken": "color.neutral.600",
+    "value": "{color.neutral.600}",
+    "description": "Care semantic color token — border moderate",
+    "rawValue": "#6d7878"
+  },
+  {
+    "semanticToken": "--color-semantic-neutral-bold",
+    "primitiveToken": "color.neutral.600",
+    "value": "{color.neutral.600}",
+    "description": "Care semantic color token — neutral bold",
+    "rawValue": "#6d7878"
+  },
+  {
+    "semanticToken": "--color-semantic-neutral-subtle",
+    "primitiveToken": "color.neutral.100",
+    "value": "{color.neutral.100}",
+    "description": "Care semantic color token — neutral subtle",
+    "rawValue": "#e5e7e7"
+  },
+  {
+    "semanticToken": "--color-semantic-negative-subtle",
+    "primitiveToken": "color.red.100",
+    "value": "{color.red.100}",
+    "description": "Care semantic color token — negative subtle",
+    "rawValue": "#fad1d1"
+  },
+  {
+    "semanticToken": "--color-semantic-information-subtle",
+    "primitiveToken": "color.blue.100",
+    "value": "{color.blue.100}",
+    "description": "Care semantic color token — information subtle",
+    "rawValue": "#ccebff"
+  },
+  {
+    "semanticToken": "--color-semantic-information-bold",
+    "primitiveToken": "color.blue.600",
+    "value": "{color.blue.600}",
+    "description": "Care semantic color token — information bold",
+    "rawValue": "#006bb2"
+  },
+  {
+    "semanticToken": "--color-semantic-attention-subtle",
+    "primitiveToken": "color.yellow.100",
+    "value": "{color.yellow.100}",
+    "description": "Care semantic color token — attention subtle",
+    "rawValue": "#fcf1cf"
+  },
+  {
+    "semanticToken": "--color-semantic-attention-bold",
+    "primitiveToken": "color.yellow.600",
+    "value": "{color.yellow.600}",
+    "description": "Care semantic color token — attention bold",
+    "rawValue": "#aa8109"
+  },
+  {
+    "semanticToken": "--color-semantic-positive-subtle",
+    "primitiveToken": "color.green.100",
+    "value": "{color.green.100}",
+    "description": "Care semantic color token — positive subtle",
+    "rawValue": "#d9f2d9"
+  },
+  {
+    "semanticToken": "--color-semantic-positive-bold",
+    "primitiveToken": "color.green.600",
+    "value": "{color.green.600}",
+    "description": "Care semantic color token — positive bold",
+    "rawValue": "#2e862d"
+  },
+  {
+    "semanticToken": "--color-semantic-text-brand-bold",
+    "primitiveToken": "color.brand.700",
+    "value": "{color.brand.700}",
+    "description": "Care semantic color token — text brand bold",
+    "rawValue": "#285d5d"
+  },
+  {
+    "semanticToken": "--color-semantic-text-negative-bold",
+    "primitiveToken": "color.red.700",
+    "value": "{color.red.700}",
+    "description": "Care semantic color token — text negative bold",
+    "rawValue": "#77140d"
+  },
+  {
+    "semanticToken": "--color-semantic-text-information-bold",
+    "primitiveToken": "color.blue.700",
+    "value": "{color.blue.700}",
+    "description": "Care semantic color token — text information bold",
+    "rawValue": "#005085"
+  },
+  {
+    "semanticToken": "--color-semantic-text-attention-bold",
+    "primitiveToken": "color.yellow.700",
+    "value": "{color.yellow.700}",
+    "description": "Care semantic color token — text attention bold",
+    "rawValue": "#7e6007"
+  },
+  {
+    "semanticToken": "--color-semantic-text-positive-bold",
+    "primitiveToken": "color.green.700",
+    "value": "{color.green.700}",
+    "description": "Care semantic color token — text positive bold",
+    "rawValue": "#226321"
+  },
+  {
+    "semanticToken": "--color-semantic-border-negative-bold",
+    "primitiveToken": "color.red.500",
+    "value": "{color.red.500}",
+    "description": "Care semantic color token — border negative bold",
+    "rawValue": "#e82f2f"
+  },
+  {
+    "semanticToken": "--color-semantic-neutral-bold-hovered",
+    "primitiveToken": "color.neutral.500",
+    "value": "{color.neutral.500}",
+    "description": "Care semantic color token — neutral bold hovered",
+    "rawValue": "#949e9d"
+  },
+  {
+    "semanticToken": "--color-semantic-text-brand-subtle",
+    "primitiveToken": "color.brand.500",
+    "value": "{color.brand.500}",
+    "description": "Care semantic color token — text brand subtle",
+    "rawValue": "#4db3b3"
+  },
+  {
+    "semanticToken": "--color-semantic-border-brand-bold",
+    "primitiveToken": "color.brand.500",
+    "value": "{color.brand.500}",
+    "description": "Care semantic color token — border brand bold",
+    "rawValue": "#4db3b3"
+  },
+  {
+    "semanticToken": "--color-semantic-text-neutral-subtle",
+    "primitiveToken": "color.neutral.500",
+    "value": "{color.neutral.500}",
+    "description": "Care semantic color token — text neutral subtle",
+    "rawValue": "#949e9d"
+  },
+  {
+    "semanticToken": "--typography-semantic-heading-h3",
+    "primitiveToken": "heading.h3",
+    "value": "{heading.h3}",
+    "description": "Care semantic typography token — heading h3",
+    "rawValue": {
+      "fontFamily": "Nunito Sans",
+      "fontSize": "18",
+      "lineHeight": "22",
+      "letterSpacing": "-0.1"
+    }
+  },
+  {
+    "semanticToken": "--typography-semantic-heading-h2",
+    "primitiveToken": "heading.h2",
+    "value": "{heading.h2}",
+    "description": "Care semantic typography token — heading h2",
+    "rawValue": {
+      "fontFamily": "Nunito Sans",
+      "fontSize": "20",
+      "lineHeight": "24",
+      "letterSpacing": "-0.1"
+    }
+  },
+  {
+    "semanticToken": "--typography-semantic-heading-h1",
+    "primitiveToken": "heading.h1",
+    "value": "{heading.h1}",
+    "description": "Care semantic typography token — heading h1",
+    "rawValue": {
+      "fontFamily": "Nunito Sans",
+      "lineHeight": "28",
+      "fontSize": "24",
+      "letterSpacing": "-0.1"
+    }
+  },
+  {
+    "semanticToken": "--typography-semantic-heading-h4",
+    "primitiveToken": "heading.h4",
+    "value": "{heading.h4}",
+    "description": "Care semantic typography token — heading h4",
+    "rawValue": {
+      "fontFamily": "Nunito Sans",
+      "fontSize": "16",
+      "lineHeight": "20",
+      "letterSpacing": "-0.1"
+    }
+  },
+  {
+    "semanticToken": "--typography-semantic-title-small",
+    "primitiveToken": "title.small",
+    "value": "{title.small}",
+    "description": "Care semantic typography token — title small",
+    "rawValue": {
+      "fontFamily": "Nunito Sans",
+      "fontWeight": "SemiBold",
+      "fontSize": "14",
+      "lineHeight": "20",
+      "letterSpacing": "-0.1"
+    }
+  },
+  {
+    "semanticToken": "--typography-semantic-title-default",
+    "primitiveToken": "title.default",
+    "value": "{title.default}",
+    "description": "Care semantic typography token — title default",
+    "rawValue": {
+      "fontFamily": "Nunito Sans",
+      "fontWeight": "SemiBold",
+      "fontSize": "16",
+      "lineHeight": "22",
+      "letterSpacing": "-0.1"
+    }
+  },
+  {
+    "semanticToken": "--typography-semantic-title-large",
+    "primitiveToken": "title.large",
+    "value": "{title.large}",
+    "description": "Care semantic typography token — title large",
+    "rawValue": {
+      "fontFamily": "Nunito Sans",
+      "fontWeight": "SemiBold",
+      "fontSize": "18",
+      "lineHeight": "24",
+      "letterSpacing": "-0.1"
+    }
+  },
+  {
+    "semanticToken": "--typography-semantic-paragraph-small",
+    "primitiveToken": "paragraph.small",
+    "value": "{paragraph.small}",
+    "description": "Care semantic typography token — paragraph small",
+    "rawValue": {
+      "fontFamily": "Nunito Sans",
+      "fontWeight": "Regular",
+      "fontSize": "12",
+      "lineHeight": "18",
+      "letterSpacing": "0"
+    }
+  },
+  {
+    "semanticToken": "--typography-semantic-paragraph-default",
+    "primitiveToken": "paragraph.default",
+    "value": "{paragraph.default}",
+    "description": "Care semantic typography token — paragraph default",
+    "rawValue": {
+      "fontFamily": "Nunito Sans",
+      "fontWeight": "Regular",
+      "fontSize": "14",
+      "lineHeight": "20",
+      "letterSpacing": "0"
+    }
+  },
+  {
+    "semanticToken": "--typography-semantic-paragraph-large",
+    "primitiveToken": "paragraph.large",
+    "value": "{paragraph.large}",
+    "description": "Care semantic typography token — paragraph large",
+    "rawValue": {
+      "fontFamily": "Nunito Sans",
+      "fontWeight": "Regular",
+      "fontSize": "16",
+      "lineHeight": "22",
+      "letterSpacing": "0"
+    }
+  },
+  {
+    "semanticToken": "--typography-semantic-label-small",
+    "primitiveToken": "label.small",
+    "value": "{label.small}",
+    "description": "Care semantic typography token — label small",
+    "rawValue": {
+      "fontFamily": "Nunito Sans",
+      "fontWeight": "SemiBold",
+      "fontSize": "10",
+      "lineHeight": "12",
+      "letterSpacing": "0.1"
+    }
+  },
+  {
+    "semanticToken": "--typography-semantic-label-default",
+    "primitiveToken": "label.default",
+    "value": "{label.default}",
+    "description": "Care semantic typography token — label default",
+    "rawValue": {
+      "fontFamily": "Nunito Sans",
+      "fontWeight": "SemiBold",
+      "fontSize": "12",
+      "lineHeight": "14",
+      "letterSpacing": "0.1"
+    }
+  },
+  {
+    "semanticToken": "--typography-semantic-label-large",
+    "primitiveToken": "label.large",
+    "value": "{label.large}",
+    "description": "Care semantic typography token — label large",
+    "rawValue": {
+      "fontFamily": "Nunito Sans",
+      "fontWeight": "SemiBold",
+      "fontSize": "14",
+      "lineHeight": "16",
+      "letterSpacing": "0.1"
+    }
+  },
+  {
+    "semanticToken": "--typography-semantic-display-default",
+    "primitiveToken": "display.default",
+    "value": "{display.default}",
+    "description": "Care semantic typography token — display default",
+    "rawValue": {
+      "fontFamily": "Nunito Sans",
+      "fontWeight": "SemiBold",
+      "fontSize": "32",
+      "lineHeight": "36",
+      "letterSpacing": "-0.1"
+    }
+  },
+  {
+    "semanticToken": "--shadow-semantic-elevation-0",
+    "primitiveToken": "elevation.0",
+    "value": "{elevation.0}",
+    "description": "Care semantic shadow token — elevation 0",
+    "rawValue": {
+      "0": {
+        "x": "0",
+        "y": "0",
+        "blur": "1",
+        "spread": "0",
+        "color": "#0000000a",
+        "type": "dropShadow"
+      },
+      "1": {
+        "x": "0",
+        "y": "0",
+        "blur": "2",
+        "spread": "0",
+        "color": "#0000000f",
+        "type": "dropShadow"
+      },
+      "2": {
+        "x": "0",
+        "y": "4",
+        "blur": "8",
+        "spread": "0",
+        "color": "#0000000a",
+        "type": "dropShadow"
+      }
+    }
+  },
+  {
+    "semanticToken": "--shadow-semantic-elevation-1",
+    "primitiveToken": "elevation.1",
+    "value": "{elevation.1}",
+    "description": "Care semantic shadow token — elevation 1",
+    "rawValue": {
+      "0": {
+        "x": "0",
+        "y": "0",
+        "blur": "1",
+        "spread": "0",
+        "color": "#0000000a",
+        "type": "dropShadow"
+      },
+      "1": {
+        "x": "0",
+        "y": "2",
+        "blur": "6",
+        "spread": "0",
+        "color": "#0000000a",
+        "type": "dropShadow"
+      },
+      "2": {
+        "x": "0",
+        "y": "10",
+        "blur": "20",
+        "spread": "0",
+        "color": "#0000000a",
+        "type": "dropShadow"
+      }
+    }
+  },
+  {
+    "semanticToken": "--shadow-semantic-elevation-2",
+    "primitiveToken": "elevation.2",
+    "value": "{elevation.2}",
+    "description": "Care semantic shadow token — elevation 2",
+    "rawValue": {
+      "0": {
+        "x": "0",
+        "y": "0",
+        "blur": "1",
+        "spread": "0",
+        "color": "#0000000a",
+        "type": "dropShadow"
+      },
+      "1": {
+        "x": "0",
+        "y": "2",
+        "blur": "6",
+        "spread": "0",
+        "color": "#0000000a",
+        "type": "dropShadow"
+      },
+      "2": {
+        "x": "0",
+        "y": "16",
+        "blur": "30",
+        "spread": "0",
+        "color": "#00000014",
+        "type": "dropShadow"
+      }
+    }
+  },
+  {
+    "semanticToken": "--shadow-semantic-elevation-3",
+    "primitiveToken": "elevation.3",
+    "value": "{elevation.3}",
+    "description": "Care semantic shadow token — elevation 3",
+    "rawValue": {
+      "0": {
+        "x": "0",
+        "y": "0",
+        "blur": "1",
+        "spread": "0",
+        "color": "#00000005",
+        "type": "dropShadow"
+      },
+      "1": {
+        "x": "0",
+        "y": "4",
+        "blur": "8",
+        "spread": "0",
+        "color": "#00000008",
+        "type": "dropShadow"
+      },
+      "2": {
+        "x": "0",
+        "y": "16",
+        "blur": "24",
+        "spread": "0",
+        "color": "#00000008",
+        "type": "dropShadow"
+      },
+      "3": {
+        "x": "0",
+        "y": "30",
+        "blur": "50",
+        "spread": "0",
+        "color": "#00000012",
+        "type": "dropShadow"
+      }
+    }
+  }
+]

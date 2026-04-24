@@ -1,0 +1,182 @@
+[
+  {
+    "name": "--font-text",
+    "value": "Nunito Sans",
+    "type": "fontFamily",
+    "description": "Care @theme font family — text"
+  },
+  {
+    "name": "--font-brand",
+    "value": "Nunito Sans",
+    "type": "fontFamily",
+    "description": "Care @theme font family — brand"
+  },
+  {
+    "name": "--font-weight-regular",
+    "value": "400",
+    "type": "fontWeight",
+    "description": "Care @theme font weight — regular"
+  },
+  {
+    "name": "--font-weight-medium",
+    "value": "500",
+    "type": "fontWeight",
+    "description": "Care @theme font weight — medium"
+  },
+  {
+    "name": "--font-weight-semibold",
+    "value": "600",
+    "type": "fontWeight",
+    "description": "Care @theme font weight — semibold"
+  },
+  {
+    "name": "--font-weight-bold",
+    "value": "700",
+    "type": "fontWeight",
+    "description": "Care @theme font weight — bold"
+  },
+  {
+    "name": "--font-size-10",
+    "value": "0.625rem",
+    "type": "dimension",
+    "description": "Care @theme font size — 10 (10px)"
+  },
+  {
+    "name": "--font-size-12",
+    "value": "0.75rem",
+    "type": "dimension",
+    "description": "Care @theme font size — 12 (12px)"
+  },
+  {
+    "name": "--font-size-14",
+    "value": "0.875rem",
+    "type": "dimension",
+    "description": "Care @theme font size — 14 (14px)"
+  },
+  {
+    "name": "--font-size-16",
+    "value": "1rem",
+    "type": "dimension",
+    "description": "Care @theme font size — 16 (16px)"
+  },
+  {
+    "name": "--font-size-18",
+    "value": "1.125rem",
+    "type": "dimension",
+    "description": "Care @theme font size — 18 (18px)"
+  },
+  {
+    "name": "--font-size-20",
+    "value": "1.25rem",
+    "type": "dimension",
+    "description": "Care @theme font size — 20 (20px)"
+  },
+  {
+    "name": "--font-size-24",
+    "value": "1.5rem",
+    "type": "dimension",
+    "description": "Care @theme font size — 24 (24px)"
+  },
+  {
+    "name": "--font-size-28",
+    "value": "1.75rem",
+    "type": "dimension",
+    "description": "Care @theme font size — 28 (28px)"
+  },
+  {
+    "name": "--font-size-32",
+    "value": "2rem",
+    "type": "dimension",
+    "description": "Care @theme font size — 32 (32px)"
+  },
+  {
+    "name": "--font-size-36",
+    "value": "2.25rem",
+    "type": "dimension",
+    "description": "Care @theme font size — 36 (36px)"
+  },
+  {
+    "name": "--font-size-48",
+    "value": "3rem",
+    "type": "dimension",
+    "description": "Care @theme font size — 48 (48px)"
+  },
+  {
+    "name": "--font-size-56",
+    "value": "3.5rem",
+    "type": "dimension",
+    "description": "Care @theme font size — 56 (56px)"
+  },
+  {
+    "name": "--tracking-dense",
+    "value": "-0.1px",
+    "type": "dimension",
+    "description": "Care @theme letter spacing — dense"
+  },
+  {
+    "name": "--tracking-normal",
+    "value": "0px",
+    "type": "dimension",
+    "description": "Care @theme letter spacing — normal"
+  },
+  {
+    "name": "--tracking-loose",
+    "value": "0.1px",
+    "type": "dimension",
+    "description": "Care @theme letter spacing — loose"
+  },
+  {
+    "name": "--leading-12",
+    "value": "0.75rem",
+    "type": "dimension",
+    "description": "Care @theme line height — 12 (12px)"
+  },
+  {
+    "name": "--leading-14",
+    "value": "0.875rem",
+    "type": "dimension",
+    "description": "Care @theme line height — 14 (14px)"
+  },
+  {
+    "name": "--leading-16",
+    "value": "1rem",
+    "type": "dimension",
+    "description": "Care @theme line height — 16 (16px)"
+  },
+  {
+    "name": "--leading-18",
+    "value": "1.125rem",
+    "type": "dimension",
+    "description": "Care @theme line height — 18 (18px)"
+  },
+  {
+    "name": "--leading-20",
+    "value": "1.25rem",
+    "type": "dimension",
+    "description": "Care @theme line height — 20 (20px)"
+  },
+  {
+    "name": "--leading-22",
+    "value": "1.375rem",
+    "type": "dimension",
+    "description": "Care @theme line height — 22 (22px)"
+  },
+  {
+    "name": "--leading-24",
+    "value": "1.5rem",
+    "type": "dimension",
+    "description": "Care @theme line height — 24 (24px)"
+  },
+  {
+    "name": "--leading-28",
+    "value": "1.75rem",
+    "type": "dimension",
+    "description": "Care @theme line height — 28 (28px)"
+  },
+  {
+    "name": "--leading-36",
+    "value": "2.25rem",
+    "type": "dimension",
+    "description": "Care @theme line height — 36 (36px)"
+  }
+]

@@ -52,7 +52,7 @@ export const ThemesCell = ({ row }: TableCell) => {
 };
 
 export const ActionsCell = ({ row }: TableCell) => {
-  const { openEditDialog, openRemoveDialog } = useWorkspaceStore();
+  const { activeWorkspace, openEditDialog, openRemoveDialog } = useWorkspaceStore();
 
   const handleEdit = () => {
     openEditDialog(row.original);
@@ -77,12 +77,21 @@ export const ActionsCell = ({ row }: TableCell) => {
       <Tooltip>
         <TooltipTrigger
           render={
-            <Button variant="destructive" size="icon" onClick={handleRemove}>
-              <TrashIcon className="size-4" />
-            </Button>
+            <span tabIndex={-1}>
+              <Button
+                variant="destructive"
+                size="icon"
+                onClick={handleRemove}
+                disabled={activeWorkspace?.id === row.original.id}
+              >
+                <TrashIcon className="size-4" />
+              </Button>
+            </span>
           }
         />
-        <TooltipContent>Delete</TooltipContent>
+        <TooltipContent>
+          {activeWorkspace?.id === row.original.id ? 'Cannot delete active workspace' : 'Delete'}
+        </TooltipContent>
       </Tooltip>
     </div>
   );

@@ -21,7 +21,8 @@
     "db:studio": "drizzle-kit studio",
     "db:sync": "tsx --env-file .env scripts/db-sync.ts",
     "db:seed:primitives": "tsx scripts/db-seed-primitive-tokens.ts",
-    "db:seed:workspaces": "tsx scripts/db-seed-workspaces.ts"
+    "db:seed:workspaces": "tsx scripts/db-seed-workspaces.ts",
+    "skills:install": "npx skills experimental_install"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",
