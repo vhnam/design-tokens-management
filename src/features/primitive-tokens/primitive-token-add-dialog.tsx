@@ -11,6 +11,8 @@ import { TokenType } from '@/enums/token';
 import { primitiveTokenSchema } from '@/schemas/primitive-token.schema';
 import type { PrimitiveTokenSchemaType } from '@/schemas/primitive-token.schema';
 
+import { useWorkspaceStore } from '@/stores/workspace.store';
+
 import { Button } from '@/components/primitives/button';
 import {
   Dialog,
@@ -32,6 +34,7 @@ import { useCreatePrimitiveToken } from './primitive-tokens.actions';
 export const PrimitiveTokenAddDialog = () => {
   const [open, setOpen] = useState(false);
 
+  const { activeWorkspace } = useWorkspaceStore();
   const createToken = useCreatePrimitiveToken();
 
   const form = useForm<PrimitiveTokenSchemaType>({
@@ -54,6 +57,7 @@ export const PrimitiveTokenAddDialog = () => {
   const onSubmit = form.handleSubmit((value) => {
     createToken.mutate(
       {
+        workspaceId: activeWorkspace?.id ?? '',
         name: value.tokenName.trim(),
         value: value.tokenValue.trim(),
         type: value.tokenType,

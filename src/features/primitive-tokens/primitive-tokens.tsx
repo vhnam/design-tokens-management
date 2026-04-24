@@ -36,7 +36,7 @@ const columnHelper = createColumnHelper<PrimitiveToken>();
 export const PrimitiveTokens = () => {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
-  const { data, isLoading, error } = useGetPrimitiveTokens();
+  const { data, isFetching, error } = useGetPrimitiveTokens();
   const { isOpenDeleteDialog, isOpenEditDialog } = usePrimitiveTokensTableStore();
 
   const tableData = useMemo(() => (Array.isArray(data) ? (data as PrimitiveToken[]) : []), [data]);
@@ -80,10 +80,10 @@ export const PrimitiveTokens = () => {
     getRowId: (row) => row.id,
     onColumnFiltersChange: setColumnFilters,
   });
-  const nameQuery = (table.getColumn('name')?.getFilterValue() as string) ?? '';
+  const nameQuery = (table.getColumn('name')?.getFilterValue() as string | undefined) ?? '';
   const selectedType = (table.getColumn('type')?.getFilterValue() as TokenType | null) ?? null;
 
-  if (isLoading) return <div className="flex items-center justify-center h-full">Loading…</div>;
+  if (isFetching && !data) return <div className="flex h-full items-center justify-center">Loading...</div>;
 
   if (error) return <div>Error: {error.message}</div>;
 

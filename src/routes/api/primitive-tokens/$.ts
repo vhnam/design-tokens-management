@@ -14,6 +14,10 @@ const TOKEN_TYPES = new Set<TokenType>([
   TokenType.Duration,
   TokenType.CubicBezier,
   TokenType.Number,
+  TokenType.Typography,
+  TokenType.Shadow,
+  TokenType.Border,
+  TokenType.Gradient,
 ]);
 
 function isTokenType(value: unknown): value is TokenType {
@@ -23,8 +27,12 @@ function isTokenType(value: unknown): value is TokenType {
 export const Route = createFileRoute('/api/primitive-tokens/$')({
   server: {
     handlers: {
-      GET: async () => {
-        const rows = await db.select().from(primitiveTokens);
+      GET: async ({ request }) => {
+        const url = new URL(request.url);
+        const workspaceId = url.searchParams.get('workspaceId');
+        const rows = workspaceId
+          ? await db.select().from(primitiveTokens).where(eq(primitiveTokens.workspaceId, workspaceId))
+          : await db.select().from(primitiveTokens);
         return new Response(JSON.stringify(rows), {
           status: 200,
           headers: { 'Content-Type': 'application/json' },
@@ -48,13 +56,21 @@ export const Route = createFileRoute('/api/primitive-tokens/$')({
           });
         }
 
-        const { name, value, type, description } = body as Record<string, unknown>;
+        const { name, value, type, description, workspaceId } = body as Record<string, unknown>;
         const nameStr = typeof name === 'string' ? name.trim() : '';
         const valueStr = typeof value === 'string' ? value.trim() : '';
+        const workspaceIdStr = typeof workspaceId === 'string' ? workspaceId.trim() : '';
         const descriptionStr = typeof description === 'string' && description.trim() !== '' ? description.trim() : null;
 
         if (!nameStr || !valueStr) {
           return new Response(JSON.stringify({ error: 'Name and value are required' }), {
+            status: 400,
+            headers: { 'Content-Type': 'application/json' },
+          });
+        }
+
+        if (!workspaceIdStr) {
+          return new Response(JSON.stringify({ error: 'workspaceId is required' }), {
             status: 400,
             headers: { 'Content-Type': 'application/json' },
           });
@@ -74,6 +90,7 @@ export const Route = createFileRoute('/api/primitive-tokens/$')({
             value: valueStr,
             type,
             description: descriptionStr,
+            workspaceId: workspaceIdStr,
           })
           .returning();
 

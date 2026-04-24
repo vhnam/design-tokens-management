@@ -17,10 +17,15 @@ const baseColumns = {
 };
 
 // Layer 1 — no theme, no brand, no component
-export const primitiveTokens = sqliteTable('primitive_tokens', {
-  ...baseColumns,
-  ...timestampColumns,
-});
+export const primitiveTokens = sqliteTable(
+  'primitive_tokens',
+  {
+    ...baseColumns,
+    workspaceId: text('workspace_id').notNull(),
+    ...timestampColumns,
+  },
+  (t) => [index('primitive_workspace_idx').on(t.workspaceId)],
+);
 
 // Layer 2 — has theme, no brand, no component
 export const semanticTokens = sqliteTable(

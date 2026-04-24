@@ -1,9 +1,10 @@
 'use client';
 
 import { ChevronsUpDownIcon, PlusIcon } from 'lucide-react';
-import { useState } from 'react';
 
 import type { Workspace } from '@/types/workspace';
+
+import { useWorkspaceStore } from '@/stores/workspace.store';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/primitives/avatar';
 import {
@@ -13,7 +14,6 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@/components/primitives/dropdown-menu';
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/primitives/sidebar';
@@ -24,7 +24,9 @@ interface TeamSwitcherProps {
 
 export const WorkspaceSwitcher = ({ workspaces }: TeamSwitcherProps) => {
   const { isMobile } = useSidebar();
-  const [activeWorkspace, setActiveWorkspace] = useState<Workspace>(workspaces[0]);
+  const { activeWorkspace, setActiveWorkspace } = useWorkspaceStore();
+
+  const displayed = activeWorkspace ?? workspaces[0];
 
   return (
     <SidebarMenu>
@@ -39,11 +41,11 @@ export const WorkspaceSwitcher = ({ workspaces }: TeamSwitcherProps) => {
             }
           >
             <Avatar>
-              <AvatarImage src={activeWorkspace.image ?? ''} alt={activeWorkspace.name} />
-              <AvatarFallback>{activeWorkspace.name.charAt(0).toUpperCase()}</AvatarFallback>
+              <AvatarImage src={displayed.image} alt={displayed.name} />
+              <AvatarFallback>{displayed.name.charAt(0).toUpperCase()}</AvatarFallback>
             </Avatar>
             <div className="grid flex-1 text-left text-sm leading-tight font-heading">
-              <span className="truncate font-medium">{activeWorkspace.name}</span>
+              <span className="truncate font-medium">{displayed.name}</span>
             </div>
             <ChevronsUpDownIcon className="ml-auto" />
           </DropdownMenuTrigger>
@@ -55,18 +57,17 @@ export const WorkspaceSwitcher = ({ workspaces }: TeamSwitcherProps) => {
           >
             <DropdownMenuGroup>
               <DropdownMenuLabel className="text-xs text-muted-foreground">Workspaces</DropdownMenuLabel>
-              {workspaces.map((workspace, index) => (
+              {workspaces.map((workspace) => (
                 <DropdownMenuItem
                   key={workspace.name}
                   onClick={() => setActiveWorkspace(workspace)}
                   className="gap-2 p-2"
                 >
                   <Avatar size="sm">
-                    <AvatarImage src={workspace.image ?? ''} alt={workspace.name} />
+                    <AvatarImage src={workspace.image} alt={workspace.name} />
                     <AvatarFallback>{workspace.name.charAt(0).toUpperCase()}</AvatarFallback>
                   </Avatar>
                   {workspace.name}
-                  <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut>
                 </DropdownMenuItem>
               ))}
             </DropdownMenuGroup>

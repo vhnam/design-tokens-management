@@ -9,7 +9,7 @@ export const useCreatePrimitiveTokenMutation = () => {
   return useMutation({
     mutationFn: createPrimitiveToken,
     onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: PRIMITIVE_TOKENS_KEYS.LIST });
+      void queryClient.invalidateQueries({ queryKey: PRIMITIVE_TOKENS_KEYS.ALL });
     },
   });
 };
@@ -20,7 +20,7 @@ export const useUpdatePrimitiveTokenMutation = () => {
   return useMutation({
     mutationFn: updatePrimitiveToken,
     onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: PRIMITIVE_TOKENS_KEYS.LIST });
+      void queryClient.invalidateQueries({ queryKey: PRIMITIVE_TOKENS_KEYS.ALL });
     },
   });
 };
@@ -31,7 +31,7 @@ export const useDeletePrimitiveTokenMutation = () => {
   return useMutation({
     mutationFn: deletePrimitiveToken,
     onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: PRIMITIVE_TOKENS_KEYS.LIST });
+      void queryClient.invalidateQueries({ queryKey: PRIMITIVE_TOKENS_KEYS.ALL });
     },
   });
 };

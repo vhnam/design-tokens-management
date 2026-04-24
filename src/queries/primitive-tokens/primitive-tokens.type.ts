@@ -1,6 +1,7 @@
-import type { TokenType } from '@/types/token';
+import type { TokenType } from '@/enums/token';
 
 export type CreatePrimitiveTokenPayload = {
+  workspaceId: string;
   name: string;
   value: string;
   type: TokenType;

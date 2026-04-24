@@ -1,8 +1,8 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "29e8b0a7-813e-4dc9-9f21-398930db6972",
-  "prevId": "bdf292b4-9d23-4950-8b58-474d3127c021",
+  "id": "b997efcd-07ff-4971-8e9b-4fd177c37899",
+  "prevId": "29e8b0a7-813e-4dc9-9f21-398930db6972",
   "tables": {
     "brand_overrides": {
       "name": "brand_overrides",
@@ -237,6 +237,13 @@
           "notNull": false,
           "autoincrement": false
         },
+        "workspace_id": {
+          "name": "workspace_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
         "created_at": {
           "name": "created_at",
           "type": "integer",
@@ -254,7 +261,13 @@
           "default": "(unixepoch())"
         }
       },
-      "indexes": {},
+      "indexes": {
+        "primitive_workspace_idx": {
+          "name": "primitive_workspace_idx",
+          "columns": ["workspace_id"],
+          "isUnique": false
+        }
+      },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},

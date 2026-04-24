@@ -1,3 +1,4 @@
 export const PRIMITIVE_TOKENS_KEYS = {
-  LIST: ['primitive-tokens'] as const,
+  ALL: ['primitive-tokens'] as const,
+  LIST: (workspaceId?: string) => ['primitive-tokens', workspaceId] as const,
 };

@@ -8,8 +8,8 @@ import type {
 
 const API_ENDPOINT = '/api/primitive-tokens';
 
-export const getPrimitiveTokens = async () => {
-  const response = await axios.get(API_ENDPOINT);
+export const getPrimitiveTokens = async (workspaceId?: string) => {
+  const response = await axios.get(API_ENDPOINT, { params: workspaceId ? { workspaceId } : undefined });
   return response.data;
 };
 
