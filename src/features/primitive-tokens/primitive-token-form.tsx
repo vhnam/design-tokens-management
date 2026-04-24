@@ -14,6 +14,8 @@ import { InputField } from '@/components/composites/field/input-field';
 import { SelectField } from '@/components/composites/field/select-field';
 import { TextareaField } from '@/components/composites/field/textarea-field';
 
+import { CompositeTokenBorderForm } from './compotite-token-border-form';
+import { CompositeTokenGradientForm } from './compotite-token-gradient-form';
 import { CompositeTokenShadowForm } from './compotite-token-shadow-form';
 import { CompositeTokenTypographyForm } from './compotite-token-typography-form';
 
@@ -46,6 +48,10 @@ const PrimitiveTokenForm = ({ form, isPending, onSubmit, onClose }: PrimitiveTok
         {tokenType === TokenType.Typography && <CompositeTokenTypographyForm control={form.control} />}
 
         {tokenType === TokenType.Shadow && <CompositeTokenShadowForm control={form.control} />}
+
+        {tokenType === TokenType.Border && <CompositeTokenBorderForm control={form.control} />}
+
+        {tokenType === TokenType.Gradient && <CompositeTokenGradientForm control={form.control} />}
 
         {shouldShowValueField && (
           <InputField control={form.control} name="tokenValue" label="Value" placeholder="e.g. --color-blue-500" />

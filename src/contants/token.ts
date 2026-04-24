@@ -80,3 +80,14 @@ export const TOKEN_TYPE_LABELS: Record<TokenType, string> = {
   [TokenType.Border]: 'Border',
   [TokenType.Gradient]: 'Gradient',
 };
+
+export const BORDER_STYLE_LIST: { label: string; value: string }[] = [
+  { label: 'Solid', value: 'solid' },
+  { label: 'Dashed', value: 'dashed' },
+  { label: 'Dotted', value: 'dotted' },
+  { label: 'Double', value: 'double' },
+  { label: 'Groove', value: 'groove' },
+  { label: 'Ridge', value: 'ridge' },
+  { label: 'Inset', value: 'inset' },
+  { label: 'Outset', value: 'outset' },
+];
