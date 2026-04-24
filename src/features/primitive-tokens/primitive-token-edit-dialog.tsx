@@ -65,6 +65,7 @@ export const PrimitiveTokenEditDialog = () => {
         <PrimitiveTokenForm
           form={form}
           isPending={updateToken.isPending}
+          submitText="Update token"
           onClose={closeEditDialog}
           onSubmit={onSubmit}
         />

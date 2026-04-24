@@ -1,9 +1,6 @@
-import { useWatch } from 'react-hook-form';
 import type { UseFormReturn } from 'react-hook-form';
 
-import { TOKEN_TYPE_OPTIONS } from '@/contants/token';
-
-import { TokenType } from '@/enums/token';
+import { PRIMITIVE_TOKEN_TYPE_OPTIONS } from '@/contants/token';
 
 import type { PrimitiveTokenSchemaType } from '@/schemas/primitive-token.schema';
 
@@ -14,48 +11,23 @@ import { InputField } from '@/components/composites/field/input-field';
 import { SelectField } from '@/components/composites/field/select-field';
 import { TextareaField } from '@/components/composites/field/textarea-field';
 
-import { CompositeTokenBorderForm } from './compotite-token-border-form';
-import { CompositeTokenGradientForm } from './compotite-token-gradient-form';
-import { CompositeTokenShadowForm } from './compotite-token-shadow-form';
-import { CompositeTokenTypographyForm } from './compotite-token-typography-form';
-
 interface PrimitiveTokenFormProps {
   form: UseFormReturn<PrimitiveTokenSchemaType>;
   isPending: boolean;
   onSubmit: (data: PrimitiveTokenSchemaType) => void;
   onClose: () => void;
+  submitText: string;
 }
 
-const tokenTypesWithoutValueField = new Set([
-  TokenType.Typography,
-  TokenType.Shadow,
-  TokenType.Border,
-  TokenType.Gradient,
-]);
-
-const PrimitiveTokenForm = ({ form, isPending, onSubmit, onClose }: PrimitiveTokenFormProps) => {
-  const tokenType = useWatch({ control: form.control, name: 'tokenType' });
-
-  const shouldShowValueField = !tokenTypesWithoutValueField.has(tokenType);
-
+const PrimitiveTokenForm = ({ form, isPending, submitText, onSubmit, onClose }: PrimitiveTokenFormProps) => {
   return (
     <div className="no-scrollbar max-h-[50vh] overflow-y-auto -mx-4 px-4">
       <form className="grid gap-4" onSubmit={form.handleSubmit(onSubmit)}>
         <InputField control={form.control} name="tokenName" label="Name" placeholder="e.g. --color-blue-500" />
 
-        <SelectField control={form.control} name="tokenType" label="Type" items={TOKEN_TYPE_OPTIONS} />
+        <SelectField control={form.control} name="tokenType" label="Type" items={PRIMITIVE_TOKEN_TYPE_OPTIONS} />
 
-        {tokenType === TokenType.Typography && <CompositeTokenTypographyForm control={form.control} />}
-
-        {tokenType === TokenType.Shadow && <CompositeTokenShadowForm control={form.control} />}
-
-        {tokenType === TokenType.Border && <CompositeTokenBorderForm control={form.control} />}
-
-        {tokenType === TokenType.Gradient && <CompositeTokenGradientForm control={form.control} />}
-
-        {shouldShowValueField && (
-          <InputField control={form.control} name="tokenValue" label="Value" placeholder="e.g. --color-blue-500" />
-        )}
+        <InputField control={form.control} name="tokenValue" label="Value" placeholder="e.g. --color-blue-500" />
 
         <TextareaField
           control={form.control}
@@ -71,7 +43,7 @@ const PrimitiveTokenForm = ({ form, isPending, onSubmit, onClose }: PrimitiveTok
             Cancel
           </DialogClose>
           <Button type="submit" disabled={form.formState.isSubmitting || isPending}>
-            {form.formState.isSubmitting || isPending ? 'Saving…' : 'Add token'}
+            {form.formState.isSubmitting || isPending ? 'Saving…' : submitText}
           </Button>
         </DialogFooter>
       </form>

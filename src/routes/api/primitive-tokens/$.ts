@@ -14,10 +14,6 @@ const TOKEN_TYPES = new Set<TokenType>([
   TokenType.Duration,
   TokenType.CubicBezier,
   TokenType.Number,
-  TokenType.Typography,
-  TokenType.Shadow,
-  TokenType.Border,
-  TokenType.Gradient,
 ]);
 
 function isTokenType(value: unknown): value is TokenType {
@@ -187,7 +183,6 @@ export const Route = createFileRoute('/api/primitive-tokens/$')({
         patch.updatedAt = new Date();
 
         const rows = await db.update(primitiveTokens).set(patch).where(eq(primitiveTokens.id, idStr)).returning();
-
         if (rows.length === 0) {
           return new Response(JSON.stringify({ error: 'Token not found' }), {
             status: 404,

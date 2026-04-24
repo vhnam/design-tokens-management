@@ -10,6 +10,13 @@ export const TOKEN_TYPE_LIST: TokenType[] = [
   TokenType.Number,
 ];
 
+export const COMPOSITE_TOKEN_TYPE_LIST: TokenType[] = [
+  TokenType.Typography,
+  TokenType.Shadow,
+  TokenType.Border,
+  TokenType.Gradient,
+];
+
 export const TOKEN_TYPE_OPTIONS: { group: string; items: { label: string; value: TokenType }[] }[] = [
   {
     group: 'Simple tokens',
@@ -65,6 +72,14 @@ export const TOKEN_TYPE_OPTIONS: { group: string; items: { label: string; value:
       },
     ],
   },
+];
+
+export const PRIMITIVE_TOKEN_TYPE_OPTIONS: { group: string; items: { label: string; value: TokenType }[] }[] = [
+  TOKEN_TYPE_OPTIONS[0],
+];
+
+export const COMPOSITE_TOKEN_TYPE_OPTIONS: { group: string; items: { label: string; value: TokenType }[] }[] = [
+  TOKEN_TYPE_OPTIONS[1],
 ];
 
 export const TOKEN_TYPE_LABELS: Record<TokenType, string> = {

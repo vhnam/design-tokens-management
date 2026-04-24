@@ -1,18 +1,27 @@
-import type { TokenType } from '@/types/token';
+import type { TokenType } from '@/enums/token';
+import type { TokenTheme } from '@/enums/token';
 
-export type CreateSemanticTokenPayload = {
-  semanticToken: string;
-  primitiveToken: string;
-  type: TokenType;
-  description?: string;
-};
-
-export type UpdateSemanticTokenPayload = {
+export type SemanticTokenRecord = {
   id: string;
   name: string;
   value: string;
   type: TokenType;
+  group: string;
+  theme: TokenTheme;
   description?: string;
+};
+
+export type CreateSemanticTokenPayload = {
+  name: string;
+  value: string;
+  type: TokenType;
+  group: string;
+  theme: TokenTheme;
+  description?: string;
+};
+
+export type UpdateSemanticTokenPayload = CreateSemanticTokenPayload & {
+  id: string;
 };
 
 export type DeleteSemanticTokenPayload = {

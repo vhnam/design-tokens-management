@@ -17,7 +17,7 @@ export const primitiveTokenSchema = z
     message: 'Token name must start with "--"',
     path: ['tokenName'],
   })
-  .refine((data) => data.tokenType === TokenType.Color && isValidColorToken(data.tokenValue), {
+  .refine((data) => data.tokenType !== TokenType.Color || isValidColorToken(data.tokenValue), {
     message: 'Invalid color token',
     path: ['tokenValue'],
   });

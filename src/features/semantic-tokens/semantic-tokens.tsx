@@ -1,42 +1,54 @@
 import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
+import { PlusIcon } from 'lucide-react';
 import { useMemo } from 'react';
 
 import { cn } from '@/lib/utils';
 
-import type { SemanticToken } from '@/types/token';
+import type { SemanticTokenRecord } from '@/queries/semantic-tokens/semantic-tokens.type';
+import { useSemanticTokensTableStore } from '@/stores/semantic-tokens-table.store';
 
+import { Button } from '@/components/primitives/button';
 import { LottiePlayer } from '@/components/primitives/lottie-player';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/primitives/table';
 
 import {
   ActionsCell,
   DescriptionCell,
-  PrimitiveTokenCell,
+  GroupCell,
   SemanticTokenCell,
+  TypeCell,
   ValueCell,
 } from './semantic-tokens-table';
 import { useGetSemanticTokens } from './semantic-tokens.actions';
+import { SemanticTokenAddDialog } from './semantic-token-add-dialog';
+import { SemanticTokenDeleteDialog } from './semantic-token-delete-dialog';
+import { SemanticTokenEditDialog } from './semantic-token-edit-dialog';
 
-const columnHelper = createColumnHelper<SemanticToken>();
+const columnHelper = createColumnHelper<SemanticTokenRecord>();
 
 export const SemanticTokens = () => {
+  const { openAddDialog } = useSemanticTokensTableStore();
   const { data, isLoading, error } = useGetSemanticTokens();
 
-  const tableData = useMemo(() => (Array.isArray(data) ? (data as SemanticToken[]) : []), [data]);
+  const tableData = useMemo(() => (Array.isArray(data) ? (data as SemanticTokenRecord[]) : []), [data]);
 
   const columns = useMemo(
     () => [
-      columnHelper.accessor('semanticToken', {
+      columnHelper.accessor('name', {
         header: 'Semantic Token',
         cell: ({ row }) => <SemanticTokenCell row={row} />,
       }),
-      columnHelper.accessor('primitiveToken', {
-        header: 'Primitive Token',
-        cell: ({ row }) => <PrimitiveTokenCell row={row} />,
+      columnHelper.accessor('group', {
+        header: 'Group',
+        cell: ({ row }) => <GroupCell row={row} />,
       }),
-      columnHelper.accessor('primitiveToken.value', {
+      columnHelper.accessor('value', {
         header: 'Value',
         cell: ({ row }) => <ValueCell row={row} />,
+      }),
+      columnHelper.accessor('type', {
+        header: 'Type',
+        cell: ({ row }) => <TypeCell row={row} />,
       }),
       columnHelper.accessor('description', {
         header: 'Description',
@@ -66,8 +78,11 @@ export const SemanticTokens = () => {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold font-heading">Semantic Tokens</h1>
-          <p className="text-sm text-muted-foreground">Context-aware tokens referencing primitive values</p>
+          <p className="text-sm text-muted-foreground">Composite semantic tokens for component-ready semantics</p>
         </div>
+        <Button type="button" onClick={openAddDialog}>
+          <PlusIcon className="size-4" /> Add token
+        </Button>
       </div>
 
       <div className="max-h-[calc(100vh-10rem)] overflow-auto rounded-none border border-border">
@@ -115,6 +130,10 @@ export const SemanticTokens = () => {
       <div className="flex-1 text-sm text-muted-foreground">
         <strong>Total:</strong> {table.getFilteredRowModel().rows.length} tokens
       </div>
+
+      <SemanticTokenAddDialog />
+      <SemanticTokenEditDialog />
+      <SemanticTokenDeleteDialog />
     </div>
   );
 };

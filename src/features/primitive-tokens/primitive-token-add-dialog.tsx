@@ -64,6 +64,7 @@ export const PrimitiveTokenAddDialog = () => {
         <PrimitiveTokenForm
           form={form}
           isPending={createToken.isPending}
+          submitText="Add token"
           onClose={closeAddDialog}
           onSubmit={onSubmit}
         />
