@@ -27,13 +27,9 @@ import { TextareaField } from '@/components/composites/field/textarea-field';
 
 import { useUpdatePrimitiveToken } from './primitive-tokens.actions';
 
-interface PrimitiveTokenEditDialogProps {
-  isOpen: boolean;
-}
-
-export const PrimitiveTokenEditDialog = ({ isOpen }: PrimitiveTokenEditDialogProps) => {
+export const PrimitiveTokenEditDialog = () => {
   const updateToken = useUpdatePrimitiveToken();
-  const { selectedToken, closeEditDialog } = usePrimitiveTokensTableStore();
+  const { isOpenEditDialog, selectedToken, closeEditDialog } = usePrimitiveTokensTableStore();
 
   const form = useForm<PrimitiveTokenSchemaType>({
     resolver: zodResolver(primitiveTokenSchema as never) as never,
@@ -73,7 +69,7 @@ export const PrimitiveTokenEditDialog = ({ isOpen }: PrimitiveTokenEditDialogPro
   });
 
   return (
-    <Dialog open={isOpen}>
+    <Dialog open={isOpenEditDialog}>
       <DialogContent showCloseButton={false}>
         <DialogHeader>
           <DialogTitle>Edit token</DialogTitle>

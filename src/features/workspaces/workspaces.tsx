@@ -1,46 +1,46 @@
 import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
+import { PlusIcon } from 'lucide-react';
 import { useMemo } from 'react';
 
 import { cn } from '@/lib/utils';
 
-import type { SemanticToken } from '@/types/token';
+import type { Workspace } from '@/types/workspace';
 
+import { useWorkspaceStore } from '@/stores/workspace.store';
+
+import { Button } from '@/components/primitives/button';
 import { LottiePlayer } from '@/components/primitives/lottie-player';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/primitives/table';
 
-import {
-  ActionsCell,
-  DescriptionCell,
-  PrimitiveTokenCell,
-  SemanticTokenCell,
-  ValueCell,
-} from './semantic-tokens-table';
-import { useGetSemanticTokens } from './semantic-tokens.actions';
+import { WorkspaceDeleteDialog } from './workspace-delete-dialog';
+import { WorkspaceEditDialog } from './workspace-edit-dialog';
+import { ActionsCell, BrandsCell, ImageCell, NameCell, ThemesCell } from './workspaces-table';
+import { useGetWorkspaces } from './workspaces.actions';
 
-const columnHelper = createColumnHelper<SemanticToken>();
+const columnHelper = createColumnHelper<Workspace>();
 
-export const SemanticTokens = () => {
-  const { data, isLoading, error } = useGetSemanticTokens();
+export const Workspaces = () => {
+  const { data, isPending, error } = useGetWorkspaces();
+  const { openAddDialog } = useWorkspaceStore();
 
-  const tableData = useMemo(() => (Array.isArray(data) ? (data as SemanticToken[]) : []), [data]);
-
+  const tableData = useMemo(() => (Array.isArray(data) ? (data as Workspace[]) : []), [data]);
   const columns = useMemo(
     () => [
-      columnHelper.accessor('semanticToken', {
-        header: 'Semantic Token',
-        cell: ({ row }) => <SemanticTokenCell row={row} />,
+      columnHelper.accessor('name', {
+        header: 'Name',
+        cell: ({ row }) => <NameCell row={row} />,
       }),
-      columnHelper.accessor('primitiveToken', {
-        header: 'Primitive Token',
-        cell: ({ row }) => <PrimitiveTokenCell row={row} />,
+      columnHelper.accessor('image', {
+        header: 'Image',
+        cell: ({ row }) => <ImageCell row={row} />,
       }),
-      columnHelper.accessor('primitiveToken.value', {
-        header: 'Value',
-        cell: ({ row }) => <ValueCell row={row} />,
+      columnHelper.accessor('brands', {
+        header: 'Brands',
+        cell: ({ row }) => <BrandsCell row={row} />,
       }),
-      columnHelper.accessor('description', {
-        header: 'Description',
-        cell: ({ row }) => <DescriptionCell row={row} />,
+      columnHelper.accessor('themes', {
+        header: 'Themes',
+        cell: ({ row }) => <ThemesCell row={row} />,
       }),
       columnHelper.display({
         header: ' ',
@@ -57,7 +57,7 @@ export const SemanticTokens = () => {
     getRowId: (row) => row.id,
   });
 
-  if (isLoading) return <div className="flex items-center justify-center h-full">Loading…</div>;
+  if (isPending) return <div className="flex items-center justify-center h-full">Loading…</div>;
 
   if (error) return <div>Error: {error.message}</div>;
 
@@ -65,9 +65,13 @@ export const SemanticTokens = () => {
     <div className="h-full space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold font-heading">Semantic Tokens</h1>
-          <p className="text-sm text-muted-foreground">Context-aware tokens referencing primitive values</p>
+          <h1 className="text-2xl font-bold font-heading">Workspaces</h1>
+          <p className="text-sm text-muted-foreground">Manage your workspaces</p>
         </div>
+        <Button type="button" onClick={openAddDialog}>
+          <PlusIcon className="size-4" />
+          Add workspace
+        </Button>
       </div>
 
       <div className="max-h-[calc(100vh-10rem)] overflow-auto rounded-none border border-border">
@@ -100,7 +104,7 @@ export const SemanticTokens = () => {
               </TableRow>
             ) : (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id} className={cn('border-b border-border transition-colors hover:bg-muted/40')}>
+                <TableRow key={row.id} className={cn('border-border transition-colors hover:bg-muted/40')}>
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id} className="p-3 align-middle">
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -113,8 +117,11 @@ export const SemanticTokens = () => {
         </Table>
       </div>
       <div className="flex-1 text-sm text-muted-foreground">
-        <strong>Total:</strong> {table.getFilteredRowModel().rows.length} tokens
+        <strong>Total:</strong> {table.getFilteredRowModel().rows.length} workspaces
       </div>
+
+      <WorkspaceEditDialog />
+      <WorkspaceDeleteDialog />
     </div>
   );
 };

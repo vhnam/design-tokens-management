@@ -24,7 +24,7 @@ interface TeamSwitcherProps {
 
 export const WorkspaceSwitcher = ({ workspaces }: TeamSwitcherProps) => {
   const { isMobile } = useSidebar();
-  const { activeWorkspace, setActiveWorkspace } = useWorkspaceStore();
+  const { activeWorkspace, setActiveWorkspace, openAddDialog } = useWorkspaceStore();
 
   const displayed = activeWorkspace ?? workspaces[0];
 
@@ -49,12 +49,7 @@ export const WorkspaceSwitcher = ({ workspaces }: TeamSwitcherProps) => {
             </div>
             <ChevronsUpDownIcon className="ml-auto" />
           </DropdownMenuTrigger>
-          <DropdownMenuContent
-            className="min-w-56 rounded-lg"
-            align="start"
-            side={isMobile ? 'bottom' : 'right'}
-            sideOffset={4}
-          >
+          <DropdownMenuContent className="min-w-56" align="start" side={isMobile ? 'bottom' : 'right'} sideOffset={4}>
             <DropdownMenuGroup>
               <DropdownMenuLabel className="text-xs text-muted-foreground">Workspaces</DropdownMenuLabel>
               {workspaces.map((workspace) => (
@@ -73,8 +68,8 @@ export const WorkspaceSwitcher = ({ workspaces }: TeamSwitcherProps) => {
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem className="gap-2 p-2">
-                <div className="flex size-6 items-center justify-center rounded-md border bg-transparent">
+              <DropdownMenuItem className="gap-2 p-2" onClick={openAddDialog}>
+                <div className="flex size-6 items-center justify-center border bg-secondary">
                   <PlusIcon className="size-4" />
                 </div>
                 <div className="font-medium text-muted-foreground">Add workspace</div>

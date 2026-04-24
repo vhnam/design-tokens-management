@@ -13,22 +13,21 @@ import type { TokenType } from '@/enums/token';
 
 import type { PrimitiveToken } from '@/types/token';
 
-import { usePrimitiveTokensTableStore } from '@/stores/primitive-tokens-table.store';
-
 import { LottiePlayer } from '@/components/primitives/lottie-player';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/primitives/table';
 
 import { PrimitiveTokenAddDialog } from './primitive-token-add-dialog';
+import { PrimitiveTokenDeleteDialog } from './primitive-token-delete-dialog';
 import { PrimitiveTokenEditDialog } from './primitive-token-edit-dialog';
-import { PrimitiveTokenRemoveDialog } from './primitive-token-remove-dialog';
 import { PrimitiveTokensFilterBar } from './primitive-tokens-filter-bar';
 import { ActionsCell, DescriptionCell, NameCell, TypeCell, ValueCell } from './primitive-tokens-table';
 import { useGetPrimitiveTokens } from './primitive-tokens.actions';
 
-interface ColumnFilter {
+type ColumnFilter = {
   id: string;
   value: unknown;
-}
+};
+
 type ColumnFiltersState = ColumnFilter[];
 
 const columnHelper = createColumnHelper<PrimitiveToken>();
@@ -37,7 +36,6 @@ export const PrimitiveTokens = () => {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const { data, isFetching, error } = useGetPrimitiveTokens();
-  const { isOpenDeleteDialog, isOpenEditDialog } = usePrimitiveTokensTableStore();
 
   const tableData = useMemo(() => (Array.isArray(data) ? (data as PrimitiveToken[]) : []), [data]);
 
@@ -111,7 +109,7 @@ export const PrimitiveTokens = () => {
       />
 
       <div className="max-h-[calc(100vh-13.75rem)] overflow-auto rounded-none border border-border">
-        <Table className="table-fixed border-separate border-spacing-0 [&_td]:whitespace-normal [&_td]:break-words">
+        <Table className="table-fixed border-spacing-0 [&_td]:whitespace-normal [&_td]:break-words">
           <colgroup>
             <col className="w-[25%]" />
             <col className="w-auto" />
@@ -163,8 +161,8 @@ export const PrimitiveTokens = () => {
         <strong>Total:</strong> {table.getFilteredRowModel().rows.length} tokens
       </div>
 
-      <PrimitiveTokenRemoveDialog isOpen={isOpenDeleteDialog} />
-      <PrimitiveTokenEditDialog isOpen={isOpenEditDialog} />
+      <PrimitiveTokenDeleteDialog />
+      <PrimitiveTokenEditDialog />
     </div>
   );
 };

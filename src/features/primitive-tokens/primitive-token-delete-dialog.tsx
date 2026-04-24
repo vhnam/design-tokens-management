@@ -16,13 +16,9 @@ import {
 
 import { useDeletePrimitiveToken } from './primitive-tokens.actions';
 
-interface PrimitiveTokenRemoveDialogProps {
-  isOpen: boolean;
-}
-
-export const PrimitiveTokenRemoveDialog = ({ isOpen }: PrimitiveTokenRemoveDialogProps) => {
+export const PrimitiveTokenDeleteDialog = () => {
   const deleteToken = useDeletePrimitiveToken();
-  const { selectedToken, closeDeleteDialog } = usePrimitiveTokensTableStore();
+  const { isOpenDeleteDialog, selectedToken, closeDeleteDialog } = usePrimitiveTokensTableStore();
 
   const handleDelete = useCallback(() => {
     deleteToken.mutate(
@@ -33,20 +29,20 @@ export const PrimitiveTokenRemoveDialog = ({ isOpen }: PrimitiveTokenRemoveDialo
           toast.success('Token deleted successfully');
         },
         onError: (error) => {
-          toast.error(error.message);
+          toast.error(error instanceof Error ? error.message : 'Something went wrong');
         },
       },
     );
   }, [selectedToken]);
 
   return (
-    <Dialog open={isOpen}>
+    <Dialog open={isOpenDeleteDialog}>
       <DialogContent showCloseButton={false}>
         <DialogHeader>
-          <DialogTitle>Remove Primitive Token</DialogTitle>
+          <DialogTitle>Delete Primitive Token</DialogTitle>
         </DialogHeader>
         <DialogDescription>
-          Are you sure you want to remove the selected primitive token{' '}
+          Are you sure you want to delete the selected primitive token{' '}
           <code className="p-1 text-destructive bg-secondary/30">{selectedToken?.name}</code>?
         </DialogDescription>
         <DialogFooter>
@@ -59,7 +55,7 @@ export const PrimitiveTokenRemoveDialog = ({ isOpen }: PrimitiveTokenRemoveDialo
             }
           />
           <Button type="button" variant="destructive" onClick={handleDelete} disabled={deleteToken.isPending}>
-            Confirm deletion
+            Delete token
           </Button>
         </DialogFooter>
       </DialogContent>
