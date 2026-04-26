@@ -43,7 +43,7 @@ export const Register = () => {
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <Card className="w-full max-w-sm">
+      <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>Register</CardTitle>
           <CardDescription>Create an account to get started</CardDescription>

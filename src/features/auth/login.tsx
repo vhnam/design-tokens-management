@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link, useNavigate } from '@tanstack/react-router';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
@@ -18,6 +19,8 @@ import { PasswordField } from '@/components/composites/field/password-field';
 export const Login = () => {
   const navigate = useNavigate();
 
+  const [isUnverifiedEmail, setIsUnverifiedEmail] = useState(false);
+
   const form = useForm<LoginSchemaType>({
     resolver: zodResolver(loginSchema as never) as never,
     defaultValues: {
@@ -26,6 +29,24 @@ export const Login = () => {
     },
   });
 
+  const handleResendVerificationEmail = async () => {
+    const { error } = await authClient.sendVerificationEmail({
+      email: form.getValues('email').trim(),
+    });
+
+    if (error) {
+      toast.error(error.message ?? 'Unable to resend verification email. Please try again.');
+      return;
+    }
+
+    toast.success('Verification email sent successfully');
+  };
+
+  const handleLoginWithDifferentEmail = () => {
+    form.reset({ email: '', password: '' });
+    setIsUnverifiedEmail(false);
+  };
+
   const onSubmit = form.handleSubmit(async (value) => {
     const { error } = await authClient.signIn.email({
       email: value.email.trim(),
@@ -33,6 +54,12 @@ export const Login = () => {
     });
 
     if (error) {
+      if (error.status === 403) {
+        toast.error('Please verify your email address');
+
+        setIsUnverifiedEmail(true);
+        return;
+      }
       toast.error(error.message ?? 'Unable to login. Please try again.');
       return;
     }
@@ -40,11 +67,37 @@ export const Login = () => {
     await navigate({ to: '/' });
   });
 
+  if (isUnverifiedEmail) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Card className="w-full max-w-md">
+          <CardHeader>
+            <CardTitle className="text-2xl font-heading">Unverified email</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p>
+              Your email address <strong className="text-primary">{form.getValues('email')}</strong> is not verified.
+              Please check your inbox and spam folder for a verification link.
+            </p>
+          </CardContent>
+          <CardFooter className="flex-col gap-4">
+            <Button type="button" className="w-full" onClick={handleResendVerificationEmail}>
+              Resend verification link
+            </Button>
+            <Button type="button" variant="outline" className="w-full" onClick={handleLoginWithDifferentEmail}>
+              Login with a different email
+            </Button>
+          </CardFooter>
+        </Card>
+      </div>
+    );
+  }
+
   return (
     <div className="flex justify-center items-center h-screen">
-      <Card className="w-full max-w-sm">
+      <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle>Login</CardTitle>
+          <CardTitle className="text-2xl font-heading">Login</CardTitle>
           <CardDescription>Login to your account to get started</CardDescription>
         </CardHeader>
         <CardContent>
@@ -75,7 +128,7 @@ export const Login = () => {
                 Forgot your password?
               </Link>
               <Separator className="my-4 relative !w-[80%] mx-auto">
-                <span className="text-muted-foreground absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-background px-2">
+                <span className="text-muted-foreground absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-card px-2">
                   or
                 </span>
               </Separator>

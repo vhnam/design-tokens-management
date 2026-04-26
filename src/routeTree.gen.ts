@@ -17,6 +17,8 @@ import { Route as ApiWorkspacesSplatRouteImport } from './routes/api/workspaces/
 import { Route as ApiSemanticTokensSplatRouteImport } from './routes/api/semantic-tokens/$'
 import { Route as ApiPrimitiveTokensSplatRouteImport } from './routes/api/primitive-tokens/$'
 import { Route as ApiComponentTokensSplatRouteImport } from './routes/api/component-tokens/$'
+import { Route as PublicAuthVerifyEmailRouteImport } from './routes/_public/auth/verify-email'
+import { Route as PublicAuthResendVerificationRouteImport } from './routes/_public/auth/resend-verification'
 import { Route as PublicAuthRegisterRouteImport } from './routes/_public/auth/register'
 import { Route as PublicAuthLoginRouteImport } from './routes/_public/auth/login'
 import { Route as PublicAuthForgotPasswordRouteImport } from './routes/_public/auth/forgot-password'
@@ -64,6 +66,17 @@ const ApiComponentTokensSplatRoute = ApiComponentTokensSplatRouteImport.update({
   path: '/api/component-tokens/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PublicAuthVerifyEmailRoute = PublicAuthVerifyEmailRouteImport.update({
+  id: '/auth/verify-email',
+  path: '/auth/verify-email',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicAuthResendVerificationRoute =
+  PublicAuthResendVerificationRouteImport.update({
+    id: '/auth/resend-verification',
+    path: '/auth/resend-verification',
+    getParentRoute: () => PublicRoute,
+  } as any)
 const PublicAuthRegisterRoute = PublicAuthRegisterRouteImport.update({
   id: '/auth/register',
   path: '/auth/register',
@@ -122,6 +135,8 @@ export interface FileRoutesByFullPath {
   '/auth/forgot-password': typeof PublicAuthForgotPasswordRoute
   '/auth/login': typeof PublicAuthLoginRoute
   '/auth/register': typeof PublicAuthRegisterRoute
+  '/auth/resend-verification': typeof PublicAuthResendVerificationRoute
+  '/auth/verify-email': typeof PublicAuthVerifyEmailRoute
   '/api/component-tokens/$': typeof ApiComponentTokensSplatRoute
   '/api/primitive-tokens/$': typeof ApiPrimitiveTokensSplatRoute
   '/api/semantic-tokens/$': typeof ApiSemanticTokensSplatRoute
@@ -138,6 +153,8 @@ export interface FileRoutesByTo {
   '/auth/forgot-password': typeof PublicAuthForgotPasswordRoute
   '/auth/login': typeof PublicAuthLoginRoute
   '/auth/register': typeof PublicAuthRegisterRoute
+  '/auth/resend-verification': typeof PublicAuthResendVerificationRoute
+  '/auth/verify-email': typeof PublicAuthVerifyEmailRoute
   '/api/component-tokens/$': typeof ApiComponentTokensSplatRoute
   '/api/primitive-tokens/$': typeof ApiPrimitiveTokensSplatRoute
   '/api/semantic-tokens/$': typeof ApiSemanticTokensSplatRoute
@@ -157,6 +174,8 @@ export interface FileRoutesById {
   '/_public/auth/forgot-password': typeof PublicAuthForgotPasswordRoute
   '/_public/auth/login': typeof PublicAuthLoginRoute
   '/_public/auth/register': typeof PublicAuthRegisterRoute
+  '/_public/auth/resend-verification': typeof PublicAuthResendVerificationRoute
+  '/_public/auth/verify-email': typeof PublicAuthVerifyEmailRoute
   '/api/component-tokens/$': typeof ApiComponentTokensSplatRoute
   '/api/primitive-tokens/$': typeof ApiPrimitiveTokensSplatRoute
   '/api/semantic-tokens/$': typeof ApiSemanticTokensSplatRoute
@@ -175,6 +194,8 @@ export interface FileRouteTypes {
     | '/auth/forgot-password'
     | '/auth/login'
     | '/auth/register'
+    | '/auth/resend-verification'
+    | '/auth/verify-email'
     | '/api/component-tokens/$'
     | '/api/primitive-tokens/$'
     | '/api/semantic-tokens/$'
@@ -191,6 +212,8 @@ export interface FileRouteTypes {
     | '/auth/forgot-password'
     | '/auth/login'
     | '/auth/register'
+    | '/auth/resend-verification'
+    | '/auth/verify-email'
     | '/api/component-tokens/$'
     | '/api/primitive-tokens/$'
     | '/api/semantic-tokens/$'
@@ -209,6 +232,8 @@ export interface FileRouteTypes {
     | '/_public/auth/forgot-password'
     | '/_public/auth/login'
     | '/_public/auth/register'
+    | '/_public/auth/resend-verification'
+    | '/_public/auth/verify-email'
     | '/api/component-tokens/$'
     | '/api/primitive-tokens/$'
     | '/api/semantic-tokens/$'
@@ -281,6 +306,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/api/component-tokens/$'
       preLoaderRoute: typeof ApiComponentTokensSplatRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_public/auth/verify-email': {
+      id: '/_public/auth/verify-email'
+      path: '/auth/verify-email'
+      fullPath: '/auth/verify-email'
+      preLoaderRoute: typeof PublicAuthVerifyEmailRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/auth/resend-verification': {
+      id: '/_public/auth/resend-verification'
+      path: '/auth/resend-verification'
+      fullPath: '/auth/resend-verification'
+      preLoaderRoute: typeof PublicAuthResendVerificationRouteImport
+      parentRoute: typeof PublicRoute
     }
     '/_public/auth/register': {
       id: '/_public/auth/register'
@@ -369,12 +408,16 @@ interface PublicRouteChildren {
   PublicAuthForgotPasswordRoute: typeof PublicAuthForgotPasswordRoute
   PublicAuthLoginRoute: typeof PublicAuthLoginRoute
   PublicAuthRegisterRoute: typeof PublicAuthRegisterRoute
+  PublicAuthResendVerificationRoute: typeof PublicAuthResendVerificationRoute
+  PublicAuthVerifyEmailRoute: typeof PublicAuthVerifyEmailRoute
 }
 
 const PublicRouteChildren: PublicRouteChildren = {
   PublicAuthForgotPasswordRoute: PublicAuthForgotPasswordRoute,
   PublicAuthLoginRoute: PublicAuthLoginRoute,
   PublicAuthRegisterRoute: PublicAuthRegisterRoute,
+  PublicAuthResendVerificationRoute: PublicAuthResendVerificationRoute,
+  PublicAuthVerifyEmailRoute: PublicAuthVerifyEmailRoute,
 }
 
 const PublicRouteWithChildren =
