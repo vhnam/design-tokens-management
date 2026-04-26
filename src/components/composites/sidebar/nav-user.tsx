@@ -73,9 +73,9 @@ export function NavUser({ user, onLogout }: NavUserProps) {
             <DropdownMenuGroup>
               <DropdownMenuItem
                 render={
-                  <Link to="/settings/profile">
+                  <Link to="/settings/account">
                     <UserIcon />
-                    Profile
+                    Account
                   </Link>
                 }
               />

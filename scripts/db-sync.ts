@@ -2,6 +2,12 @@ import { connect } from '@tursodatabase/sync';
 import type { Database } from '@tursodatabase/sync';
 import BetterSqlite3 from 'better-sqlite3';
 
+import { serverEnv } from '../src/config/server-env';
+
+if (!serverEnv.TURSO_DATABASE_URL || !serverEnv.TURSO_AUTH_TOKEN) {
+  throw new Error('TURSO_DATABASE_URL and TURSO_AUTH_TOKEN are required for db:sync.');
+}
+
 function hasLocalAppTables(path: string) {
   const sqlite = new BetterSqlite3(path, { readonly: true });
 
@@ -27,12 +33,12 @@ function hasLocalAppTables(path: string) {
   }
 }
 
-const localPath = process.env.DATABASE_URL!;
+const localPath = serverEnv.DATABASE_URL;
 
 const db = await connect({
   path: localPath,
-  url: process.env.TURSO_DATABASE_URL!,
-  authToken: process.env.TURSO_AUTH_TOKEN!,
+  url: serverEnv.TURSO_DATABASE_URL,
+  authToken: serverEnv.TURSO_AUTH_TOKEN,
 });
 
 async function syncWhenOnline(database: Database) {

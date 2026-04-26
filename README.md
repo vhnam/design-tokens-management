@@ -1,13 +1,13 @@
 # Design Tokens Management
 
-Design Tokens Management is a TanStack Start app for managing multi-layer design tokens with SQLite persistence, Better Auth authentication, and a Tailwind-based component system.
+Design Tokens Management is a TanStack Start app for managing multi-layer design tokens with SQLite persistence, backend-driven authentication, and a Tailwind-based component system.
 
 ## Tech Stack
 
 - TanStack Start + TanStack Router
 - React 19 + Vite
 - Tailwind CSS v4 + Base UI + Shadcn/ui
-- Better Auth
+- External backend authentication API
 - Drizzle ORM + Drizzle Kit
 - SQLite (via `better-sqlite3`)
 - React Hook Form + Zod
@@ -50,22 +50,13 @@ App runs at `http://localhost:3000`.
    - `.env` is used by commands that explicitly load `.env` (for example `pnpm db:sync`).
 
 3. Fill required values:
-   - `BETTER_AUTH_URL` (for local dev: `http://localhost:3000`)
-   - `BETTER_AUTH_SECRET` (generate with `npx -y @better-auth/cli secret`)
-   - `DATABASE_URL` (for local SQLite: `dev.db`)
-   - `MAILER_TOKEN` (required for verification emails)
-   - `TURSO_DATABASE_URL` (optional, used by cloud sync flows)
-   - `TURSO_AUTH_TOKEN` (optional, used by cloud sync flows)
+  - `VITE_BETTER_AUTH_URL` (auth API base URL, for local backend: `http://localhost:4000`)
+  - `DATABASE_URL` (for local SQLite: `dev.db`)
+  - `MAILER_TOKEN` (required for verification emails)
+  - `TURSO_DATABASE_URL` (optional, used by cloud sync flows)
+  - `TURSO_AUTH_TOKEN` (optional, used by cloud sync flows)
 
-4. Run Better Auth migrations:
-
-   ```bash
-   pnpm dlx auth@latest migrate
-   ```
-
-   This creates/updates Better Auth tables (`user`, `session`, `account`, `verification`).
-
-5. Run Drizzle migrations:
+4. Run Drizzle migrations:
 
    ```bash
    pnpm db:migrate
@@ -75,13 +66,13 @@ App runs at `http://localhost:3000`.
    - `src/db/tokens.table.ts`
    - `src/db/auth.table.ts`
 
-6. Seed primitive tokens (optional):
+5. Seed primitive tokens (optional):
 
    ```bash
    pnpm db:seed:primitives
    ```
 
-7. Start the development server:
+6. Start the development server:
 
    ```bash
    pnpm dev
@@ -108,13 +99,11 @@ App runs at `http://localhost:3000`.
 ## API
 
 - Primitive tokens API route: `src/routes/api/primitive-tokens/$.ts`
-- Auth API route: `src/routes/api/auth/$.ts`
 
 ## Authentication
 
-- Better Auth is configured in `src/lib/auth.ts`.
-- Auth API handlers are exposed at `src/routes/api/auth/$.ts`.
-- Client helpers live in `src/lib/auth-client.ts`.
+- Authentication is handled by your backend API.
+- Frontend auth client helpers live in `src/integrations/better-auth/auth-client.ts`.
 - UI auth flows live under `src/routes/_public/auth/` (`login`, `register`, `forgot-password`).
 
 ## Database

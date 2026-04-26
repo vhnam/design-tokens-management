@@ -1,8 +1,10 @@
 import { config } from 'dotenv';
 
+import { serverEnv } from '../src/config/server-env';
+
 config({ path: ['.env.local', '.env'] });
 
-if (!process.env.DATABASE_URL) {
+if (!serverEnv.DATABASE_URL) {
   console.error('DATABASE_URL is not set. Add it to .env or .env.local.');
   process.exit(1);
 }

@@ -1,15 +1,13 @@
 import { drizzle } from 'drizzle-orm/better-sqlite3';
 
-import * as authSchema from './auth.table.ts';
+import { serverEnv } from '@/config/server-env';
+
 import * as tokensSchema from './tokens.table.ts';
 import * as workspaceSchema from './workspace.table.ts';
 
 export const schema = {
-  ...authSchema,
   ...tokensSchema,
   ...workspaceSchema,
 };
 
-export const db = drizzle(process.env.DATABASE_URL!, { schema });
-export { authSchema };
-export * as authTable from './auth.table.ts';
+export const db = drizzle(serverEnv.DATABASE_URL, { schema });
