@@ -1,3 +1,4 @@
+import { AccountPassword } from './account-password';
 import AccountProfileInformation from './account-profile-information';
 
 export const Account = () => {
@@ -11,6 +12,7 @@ export const Account = () => {
       </div>
 
       <AccountProfileInformation />
+      <AccountPassword />
     </div>
   );
 };

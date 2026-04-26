@@ -1,3 +1,4 @@
+import { env } from '@/config/env';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import { SaveIcon, UploadIcon } from 'lucide-react';
@@ -6,7 +7,6 @@ import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { authClient } from '@/integrations/better-auth/auth-client';
-import { env } from '@/config/env';
 
 import { type ProfileSchemaType, profileSchema } from '@/schemas/profile.schema';
 
@@ -123,7 +123,7 @@ const AccountProfileInformation = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Profile Information</CardTitle>
+        <CardTitle className="text-xl font-bold font-heading">Profile Information</CardTitle>
       </CardHeader>
       <CardContent>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">

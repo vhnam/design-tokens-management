@@ -15,7 +15,7 @@ export const passwordSchema = z
       .string()
       .min(8, 'Password must be at least 8 characters long')
       .max(255, 'Password must be less than 255 characters'),
-    password: z
+    newPassword: z
       .string()
       .min(8, 'Password must be at least 8 characters long')
       .max(255, 'Password must be less than 255 characters'),
@@ -24,7 +24,7 @@ export const passwordSchema = z
       .min(8, 'Password must be at least 8 characters long')
       .max(255, 'Password must be less than 255 characters'),
   })
-  .refine((data) => data.password === data.confirmPassword, {
+  .refine((data) => data.newPassword === data.confirmPassword, {
     message: 'Passwords do not match',
     path: ['confirmPassword'],
   });
