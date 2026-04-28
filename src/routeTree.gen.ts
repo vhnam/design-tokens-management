@@ -13,10 +13,6 @@ import { Route as PublicRouteImport } from './routes/_public'
 import { Route as ProtectedRouteImport } from './routes/_protected'
 import { Route as ProtectedIndexRouteImport } from './routes/_protected/index'
 import { Route as ProtectedHelpRouteImport } from './routes/_protected/help'
-import { Route as ApiWorkspacesSplatRouteImport } from './routes/api/workspaces/$'
-import { Route as ApiSemanticTokensSplatRouteImport } from './routes/api/semantic-tokens/$'
-import { Route as ApiPrimitiveTokensSplatRouteImport } from './routes/api/primitive-tokens/$'
-import { Route as ApiComponentTokensSplatRouteImport } from './routes/api/component-tokens/$'
 import { Route as PublicAuthVerifyEmailRouteImport } from './routes/_public/auth/verify-email'
 import { Route as PublicAuthResendVerificationRouteImport } from './routes/_public/auth/resend-verification'
 import { Route as PublicAuthRegisterRouteImport } from './routes/_public/auth/register'
@@ -45,26 +41,6 @@ const ProtectedHelpRoute = ProtectedHelpRouteImport.update({
   id: '/help',
   path: '/help',
   getParentRoute: () => ProtectedRoute,
-} as any)
-const ApiWorkspacesSplatRoute = ApiWorkspacesSplatRouteImport.update({
-  id: '/api/workspaces/$',
-  path: '/api/workspaces/$',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiSemanticTokensSplatRoute = ApiSemanticTokensSplatRouteImport.update({
-  id: '/api/semantic-tokens/$',
-  path: '/api/semantic-tokens/$',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiPrimitiveTokensSplatRoute = ApiPrimitiveTokensSplatRouteImport.update({
-  id: '/api/primitive-tokens/$',
-  path: '/api/primitive-tokens/$',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiComponentTokensSplatRoute = ApiComponentTokensSplatRouteImport.update({
-  id: '/api/component-tokens/$',
-  path: '/api/component-tokens/$',
-  getParentRoute: () => rootRouteImport,
 } as any)
 const PublicAuthVerifyEmailRoute = PublicAuthVerifyEmailRouteImport.update({
   id: '/auth/verify-email',
@@ -137,10 +113,6 @@ export interface FileRoutesByFullPath {
   '/auth/register': typeof PublicAuthRegisterRoute
   '/auth/resend-verification': typeof PublicAuthResendVerificationRoute
   '/auth/verify-email': typeof PublicAuthVerifyEmailRoute
-  '/api/component-tokens/$': typeof ApiComponentTokensSplatRoute
-  '/api/primitive-tokens/$': typeof ApiPrimitiveTokensSplatRoute
-  '/api/semantic-tokens/$': typeof ApiSemanticTokensSplatRoute
-  '/api/workspaces/$': typeof ApiWorkspacesSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof ProtectedIndexRoute
@@ -155,10 +127,6 @@ export interface FileRoutesByTo {
   '/auth/register': typeof PublicAuthRegisterRoute
   '/auth/resend-verification': typeof PublicAuthResendVerificationRoute
   '/auth/verify-email': typeof PublicAuthVerifyEmailRoute
-  '/api/component-tokens/$': typeof ApiComponentTokensSplatRoute
-  '/api/primitive-tokens/$': typeof ApiPrimitiveTokensSplatRoute
-  '/api/semantic-tokens/$': typeof ApiSemanticTokensSplatRoute
-  '/api/workspaces/$': typeof ApiWorkspacesSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -176,10 +144,6 @@ export interface FileRoutesById {
   '/_public/auth/register': typeof PublicAuthRegisterRoute
   '/_public/auth/resend-verification': typeof PublicAuthResendVerificationRoute
   '/_public/auth/verify-email': typeof PublicAuthVerifyEmailRoute
-  '/api/component-tokens/$': typeof ApiComponentTokensSplatRoute
-  '/api/primitive-tokens/$': typeof ApiPrimitiveTokensSplatRoute
-  '/api/semantic-tokens/$': typeof ApiSemanticTokensSplatRoute
-  '/api/workspaces/$': typeof ApiWorkspacesSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -196,10 +160,6 @@ export interface FileRouteTypes {
     | '/auth/register'
     | '/auth/resend-verification'
     | '/auth/verify-email'
-    | '/api/component-tokens/$'
-    | '/api/primitive-tokens/$'
-    | '/api/semantic-tokens/$'
-    | '/api/workspaces/$'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -214,10 +174,6 @@ export interface FileRouteTypes {
     | '/auth/register'
     | '/auth/resend-verification'
     | '/auth/verify-email'
-    | '/api/component-tokens/$'
-    | '/api/primitive-tokens/$'
-    | '/api/semantic-tokens/$'
-    | '/api/workspaces/$'
   id:
     | '__root__'
     | '/_protected'
@@ -234,19 +190,11 @@ export interface FileRouteTypes {
     | '/_public/auth/register'
     | '/_public/auth/resend-verification'
     | '/_public/auth/verify-email'
-    | '/api/component-tokens/$'
-    | '/api/primitive-tokens/$'
-    | '/api/semantic-tokens/$'
-    | '/api/workspaces/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   ProtectedRoute: typeof ProtectedRouteWithChildren
   PublicRoute: typeof PublicRouteWithChildren
-  ApiComponentTokensSplatRoute: typeof ApiComponentTokensSplatRoute
-  ApiPrimitiveTokensSplatRoute: typeof ApiPrimitiveTokensSplatRoute
-  ApiSemanticTokensSplatRoute: typeof ApiSemanticTokensSplatRoute
-  ApiWorkspacesSplatRoute: typeof ApiWorkspacesSplatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -278,34 +226,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/help'
       preLoaderRoute: typeof ProtectedHelpRouteImport
       parentRoute: typeof ProtectedRoute
-    }
-    '/api/workspaces/$': {
-      id: '/api/workspaces/$'
-      path: '/api/workspaces/$'
-      fullPath: '/api/workspaces/$'
-      preLoaderRoute: typeof ApiWorkspacesSplatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/semantic-tokens/$': {
-      id: '/api/semantic-tokens/$'
-      path: '/api/semantic-tokens/$'
-      fullPath: '/api/semantic-tokens/$'
-      preLoaderRoute: typeof ApiSemanticTokensSplatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/primitive-tokens/$': {
-      id: '/api/primitive-tokens/$'
-      path: '/api/primitive-tokens/$'
-      fullPath: '/api/primitive-tokens/$'
-      preLoaderRoute: typeof ApiPrimitiveTokensSplatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/component-tokens/$': {
-      id: '/api/component-tokens/$'
-      path: '/api/component-tokens/$'
-      fullPath: '/api/component-tokens/$'
-      preLoaderRoute: typeof ApiComponentTokensSplatRouteImport
-      parentRoute: typeof rootRouteImport
     }
     '/_public/auth/verify-email': {
       id: '/_public/auth/verify-email'
@@ -426,10 +346,6 @@ const PublicRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   ProtectedRoute: ProtectedRouteWithChildren,
   PublicRoute: PublicRouteWithChildren,
-  ApiComponentTokensSplatRoute: ApiComponentTokensSplatRoute,
-  ApiPrimitiveTokensSplatRoute: ApiPrimitiveTokensSplatRoute,
-  ApiSemanticTokensSplatRoute: ApiSemanticTokensSplatRoute,
-  ApiWorkspacesSplatRoute: ApiWorkspacesSplatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

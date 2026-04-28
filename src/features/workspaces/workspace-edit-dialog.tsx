@@ -19,22 +19,9 @@ import {
   DialogTitle,
 } from '@/components/primitives/dialog';
 
-import { CheckboxField } from '@/components/composites/field/checkbox-field';
 import { InputField } from '@/components/composites/field/input-field';
 
 import { useUpdateWorkspace } from './workspaces.actions';
-
-const parseStringArray = (value: unknown): string[] => {
-  if (Array.isArray(value)) return value.filter((item): item is string => typeof item === 'string');
-  if (typeof value !== 'string') return [];
-
-  try {
-    const parsed = JSON.parse(value) as unknown;
-    return Array.isArray(parsed) ? parsed.filter((item): item is string => typeof item === 'string') : [];
-  } catch {
-    return [];
-  }
-};
 
 export const WorkspaceEditDialog = () => {
   const updateWorkspace = useUpdateWorkspace();
@@ -45,7 +32,6 @@ export const WorkspaceEditDialog = () => {
     defaultValues: {
       workspaceName: '',
       workspaceImage: '',
-      workspaceThemes: [],
     },
   });
 
@@ -53,8 +39,7 @@ export const WorkspaceEditDialog = () => {
     if (selectedWorkspace) {
       form.reset({
         workspaceName: selectedWorkspace.name,
-        workspaceImage: selectedWorkspace.image,
-        workspaceThemes: parseStringArray(selectedWorkspace.themes),
+        workspaceImage: selectedWorkspace.image ?? '',
       });
     }
   }, [form, selectedWorkspace]);
@@ -69,9 +54,7 @@ export const WorkspaceEditDialog = () => {
       {
         id: selectedWorkspace.id,
         name: value.workspaceName.trim(),
-        image: value.workspaceImage?.trim() ?? '',
-        brands: ['default'],
-        themes: value.workspaceThemes?.map((theme) => theme.trim()) ?? [],
+        image: value.workspaceImage?.trim().length ? value.workspaceImage.trim() : undefined,
       },
       {
         onSuccess: () => {
@@ -96,24 +79,6 @@ export const WorkspaceEditDialog = () => {
 
         <form className="grid gap-4" onSubmit={onSubmit}>
           <InputField control={form.control} name="workspaceName" label="Name" placeholder="e.g. My Workspace" />
-
-          <InputField
-            control={form.control}
-            name="workspaceImage"
-            label="Image"
-            optional
-            placeholder="e.g. https://example.com/image.png"
-          />
-
-          <CheckboxField
-            control={form.control}
-            name="workspaceThemes"
-            label="Themes"
-            items={[
-              { label: 'Light', value: 'light' },
-              { label: 'Dark', value: 'dark' },
-            ]}
-          />
 
           <DialogFooter>
             <DialogClose

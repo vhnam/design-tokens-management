@@ -14,7 +14,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 
 import { WorkspaceDeleteDialog } from './workspace-delete-dialog';
 import { WorkspaceEditDialog } from './workspace-edit-dialog';
-import { ActionsCell, BrandsCell, ImageCell, NameCell, ThemesCell } from './workspaces-table';
+import { ActionsCell, ImageCell, NameCell } from './workspaces-table';
 import { useGetWorkspaces } from './workspaces.actions';
 
 const columnHelper = createColumnHelper<Workspace>();
@@ -34,14 +34,14 @@ export const Workspaces = () => {
         header: 'Image',
         cell: ({ row }) => <ImageCell row={row} />,
       }),
-      columnHelper.accessor('brands', {
-        header: 'Brands',
-        cell: ({ row }) => <BrandsCell row={row} />,
-      }),
-      columnHelper.accessor('themes', {
-        header: 'Themes',
-        cell: ({ row }) => <ThemesCell row={row} />,
-      }),
+      // columnHelper.accessor('brands', {
+      //   header: 'Brands',
+      //   cell: ({ row }) => <BrandsCell row={row} />,
+      // }),
+      // columnHelper.accessor('themes', {
+      //   header: 'Themes',
+      //   cell: ({ row }) => <ThemesCell row={row} />,
+      // }),
       columnHelper.display({
         header: ' ',
         cell: ({ row }) => <ActionsCell row={row} />,

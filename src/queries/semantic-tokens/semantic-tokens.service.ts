@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from '@/integrations/axios/api';
 
 import type {
   CreateSemanticTokenPayload,
@@ -9,21 +9,21 @@ import type {
 const API_ENDPOINT = '/api/semantic-tokens';
 
 export const getSemanticTokens = async () => {
-  const response = await axios.get(API_ENDPOINT);
+  const response = await api.get(API_ENDPOINT);
   return response.data;
 };
 
 export const createSemanticToken = async (payload: CreateSemanticTokenPayload) => {
-  const response = await axios.post(API_ENDPOINT, payload);
+  const response = await api.post(API_ENDPOINT, payload);
   return response.data;
 };
 
-export const updateSemanticToken = async (payload: UpdateSemanticTokenPayload) => {
-  const response = await axios.patch(API_ENDPOINT, payload);
+export const updateSemanticToken = async ({ id, ...payload }: UpdateSemanticTokenPayload) => {
+  const response = await api.patch(`${API_ENDPOINT}/${id}`, payload);
   return response.data;
 };
 
-export const deleteSemanticToken = async (payload: DeleteSemanticTokenPayload) => {
-  const response = await axios.delete(API_ENDPOINT, { data: payload });
+export const deleteSemanticToken = async ({ id }: DeleteSemanticTokenPayload) => {
+  const response = await api.delete(`${API_ENDPOINT}/${id}`);
   return response.data;
 };

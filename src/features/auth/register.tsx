@@ -38,7 +38,9 @@ export const Register = () => {
       return;
     }
 
-    await navigate({ to: '/' });
+    toast.success('Account created successfully. Please check your email for verification.');
+
+    await navigate({ to: '/auth/login' });
   });
 
   return (

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from '@/integrations/axios/api';
 
 import type {
   CreateComponentTokenPayload,
@@ -9,21 +9,21 @@ import type {
 const API_ENDPOINT = '/api/component-tokens';
 
 export const getComponentTokens = async () => {
-  const response = await axios.get(API_ENDPOINT);
+  const response = await api.get(API_ENDPOINT);
   return response.data;
 };
 
 export const createComponentToken = async (payload: CreateComponentTokenPayload) => {
-  const response = await axios.post(API_ENDPOINT, payload);
+  const response = await api.post(API_ENDPOINT, payload);
   return response.data;
 };
 
-export const updateComponentToken = async (payload: UpdateComponentTokenPayload) => {
-  const response = await axios.patch(API_ENDPOINT, payload);
+export const updateComponentToken = async ({ id, ...payload }: UpdateComponentTokenPayload) => {
+  const response = await api.patch(`${API_ENDPOINT}/${id}`, payload);
   return response.data;
 };
 
-export const deleteComponentToken = async (payload: DeleteComponentTokenPayload) => {
-  const response = await axios.delete(API_ENDPOINT, { data: payload });
+export const deleteComponentToken = async ({ id }: DeleteComponentTokenPayload) => {
+  const response = await api.delete(`${API_ENDPOINT}/${id}`);
   return response.data;
 };

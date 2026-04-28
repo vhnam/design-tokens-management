@@ -20,7 +20,6 @@ import {
   DialogTitle,
 } from '@/components/primitives/dialog';
 
-import { CheckboxField } from '@/components/composites/field/checkbox-field';
 import { InputField } from '@/components/composites/field/input-field';
 
 export const WorkspaceAddDialog = () => {
@@ -31,8 +30,6 @@ export const WorkspaceAddDialog = () => {
     defaultValues: {
       workspaceName: '',
       workspaceImage: '',
-      // workspaceBrands: [],
-      workspaceThemes: [],
     },
     resolver: zodResolver(workspaceSchema as never) as never,
   });
@@ -42,8 +39,6 @@ export const WorkspaceAddDialog = () => {
       {
         name: value.workspaceName.trim(),
         image: value.workspaceImage?.trim() ?? '',
-        brands: ['default'],
-        themes: value.workspaceThemes?.map((theme) => theme.trim()) ?? [],
       },
       {
         onSuccess: () => {
@@ -68,24 +63,6 @@ export const WorkspaceAddDialog = () => {
 
         <form className="grid gap-4" onSubmit={onSubmit}>
           <InputField control={form.control} name="workspaceName" label="Name" placeholder="e.g. My Workspace" />
-
-          <InputField
-            control={form.control}
-            name="workspaceImage"
-            label="Image"
-            optional
-            placeholder="e.g. https://example.com/image.png"
-          />
-
-          <CheckboxField
-            control={form.control}
-            name="workspaceThemes"
-            label="Themes"
-            items={[
-              { label: 'Light', value: 'light' },
-              { label: 'Dark', value: 'dark' },
-            ]}
-          />
 
           <DialogFooter>
             <DialogClose onClick={closeAddDialog} render={<Button type="button" variant="outline" />}>
