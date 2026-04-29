@@ -1,0 +1,19 @@
+import { z } from 'zod/v4';
+
+export const resetPasswordSchema = z
+  .object({
+    password: z
+      .string()
+      .min(8, 'Password must be at least 8 characters long')
+      .max(255, 'Password must be less than 255 characters'),
+    confirmPassword: z
+      .string()
+      .min(8, 'Password must be at least 8 characters long')
+      .max(255, 'Password must be less than 255 characters'),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: 'Passwords do not match',
+    path: ['confirmPassword'],
+  });
+
+export type ResetPasswordSchemaType = z.infer<typeof resetPasswordSchema>;

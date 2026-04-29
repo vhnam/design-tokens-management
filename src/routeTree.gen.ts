@@ -15,10 +15,13 @@ import { Route as ProtectedIndexRouteImport } from './routes/_protected/index'
 import { Route as ProtectedOnboardingRouteImport } from './routes/_protected/onboarding'
 import { Route as ProtectedHelpRouteImport } from './routes/_protected/help'
 import { Route as PublicAuthVerifyEmailRouteImport } from './routes/_public/auth/verify-email'
+import { Route as PublicAuthResetPasswordRouteImport } from './routes/_public/auth/reset-password'
+import { Route as PublicAuthResendVerificationSuccessRouteImport } from './routes/_public/auth/resend-verification-success'
 import { Route as PublicAuthResendVerificationRouteImport } from './routes/_public/auth/resend-verification'
 import { Route as PublicAuthRegisterSuccessRouteImport } from './routes/_public/auth/register-success'
 import { Route as PublicAuthRegisterRouteImport } from './routes/_public/auth/register'
 import { Route as PublicAuthLoginRouteImport } from './routes/_public/auth/login'
+import { Route as PublicAuthForgotPasswordSuccessRouteImport } from './routes/_public/auth/forgot-password-success'
 import { Route as PublicAuthForgotPasswordRouteImport } from './routes/_public/auth/forgot-password'
 import { Route as ProtectedTokensSemanticTokensRouteImport } from './routes/_protected/tokens/semantic-tokens'
 import { Route as ProtectedTokensPrimitiveTokensRouteImport } from './routes/_protected/tokens/primitive-tokens'
@@ -54,6 +57,17 @@ const PublicAuthVerifyEmailRoute = PublicAuthVerifyEmailRouteImport.update({
   path: '/auth/verify-email',
   getParentRoute: () => PublicRoute,
 } as any)
+const PublicAuthResetPasswordRoute = PublicAuthResetPasswordRouteImport.update({
+  id: '/auth/reset-password',
+  path: '/auth/reset-password',
+  getParentRoute: () => PublicRoute,
+} as any)
+const PublicAuthResendVerificationSuccessRoute =
+  PublicAuthResendVerificationSuccessRouteImport.update({
+    id: '/auth/resend-verification-success',
+    path: '/auth/resend-verification-success',
+    getParentRoute: () => PublicRoute,
+  } as any)
 const PublicAuthResendVerificationRoute =
   PublicAuthResendVerificationRouteImport.update({
     id: '/auth/resend-verification',
@@ -76,6 +90,12 @@ const PublicAuthLoginRoute = PublicAuthLoginRouteImport.update({
   path: '/auth/login',
   getParentRoute: () => PublicRoute,
 } as any)
+const PublicAuthForgotPasswordSuccessRoute =
+  PublicAuthForgotPasswordSuccessRouteImport.update({
+    id: '/auth/forgot-password-success',
+    path: '/auth/forgot-password-success',
+    getParentRoute: () => PublicRoute,
+  } as any)
 const PublicAuthForgotPasswordRoute =
   PublicAuthForgotPasswordRouteImport.update({
     id: '/auth/forgot-password',
@@ -123,10 +143,13 @@ export interface FileRoutesByFullPath {
   '/tokens/primitive-tokens': typeof ProtectedTokensPrimitiveTokensRoute
   '/tokens/semantic-tokens': typeof ProtectedTokensSemanticTokensRoute
   '/auth/forgot-password': typeof PublicAuthForgotPasswordRoute
+  '/auth/forgot-password-success': typeof PublicAuthForgotPasswordSuccessRoute
   '/auth/login': typeof PublicAuthLoginRoute
   '/auth/register': typeof PublicAuthRegisterRoute
   '/auth/register-success': typeof PublicAuthRegisterSuccessRoute
   '/auth/resend-verification': typeof PublicAuthResendVerificationRoute
+  '/auth/resend-verification-success': typeof PublicAuthResendVerificationSuccessRoute
+  '/auth/reset-password': typeof PublicAuthResetPasswordRoute
   '/auth/verify-email': typeof PublicAuthVerifyEmailRoute
 }
 export interface FileRoutesByTo {
@@ -139,10 +162,13 @@ export interface FileRoutesByTo {
   '/tokens/primitive-tokens': typeof ProtectedTokensPrimitiveTokensRoute
   '/tokens/semantic-tokens': typeof ProtectedTokensSemanticTokensRoute
   '/auth/forgot-password': typeof PublicAuthForgotPasswordRoute
+  '/auth/forgot-password-success': typeof PublicAuthForgotPasswordSuccessRoute
   '/auth/login': typeof PublicAuthLoginRoute
   '/auth/register': typeof PublicAuthRegisterRoute
   '/auth/register-success': typeof PublicAuthRegisterSuccessRoute
   '/auth/resend-verification': typeof PublicAuthResendVerificationRoute
+  '/auth/resend-verification-success': typeof PublicAuthResendVerificationSuccessRoute
+  '/auth/reset-password': typeof PublicAuthResetPasswordRoute
   '/auth/verify-email': typeof PublicAuthVerifyEmailRoute
 }
 export interface FileRoutesById {
@@ -158,10 +184,13 @@ export interface FileRoutesById {
   '/_protected/tokens/primitive-tokens': typeof ProtectedTokensPrimitiveTokensRoute
   '/_protected/tokens/semantic-tokens': typeof ProtectedTokensSemanticTokensRoute
   '/_public/auth/forgot-password': typeof PublicAuthForgotPasswordRoute
+  '/_public/auth/forgot-password-success': typeof PublicAuthForgotPasswordSuccessRoute
   '/_public/auth/login': typeof PublicAuthLoginRoute
   '/_public/auth/register': typeof PublicAuthRegisterRoute
   '/_public/auth/register-success': typeof PublicAuthRegisterSuccessRoute
   '/_public/auth/resend-verification': typeof PublicAuthResendVerificationRoute
+  '/_public/auth/resend-verification-success': typeof PublicAuthResendVerificationSuccessRoute
+  '/_public/auth/reset-password': typeof PublicAuthResetPasswordRoute
   '/_public/auth/verify-email': typeof PublicAuthVerifyEmailRoute
 }
 export interface FileRouteTypes {
@@ -176,10 +205,13 @@ export interface FileRouteTypes {
     | '/tokens/primitive-tokens'
     | '/tokens/semantic-tokens'
     | '/auth/forgot-password'
+    | '/auth/forgot-password-success'
     | '/auth/login'
     | '/auth/register'
     | '/auth/register-success'
     | '/auth/resend-verification'
+    | '/auth/resend-verification-success'
+    | '/auth/reset-password'
     | '/auth/verify-email'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -192,10 +224,13 @@ export interface FileRouteTypes {
     | '/tokens/primitive-tokens'
     | '/tokens/semantic-tokens'
     | '/auth/forgot-password'
+    | '/auth/forgot-password-success'
     | '/auth/login'
     | '/auth/register'
     | '/auth/register-success'
     | '/auth/resend-verification'
+    | '/auth/resend-verification-success'
+    | '/auth/reset-password'
     | '/auth/verify-email'
   id:
     | '__root__'
@@ -210,10 +245,13 @@ export interface FileRouteTypes {
     | '/_protected/tokens/primitive-tokens'
     | '/_protected/tokens/semantic-tokens'
     | '/_public/auth/forgot-password'
+    | '/_public/auth/forgot-password-success'
     | '/_public/auth/login'
     | '/_public/auth/register'
     | '/_public/auth/register-success'
     | '/_public/auth/resend-verification'
+    | '/_public/auth/resend-verification-success'
+    | '/_public/auth/reset-password'
     | '/_public/auth/verify-email'
   fileRoutesById: FileRoutesById
 }
@@ -266,6 +304,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicAuthVerifyEmailRouteImport
       parentRoute: typeof PublicRoute
     }
+    '/_public/auth/reset-password': {
+      id: '/_public/auth/reset-password'
+      path: '/auth/reset-password'
+      fullPath: '/auth/reset-password'
+      preLoaderRoute: typeof PublicAuthResetPasswordRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/auth/resend-verification-success': {
+      id: '/_public/auth/resend-verification-success'
+      path: '/auth/resend-verification-success'
+      fullPath: '/auth/resend-verification-success'
+      preLoaderRoute: typeof PublicAuthResendVerificationSuccessRouteImport
+      parentRoute: typeof PublicRoute
+    }
     '/_public/auth/resend-verification': {
       id: '/_public/auth/resend-verification'
       path: '/auth/resend-verification'
@@ -292,6 +344,13 @@ declare module '@tanstack/react-router' {
       path: '/auth/login'
       fullPath: '/auth/login'
       preLoaderRoute: typeof PublicAuthLoginRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/auth/forgot-password-success': {
+      id: '/_public/auth/forgot-password-success'
+      path: '/auth/forgot-password-success'
+      fullPath: '/auth/forgot-password-success'
+      preLoaderRoute: typeof PublicAuthForgotPasswordSuccessRouteImport
       parentRoute: typeof PublicRoute
     }
     '/_public/auth/forgot-password': {
@@ -367,19 +426,26 @@ const ProtectedRouteWithChildren = ProtectedRoute._addFileChildren(
 
 interface PublicRouteChildren {
   PublicAuthForgotPasswordRoute: typeof PublicAuthForgotPasswordRoute
+  PublicAuthForgotPasswordSuccessRoute: typeof PublicAuthForgotPasswordSuccessRoute
   PublicAuthLoginRoute: typeof PublicAuthLoginRoute
   PublicAuthRegisterRoute: typeof PublicAuthRegisterRoute
   PublicAuthRegisterSuccessRoute: typeof PublicAuthRegisterSuccessRoute
   PublicAuthResendVerificationRoute: typeof PublicAuthResendVerificationRoute
+  PublicAuthResendVerificationSuccessRoute: typeof PublicAuthResendVerificationSuccessRoute
+  PublicAuthResetPasswordRoute: typeof PublicAuthResetPasswordRoute
   PublicAuthVerifyEmailRoute: typeof PublicAuthVerifyEmailRoute
 }
 
 const PublicRouteChildren: PublicRouteChildren = {
   PublicAuthForgotPasswordRoute: PublicAuthForgotPasswordRoute,
+  PublicAuthForgotPasswordSuccessRoute: PublicAuthForgotPasswordSuccessRoute,
   PublicAuthLoginRoute: PublicAuthLoginRoute,
   PublicAuthRegisterRoute: PublicAuthRegisterRoute,
   PublicAuthRegisterSuccessRoute: PublicAuthRegisterSuccessRoute,
   PublicAuthResendVerificationRoute: PublicAuthResendVerificationRoute,
+  PublicAuthResendVerificationSuccessRoute:
+    PublicAuthResendVerificationSuccessRoute,
+  PublicAuthResetPasswordRoute: PublicAuthResetPasswordRoute,
   PublicAuthVerifyEmailRoute: PublicAuthVerifyEmailRoute,
 }
 

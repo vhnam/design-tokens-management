@@ -5,44 +5,44 @@ import { toast } from 'sonner';
 
 import { authClient } from '@/integrations/better-auth/auth-client';
 
-import { resendVerificationSchema } from '@/schemas/resend-verification.schema';
-import type { ResendVerificationSchemaType } from '@/schemas/resend-verification.schema';
+import { forgotPasswordSchema } from '@/schemas/forgot-password.schema';
+import type { ForgotPasswordSchemaType } from '@/schemas/forgot-password.schema';
 
 import { Button } from '@/components/primitives/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/primitives/card';
 
 import { InputField } from '@/components/composites/field/input-field';
 
-export const ResendVerification = () => {
+export const ForgotPassword = () => {
   const navigate = useNavigate();
 
-  const form = useForm<ResendVerificationSchemaType>({
-    resolver: zodResolver(resendVerificationSchema as never) as never,
+  const form = useForm<ForgotPasswordSchemaType>({
+    resolver: zodResolver(forgotPasswordSchema as never) as never,
     defaultValues: {
       email: '',
     },
   });
 
-  const handleSubmit = async (value: ResendVerificationSchemaType) => {
-    const { error } = await authClient.sendVerificationEmail({
+  const handleSubmit = async (value: ForgotPasswordSchemaType) => {
+    const { error } = await authClient.requestPasswordReset({
       email: value.email.trim(),
     });
 
     if (error) {
-      toast.error(error.message ?? 'Unable to resend verification email. Please try again.');
+      toast.error(error.message ?? 'Unable to send password reset email. Please try again.');
       return;
     }
 
-    await navigate({ to: '/auth/resend-verification-success', replace: true });
-    toast.success('Verification email sent. Please check your inbox.');
+    await navigate({ to: '/auth/forgot-password-success', replace: true });
+    toast.success('Forgot password email sent. Please check your inbox.');
   };
 
   return (
     <div className="flex justify-center items-center h-screen">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="text-2xl font-heading">Resend verification</CardTitle>
-          <CardDescription>Enter your email to receive the new verification link</CardDescription>
+          <CardTitle className="text-2xl font-heading">Forgot password</CardTitle>
+          <CardDescription>Enter your email to receive the new password reset link</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={form.handleSubmit(handleSubmit)}>
@@ -56,7 +56,7 @@ export const ResendVerification = () => {
             />
             <CardFooter className="mt-6 flex-col gap-2 px-0">
               <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
-                {form.formState.isSubmitting ? 'Sending...' : 'Send verification link'}
+                {form.formState.isSubmitting ? 'Sending...' : 'Send password reset link'}
               </Button>
               <Button
                 nativeButton={false}
