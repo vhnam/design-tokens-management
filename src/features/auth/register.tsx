@@ -26,7 +26,7 @@ export const Register = () => {
     },
   });
 
-  const onSubmit = form.handleSubmit(async (value) => {
+  const handleSubmit = async (value: RegisterSchemaType) => {
     const { error } = await authClient.signUp.email({
       name: value.name.trim(),
       email: value.email.trim(),
@@ -37,21 +37,18 @@ export const Register = () => {
       toast.error(error.message ?? 'Unable to create account. Please try again.');
       return;
     }
-
-    toast.success('Account created successfully. Please check your email for verification.');
-
-    await navigate({ to: '/auth/login' });
-  });
+    await navigate({ to: '/auth/register-success', replace: true });
+  };
 
   return (
     <div className="flex justify-center items-center h-screen">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle>Register</CardTitle>
+          <CardTitle className="text-2xl font-heading">Register</CardTitle>
           <CardDescription>Create an account to get started</CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={form.handleSubmit(handleSubmit)}>
             <div className="flex flex-col gap-6">
               <InputField
                 control={form.control}
@@ -89,7 +86,12 @@ export const Register = () => {
                   nativeButton={false}
                   variant="link"
                   className="px-0"
-                  render={<Link to="/auth/login">Login</Link>}
+                  disabled={form.formState.isSubmitting}
+                  render={
+                    <Link to="/auth/login" disabled={form.formState.isSubmitting}>
+                      Login
+                    </Link>
+                  }
                 />
               </div>
             </CardFooter>

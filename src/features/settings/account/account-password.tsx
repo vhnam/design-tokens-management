@@ -5,7 +5,8 @@ import { toast } from 'sonner';
 
 import { authClient } from '@/integrations/better-auth/auth-client';
 
-import { type PasswordSchemaType, passwordSchema } from '@/schemas/profile.schema';
+import { passwordSchema } from '@/schemas/profile.schema';
+import type { PasswordSchemaType } from '@/schemas/profile.schema';
 
 import { Button } from '@/components/primitives/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/primitives/card';

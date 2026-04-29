@@ -4,14 +4,16 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { TokenTheme, TokenType } from '@/enums/token';
+
 import { semanticTokenFormSchema } from '@/schemas/semantic-token.schema';
 import type { SemanticTokenFormSchemaType } from '@/schemas/semantic-token.schema';
+
 import { useSemanticTokensTableStore } from '@/stores/semantic-tokens-table.store';
 
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/primitives/dialog';
 
-import { useUpdateSemanticToken } from './semantic-tokens.actions';
 import { SemanticTokenForm } from './semantic-token-form';
+import { useUpdateSemanticToken } from './semantic-tokens.actions';
 
 const getSemanticValueForSubmit = (value: SemanticTokenFormSchemaType) => {
   if (value.type === TokenType.Typography) {
@@ -55,7 +57,9 @@ const getSemanticValueForSubmit = (value: SemanticTokenFormSchemaType) => {
 const getCompositeFieldsFromValue = (value: string) => {
   try {
     const parsed = JSON.parse(value) as Record<string, unknown>;
-    const firstStop = Array.isArray(parsed.stops) ? (parsed.stops[0] as Record<string, unknown> | undefined) : undefined;
+    const firstStop = Array.isArray(parsed.stops)
+      ? (parsed.stops[0] as Record<string, unknown> | undefined)
+      : undefined;
     return {
       fontFamily: typeof parsed.fontFamily === 'string' ? parsed.fontFamily : '',
       fontSize: typeof parsed.fontSize === 'string' ? parsed.fontSize : '',

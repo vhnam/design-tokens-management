@@ -3,14 +3,16 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { TokenTheme, TokenType } from '@/enums/token';
+
 import { semanticTokenFormSchema } from '@/schemas/semantic-token.schema';
 import type { SemanticTokenFormSchemaType } from '@/schemas/semantic-token.schema';
+
 import { useSemanticTokensTableStore } from '@/stores/semantic-tokens-table.store';
 
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/primitives/dialog';
 
-import { useCreateSemanticToken } from './semantic-tokens.actions';
 import { SemanticTokenForm } from './semantic-token-form';
+import { useCreateSemanticToken } from './semantic-tokens.actions';
 
 const getSemanticValueForSubmit = (value: SemanticTokenFormSchemaType) => {
   if (value.type === TokenType.Typography) {

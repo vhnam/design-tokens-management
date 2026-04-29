@@ -39,7 +39,7 @@ export const WorkspaceEditDialog = () => {
     if (selectedWorkspace) {
       form.reset({
         workspaceName: selectedWorkspace.name,
-        workspaceImage: selectedWorkspace.image ?? '',
+        workspaceImage: selectedWorkspace.image,
       });
     }
   }, [form, selectedWorkspace]);

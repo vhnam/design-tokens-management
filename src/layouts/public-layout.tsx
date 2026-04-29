@@ -1,4 +1,4 @@
-import { Navigate } from '@tanstack/react-router';
+import { Navigate, useLocation } from '@tanstack/react-router';
 import type { PropsWithChildren } from 'react';
 
 import { authClient } from '@/integrations/better-auth/auth-client';
@@ -7,6 +7,7 @@ import { LottiePlayer } from '@/components/primitives/lottie-player';
 
 export default function PublicLayout({ children }: PropsWithChildren) {
   const { data: session, isPending } = authClient.useSession();
+  const location = useLocation();
 
   if (isPending) {
     return (
@@ -16,7 +17,7 @@ export default function PublicLayout({ children }: PropsWithChildren) {
     );
   }
 
-  if (session?.user) {
+  if (session?.user && location.pathname !== '/auth/register-success') {
     return <Navigate to="/" />;
   }
 

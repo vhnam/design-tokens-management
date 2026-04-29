@@ -1,5 +1,4 @@
-import type { TokenType } from '@/enums/token';
-import type { TokenTheme } from '@/enums/token';
+import type { TokenTheme, TokenType } from '@/enums/token';
 
 export type SemanticTokenRecord = {
   id: string;

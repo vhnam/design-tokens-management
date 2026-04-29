@@ -5,12 +5,16 @@ import { useMemo } from 'react';
 import { cn } from '@/lib/utils';
 
 import type { SemanticTokenRecord } from '@/queries/semantic-tokens/semantic-tokens.type';
+
 import { useSemanticTokensTableStore } from '@/stores/semantic-tokens-table.store';
 
 import { Button } from '@/components/primitives/button';
 import { LottiePlayer } from '@/components/primitives/lottie-player';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/primitives/table';
 
+import { SemanticTokenAddDialog } from './semantic-token-add-dialog';
+import { SemanticTokenDeleteDialog } from './semantic-token-delete-dialog';
+import { SemanticTokenEditDialog } from './semantic-token-edit-dialog';
 import {
   ActionsCell,
   DescriptionCell,
@@ -20,9 +24,6 @@ import {
   ValueCell,
 } from './semantic-tokens-table';
 import { useGetSemanticTokens } from './semantic-tokens.actions';
-import { SemanticTokenAddDialog } from './semantic-token-add-dialog';
-import { SemanticTokenDeleteDialog } from './semantic-token-delete-dialog';
-import { SemanticTokenEditDialog } from './semantic-token-edit-dialog';
 
 const columnHelper = createColumnHelper<SemanticTokenRecord>();
 

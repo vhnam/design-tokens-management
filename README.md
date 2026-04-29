@@ -50,11 +50,12 @@ App runs at `http://localhost:3000`.
    - `.env` is used by commands that explicitly load `.env` (for example `pnpm db:sync`).
 
 3. Fill required values:
-  - `VITE_BETTER_AUTH_URL` (auth API base URL, for local backend: `http://localhost:4000`)
-  - `DATABASE_URL` (for local SQLite: `dev.db`)
-  - `MAILER_TOKEN` (required for verification emails)
-  - `TURSO_DATABASE_URL` (optional, used by cloud sync flows)
-  - `TURSO_AUTH_TOKEN` (optional, used by cloud sync flows)
+
+- `VITE_BETTER_AUTH_URL` (auth API base URL, for local backend: `http://localhost:4000`)
+- `DATABASE_URL` (for local SQLite: `dev.db`)
+- `MAILER_TOKEN` (required for verification emails)
+- `TURSO_DATABASE_URL` (optional, used by cloud sync flows)
+- `TURSO_AUTH_TOKEN` (optional, used by cloud sync flows)
 
 4. Run Drizzle migrations:
 

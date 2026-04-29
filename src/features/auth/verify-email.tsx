@@ -21,7 +21,7 @@ export const VerifyEmail = () => {
       return;
     }
     toast.success('Email verified successfully');
-    await navigate({ to: '/auth/login' });
+    await navigate({ to: '/auth/login', replace: true });
   };
 
   useEffect(() => {

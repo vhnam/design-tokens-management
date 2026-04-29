@@ -2,8 +2,11 @@ import type { Row } from '@tanstack/react-table';
 import { PencilIcon, TrashIcon } from 'lucide-react';
 
 import { TOKEN_TYPE_LABELS } from '@/contants/token';
-import { TokenType } from '@/enums/token';
+
 import type { SemanticTokenRecord } from '@/queries/semantic-tokens/semantic-tokens.type';
+
+import { TokenType } from '@/enums/token';
+
 import { useSemanticTokensTableStore } from '@/stores/semantic-tokens-table.store';
 
 import { Badge } from '@/components/primitives/badge';
@@ -27,7 +30,12 @@ export const ValueCell = ({ row }: TableCell) => {
   const isColor = row.original.type === TokenType.Color;
   return (
     <div className="inline-flex cursor-default items-center gap-2 py-1">
-      {isColor && <span className="inline-block size-6 shrink-0 rounded border border-border" style={{ backgroundColor: value }} />}
+      {isColor && (
+        <span
+          className="inline-block size-6 shrink-0 rounded border border-border"
+          style={{ backgroundColor: value }}
+        />
+      )}
       {value}
     </div>
   );

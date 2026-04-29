@@ -8,7 +8,8 @@ import { toast } from 'sonner';
 
 import { authClient } from '@/integrations/better-auth/auth-client';
 
-import { type ProfileSchemaType, profileSchema } from '@/schemas/profile.schema';
+import { profileSchema } from '@/schemas/profile.schema';
+import type { ProfileSchemaType } from '@/schemas/profile.schema';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/primitives/avatar';
 import { Button } from '@/components/primitives/button';

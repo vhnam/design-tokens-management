@@ -12,9 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as PublicRouteImport } from './routes/_public'
 import { Route as ProtectedRouteImport } from './routes/_protected'
 import { Route as ProtectedIndexRouteImport } from './routes/_protected/index'
+import { Route as ProtectedOnboardingRouteImport } from './routes/_protected/onboarding'
 import { Route as ProtectedHelpRouteImport } from './routes/_protected/help'
 import { Route as PublicAuthVerifyEmailRouteImport } from './routes/_public/auth/verify-email'
 import { Route as PublicAuthResendVerificationRouteImport } from './routes/_public/auth/resend-verification'
+import { Route as PublicAuthRegisterSuccessRouteImport } from './routes/_public/auth/register-success'
 import { Route as PublicAuthRegisterRouteImport } from './routes/_public/auth/register'
 import { Route as PublicAuthLoginRouteImport } from './routes/_public/auth/login'
 import { Route as PublicAuthForgotPasswordRouteImport } from './routes/_public/auth/forgot-password'
@@ -37,6 +39,11 @@ const ProtectedIndexRoute = ProtectedIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ProtectedRoute,
 } as any)
+const ProtectedOnboardingRoute = ProtectedOnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => ProtectedRoute,
+} as any)
 const ProtectedHelpRoute = ProtectedHelpRouteImport.update({
   id: '/help',
   path: '/help',
@@ -51,6 +58,12 @@ const PublicAuthResendVerificationRoute =
   PublicAuthResendVerificationRouteImport.update({
     id: '/auth/resend-verification',
     path: '/auth/resend-verification',
+    getParentRoute: () => PublicRoute,
+  } as any)
+const PublicAuthRegisterSuccessRoute =
+  PublicAuthRegisterSuccessRouteImport.update({
+    id: '/auth/register-success',
+    path: '/auth/register-success',
     getParentRoute: () => PublicRoute,
   } as any)
 const PublicAuthRegisterRoute = PublicAuthRegisterRouteImport.update({
@@ -103,6 +116,7 @@ const ProtectedSettingsAccountRoute =
 export interface FileRoutesByFullPath {
   '/': typeof ProtectedIndexRoute
   '/help': typeof ProtectedHelpRoute
+  '/onboarding': typeof ProtectedOnboardingRoute
   '/settings/account': typeof ProtectedSettingsAccountRoute
   '/settings/workspaces': typeof ProtectedSettingsWorkspacesRoute
   '/tokens/component-tokens': typeof ProtectedTokensComponentTokensRoute
@@ -111,12 +125,14 @@ export interface FileRoutesByFullPath {
   '/auth/forgot-password': typeof PublicAuthForgotPasswordRoute
   '/auth/login': typeof PublicAuthLoginRoute
   '/auth/register': typeof PublicAuthRegisterRoute
+  '/auth/register-success': typeof PublicAuthRegisterSuccessRoute
   '/auth/resend-verification': typeof PublicAuthResendVerificationRoute
   '/auth/verify-email': typeof PublicAuthVerifyEmailRoute
 }
 export interface FileRoutesByTo {
   '/': typeof ProtectedIndexRoute
   '/help': typeof ProtectedHelpRoute
+  '/onboarding': typeof ProtectedOnboardingRoute
   '/settings/account': typeof ProtectedSettingsAccountRoute
   '/settings/workspaces': typeof ProtectedSettingsWorkspacesRoute
   '/tokens/component-tokens': typeof ProtectedTokensComponentTokensRoute
@@ -125,6 +141,7 @@ export interface FileRoutesByTo {
   '/auth/forgot-password': typeof PublicAuthForgotPasswordRoute
   '/auth/login': typeof PublicAuthLoginRoute
   '/auth/register': typeof PublicAuthRegisterRoute
+  '/auth/register-success': typeof PublicAuthRegisterSuccessRoute
   '/auth/resend-verification': typeof PublicAuthResendVerificationRoute
   '/auth/verify-email': typeof PublicAuthVerifyEmailRoute
 }
@@ -133,6 +150,7 @@ export interface FileRoutesById {
   '/_protected': typeof ProtectedRouteWithChildren
   '/_public': typeof PublicRouteWithChildren
   '/_protected/help': typeof ProtectedHelpRoute
+  '/_protected/onboarding': typeof ProtectedOnboardingRoute
   '/_protected/': typeof ProtectedIndexRoute
   '/_protected/settings/account': typeof ProtectedSettingsAccountRoute
   '/_protected/settings/workspaces': typeof ProtectedSettingsWorkspacesRoute
@@ -142,6 +160,7 @@ export interface FileRoutesById {
   '/_public/auth/forgot-password': typeof PublicAuthForgotPasswordRoute
   '/_public/auth/login': typeof PublicAuthLoginRoute
   '/_public/auth/register': typeof PublicAuthRegisterRoute
+  '/_public/auth/register-success': typeof PublicAuthRegisterSuccessRoute
   '/_public/auth/resend-verification': typeof PublicAuthResendVerificationRoute
   '/_public/auth/verify-email': typeof PublicAuthVerifyEmailRoute
 }
@@ -150,6 +169,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/help'
+    | '/onboarding'
     | '/settings/account'
     | '/settings/workspaces'
     | '/tokens/component-tokens'
@@ -158,12 +178,14 @@ export interface FileRouteTypes {
     | '/auth/forgot-password'
     | '/auth/login'
     | '/auth/register'
+    | '/auth/register-success'
     | '/auth/resend-verification'
     | '/auth/verify-email'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/help'
+    | '/onboarding'
     | '/settings/account'
     | '/settings/workspaces'
     | '/tokens/component-tokens'
@@ -172,6 +194,7 @@ export interface FileRouteTypes {
     | '/auth/forgot-password'
     | '/auth/login'
     | '/auth/register'
+    | '/auth/register-success'
     | '/auth/resend-verification'
     | '/auth/verify-email'
   id:
@@ -179,6 +202,7 @@ export interface FileRouteTypes {
     | '/_protected'
     | '/_public'
     | '/_protected/help'
+    | '/_protected/onboarding'
     | '/_protected/'
     | '/_protected/settings/account'
     | '/_protected/settings/workspaces'
@@ -188,6 +212,7 @@ export interface FileRouteTypes {
     | '/_public/auth/forgot-password'
     | '/_public/auth/login'
     | '/_public/auth/register'
+    | '/_public/auth/register-success'
     | '/_public/auth/resend-verification'
     | '/_public/auth/verify-email'
   fileRoutesById: FileRoutesById
@@ -220,6 +245,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedIndexRouteImport
       parentRoute: typeof ProtectedRoute
     }
+    '/_protected/onboarding': {
+      id: '/_protected/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof ProtectedOnboardingRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
     '/_protected/help': {
       id: '/_protected/help'
       path: '/help'
@@ -239,6 +271,13 @@ declare module '@tanstack/react-router' {
       path: '/auth/resend-verification'
       fullPath: '/auth/resend-verification'
       preLoaderRoute: typeof PublicAuthResendVerificationRouteImport
+      parentRoute: typeof PublicRoute
+    }
+    '/_public/auth/register-success': {
+      id: '/_public/auth/register-success'
+      path: '/auth/register-success'
+      fullPath: '/auth/register-success'
+      preLoaderRoute: typeof PublicAuthRegisterSuccessRouteImport
       parentRoute: typeof PublicRoute
     }
     '/_public/auth/register': {
@@ -302,6 +341,7 @@ declare module '@tanstack/react-router' {
 
 interface ProtectedRouteChildren {
   ProtectedHelpRoute: typeof ProtectedHelpRoute
+  ProtectedOnboardingRoute: typeof ProtectedOnboardingRoute
   ProtectedIndexRoute: typeof ProtectedIndexRoute
   ProtectedSettingsAccountRoute: typeof ProtectedSettingsAccountRoute
   ProtectedSettingsWorkspacesRoute: typeof ProtectedSettingsWorkspacesRoute
@@ -312,6 +352,7 @@ interface ProtectedRouteChildren {
 
 const ProtectedRouteChildren: ProtectedRouteChildren = {
   ProtectedHelpRoute: ProtectedHelpRoute,
+  ProtectedOnboardingRoute: ProtectedOnboardingRoute,
   ProtectedIndexRoute: ProtectedIndexRoute,
   ProtectedSettingsAccountRoute: ProtectedSettingsAccountRoute,
   ProtectedSettingsWorkspacesRoute: ProtectedSettingsWorkspacesRoute,
@@ -328,6 +369,7 @@ interface PublicRouteChildren {
   PublicAuthForgotPasswordRoute: typeof PublicAuthForgotPasswordRoute
   PublicAuthLoginRoute: typeof PublicAuthLoginRoute
   PublicAuthRegisterRoute: typeof PublicAuthRegisterRoute
+  PublicAuthRegisterSuccessRoute: typeof PublicAuthRegisterSuccessRoute
   PublicAuthResendVerificationRoute: typeof PublicAuthResendVerificationRoute
   PublicAuthVerifyEmailRoute: typeof PublicAuthVerifyEmailRoute
 }
@@ -336,6 +378,7 @@ const PublicRouteChildren: PublicRouteChildren = {
   PublicAuthForgotPasswordRoute: PublicAuthForgotPasswordRoute,
   PublicAuthLoginRoute: PublicAuthLoginRoute,
   PublicAuthRegisterRoute: PublicAuthRegisterRoute,
+  PublicAuthRegisterSuccessRoute: PublicAuthRegisterSuccessRoute,
   PublicAuthResendVerificationRoute: PublicAuthResendVerificationRoute,
   PublicAuthVerifyEmailRoute: PublicAuthVerifyEmailRoute,
 }

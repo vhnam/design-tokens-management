@@ -1,4 +1,4 @@
-import { Navigate } from '@tanstack/react-router';
+import { Navigate, useLocation, useNavigate } from '@tanstack/react-router';
 import { useEffect } from 'react';
 import type { PropsWithChildren } from 'react';
 
@@ -18,13 +18,25 @@ import { SidebarInset, SidebarProvider } from '@/components/primitives/sidebar';
 import { AppSidebar } from '@/components/composites/sidebar/app-sidebar';
 
 export default function ProtectedLayout({ children }: PropsWithChildren) {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const { data: session, isPending } = authClient.useSession();
 
-  const { data: workspaces, isPending: isWorkspacesPending } = useGetWorkspacesQuery();
+  const isOnboarding = location.pathname === '/onboarding';
+
+  const { data: workspaces, isPending: isWorkspacesPending } = useGetWorkspacesQuery({
+    enabled: !isOnboarding,
+  });
   const { activeWorkspace, setActiveWorkspace } = useWorkspaceStore();
 
   useEffect(() => {
-    if (!workspaces || workspaces.length === 0) return;
+    if (!session?.user) return;
+
+    if (!workspaces || workspaces.length === 0) {
+      navigate({ to: '/onboarding', replace: true });
+      return;
+    }
 
     if (!activeWorkspace) {
       setActiveWorkspace(workspaces[0]);
@@ -48,7 +60,7 @@ export default function ProtectedLayout({ children }: PropsWithChildren) {
     }
   }, [activeWorkspace, workspaces, setActiveWorkspace]);
 
-  if (isPending || isWorkspacesPending) {
+  if (isPending || (isWorkspacesPending && !isOnboarding)) {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <LottiePlayer src="/animations/loading.lottie" className="size-40" />

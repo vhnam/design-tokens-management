@@ -2,7 +2,9 @@ import { useWatch } from 'react-hook-form';
 import type { UseFormReturn } from 'react-hook-form';
 
 import { COMPOSITE_TOKEN_TYPE_OPTIONS } from '@/contants/token';
+
 import { TokenTheme, TokenType } from '@/enums/token';
+
 import type { SemanticTokenFormSchemaType } from '@/schemas/semantic-token.schema';
 
 import { Button } from '@/components/primitives/button';
@@ -41,9 +43,7 @@ export const SemanticTokenForm = ({ form, isPending, submitText, onSubmit, onClo
         <InputField control={form.control} name="group" label="Group" placeholder="e.g. typography" />
         <SelectField control={form.control} name="theme" label="Theme" items={THEME_OPTIONS} />
 
-        {tokenType === TokenType.Typography && (
-          <CompositeTokenTypographyForm control={form.control as never} />
-        )}
+        {tokenType === TokenType.Typography && <CompositeTokenTypographyForm control={form.control as never} />}
         {tokenType === TokenType.Shadow && <CompositeTokenShadowForm control={form.control as never} />}
         {tokenType === TokenType.Border && <CompositeTokenBorderForm control={form.control as never} />}
         {tokenType === TokenType.Gradient && <CompositeTokenGradientForm control={form.control as never} />}
