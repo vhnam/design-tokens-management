@@ -27,11 +27,11 @@ export const AccountPassword = () => {
     const { error } = await authClient.changePassword({
       newPassword: data.newPassword,
       currentPassword: data.currentPassword,
-      revokeOtherSessions: false,
+      revokeOtherSessions: true,
     });
 
     if (error) {
-      toast.error(error.message ?? 'Unable to update password. Please try again.');
+      toast.error('Unable to update password. Please try again.');
       return;
     }
 

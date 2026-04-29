@@ -35,7 +35,7 @@ export const ResetPassword = () => {
     });
 
     if (error) {
-      toast.error(error.message ?? 'Unable to reset password. Please try again.');
+      toast.error('Unable to reset password. Please try again.');
       return;
     }
 

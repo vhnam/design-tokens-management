@@ -29,12 +29,14 @@ export const ResendVerification = () => {
     });
 
     if (error) {
-      toast.error(error.message ?? 'Unable to resend verification email. Please try again.');
-      return;
+      if (error.status >= 500) {
+        toast.error('Unable to process your request right now. Please try again.');
+        return;
+      }
     }
 
     await navigate({ to: '/auth/resend-verification-success', replace: true });
-    toast.success('Verification email sent. Please check your inbox.');
+    toast.success('If an account exists for that email, a verification email has been sent.');
   };
 
   return (

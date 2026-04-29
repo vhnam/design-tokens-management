@@ -29,12 +29,14 @@ export const ForgotPassword = () => {
     });
 
     if (error) {
-      toast.error(error.message ?? 'Unable to send password reset email. Please try again.');
-      return;
+      if (error.status >= 500) {
+        toast.error('Unable to process your request right now. Please try again.');
+        return;
+      }
     }
 
     await navigate({ to: '/auth/forgot-password-success', replace: true });
-    toast.success('Forgot password email sent. Please check your inbox.');
+    toast.success('If an account exists for that email, a reset link has been sent.');
   };
 
   return (

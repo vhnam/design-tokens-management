@@ -34,7 +34,23 @@ export const Register = () => {
     });
 
     if (error) {
-      toast.error(error.message ?? 'Unable to create account. Please try again.');
+      const errorCode = String((error as { code?: string }).code ?? '').toUpperCase();
+      const errorMessage = (error.message ?? '').toLowerCase();
+      const isExistingUserError =
+        error.status === 409 ||
+        errorCode.includes('EXIST') ||
+        errorCode.includes('ALREADY') ||
+        errorMessage.includes('already exists') ||
+        errorMessage.includes('already registered') ||
+        errorMessage.includes('user already exists');
+
+      // Server may notify existing users via email; keep UI response generic.
+      if (isExistingUserError) {
+        await navigate({ to: '/auth/register-success', replace: true });
+        return;
+      }
+
+      toast.error('Unable to create account. Please try again.');
       return;
     }
     await navigate({ to: '/auth/register-success', replace: true });

@@ -16,7 +16,7 @@ export const VerifyEmail = () => {
   const handleVerifyEmail = async (token: string) => {
     const { error } = await authClient.verifyEmail({ query: { token } });
     if (error) {
-      toast.error(error.message ?? 'Unable to verify email. Please try again.');
+      toast.error('Unable to verify email. Please try again.');
       setIsInvalidToken(true);
       return;
     }

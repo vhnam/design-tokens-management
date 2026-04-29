@@ -4,7 +4,9 @@ import { z } from 'zod/v4';
 export const env = createEnv({
   clientPrefix: 'VITE_',
   client: {
-    VITE_API_ENDPOINT: z.url(),
+    VITE_API_ENDPOINT: z.url().refine((value) => (import.meta.env.PROD ? value.startsWith('https://') : true), {
+      message: 'VITE_API_ENDPOINT must use HTTPS in production',
+    }),
   },
   runtimeEnv: import.meta.env,
   emptyStringAsUndefined: true,

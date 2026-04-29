@@ -1,12 +1,6 @@
-import { env } from '@/config/env';
 import { zodResolver } from '@hookform/resolvers/zod';
-import axios from 'axios';
 import { SaveIcon, UploadIcon } from 'lucide-react';
-import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { toast } from 'sonner';
-
-import { authClient } from '@/integrations/better-auth/auth-client';
 
 import { profileSchema } from '@/schemas/profile.schema';
 import type { ProfileSchemaType } from '@/schemas/profile.schema';
@@ -19,107 +13,28 @@ import { Field } from '@/components/primitives/field';
 import { InputField } from '@/components/composites/field/input-field';
 
 import AccountAvatarDialog from './account-avatar-dialog';
-
-async function uploadAvatar(file: File) {
-  const ext = file.name.split('.').pop()?.toLowerCase() ?? 'png';
-
-  const { data: presign } = await axios.post<{ uploadUrl: string }>(
-    `${env.VITE_API_URL}/users/me/avatar/upload-url`,
-    {
-      extension: ext,
-      contentType: file.type || 'image/png',
-    },
-    {
-      withCredentials: true,
-    },
-  );
-
-  await axios.put(presign.uploadUrl, file, {
-    headers: { 'Content-Type': file.type || 'image/png' },
-  });
-
-  const { data: saved } = await axios.patch<{ image: string }>(
-    `${env.VITE_API_URL}/users/me/avatar`,
-    { extension: ext },
-    {
-      withCredentials: true,
-    },
-  );
-
-  return saved.image;
-}
+import { useAccountProfileInformationActions } from './account-profile-information.actions';
 
 const AccountProfileInformation = () => {
-  const [avatarDialogOpen, setAvatarDialogOpen] = useState(false);
-  const [selectedAvatarFile, setSelectedAvatarFile] = useState<File | null>(null);
-
-  const { data: sessions, refetch: refetchSession } = authClient.useSession();
-
-  const fallbackName = sessions?.user.name
-    .split(' ')
-    .map((name) => name.charAt(0).toUpperCase())
-    .join('');
-
   const form = useForm<ProfileSchemaType>({
     resolver: zodResolver(profileSchema as never) as never,
     defaultValues: {
-      name: sessions?.user.name ?? '',
-      email: sessions?.user.email ?? '',
-      image: sessions?.user.image ?? undefined,
+      name: '',
+      email: '',
+      image: undefined,
     },
   });
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setSelectedAvatarFile(file);
-      form.setValue('image', URL.createObjectURL(file), { shouldDirty: true });
-    }
-  };
-
-  const onSubmit = async (value: ProfileSchemaType) => {
-    let nextImage = value.image?.trim() ?? undefined;
-
-    if (selectedAvatarFile) {
-      try {
-        nextImage = await uploadAvatar(selectedAvatarFile);
-      } catch {
-        toast.error('Unable to upload avatar. Please try again.');
-        return;
-      }
-    }
-
-    const { error } = await authClient.updateUser({
-      name: value.name.trim(),
-      image: nextImage,
-    });
-
-    if (error) {
-      toast.error(error.message ?? 'Unable to update profile. Please try again.');
-      return;
-    }
-
-    await refetchSession();
-    form.setValue('image', nextImage ?? '');
-    setSelectedAvatarFile(null);
-    toast.success('Profile updated successfully');
-  };
-
-  useEffect(() => {
-    return () => {
-      if (form.getValues('image')?.startsWith('blob:')) {
-        URL.revokeObjectURL(form.getValues('image')!);
-      }
-    };
-  }, [form]);
-
-  useEffect(() => {
-    form.reset({
-      name: sessions?.user.name ?? '',
-      email: sessions?.user.email ?? '',
-      image: sessions?.user.image ?? undefined,
-    });
-  }, [form, sessions?.user.email, sessions?.user.image, sessions?.user.name]);
+  const {
+    avatarDialogOpen,
+    setAvatarDialogOpen,
+    session,
+    fallbackName,
+    handleFileUpload,
+    handleAvatarUrlSubmit,
+    onSubmit,
+    isSubmitting,
+  } = useAccountProfileInformationActions({ form });
 
   return (
     <Card>
@@ -138,7 +53,7 @@ const AccountProfileInformation = () => {
                     <div className="flex flex-col items-center">
                       <div className="relative">
                         <Avatar className="size-32">
-                          <AvatarImage src={field.value} alt={sessions?.user.name ?? ''} />
+                          <AvatarImage src={field.value} alt={session?.user.name ?? ''} />
                           <AvatarFallback className="bg-accent text-accent-foreground text-3xl">
                             {fallbackName}
                           </AvatarFallback>
@@ -173,9 +88,9 @@ const AccountProfileInformation = () => {
             </div>
           </div>
           <div className="flex justify-end">
-            <Button type="submit" disabled={form.formState.isSubmitting}>
+            <Button type="submit" disabled={isSubmitting}>
               <SaveIcon />
-              {form.formState.isSubmitting ? 'Saving...' : 'Save changes'}
+              {isSubmitting ? 'Saving...' : 'Save changes'}
             </Button>
           </div>
         </form>
@@ -184,10 +99,7 @@ const AccountProfileInformation = () => {
       <AccountAvatarDialog
         isOpen={avatarDialogOpen}
         onClose={() => setAvatarDialogOpen(false)}
-        onSubmit={(avatarUrl) => {
-          setSelectedAvatarFile(null);
-          form.setValue('image', avatarUrl, { shouldDirty: true });
-        }}
+        onSubmit={handleAvatarUrlSubmit}
       />
     </Card>
   );
