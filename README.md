@@ -1,142 +1,101 @@
 # Design Tokens Management
 
-Design Tokens Management is a TanStack Start app for managing multi-layer design tokens with SQLite persistence, backend-driven authentication, and a Tailwind-based component system.
+A TanStack Start frontend for managing multi-layer design tokens across workspaces, brands, and themes. Connects to an external backend API for data persistence and authentication.
 
 ## Tech Stack
 
-- TanStack Start + TanStack Router
-- React 19 + Vite
-- Tailwind CSS v4 + Base UI + Shadcn/ui
-- External backend authentication API
-- Drizzle ORM + Drizzle Kit
-- SQLite (via `better-sqlite3`)
-- React Hook Form + Zod
+- **Framework**: TanStack Start + TanStack Router (file-based routing)
+- **UI**: React 19 + Vite 8 + Tailwind CSS v4 + Base UI + Shadcn/ui
+- **State**: TanStack Query v5 + Zustand
+- **Forms**: React Hook Form + Zod
+- **Auth**: better-auth client (backend-driven)
+- **HTTP**: Axios (with 401 auto sign-out)
 
 ## Prerequisites
 
 - Node.js 22+
 - pnpm 9+
+- A running [design-tokens-management-api](https://github.com/vhnam2504/design-tokens-management-api) backend
 
 ## Quick Start
 
 ```bash
 pnpm install
 cp .env.example .env.local
-cp .env.example .env
-pnpm db::generate
-pnpm db:migrate
+# Fill in VITE_API_ENDPOINT (see below)
 pnpm dev
 ```
 
 App runs at `http://localhost:3000`.
 
-## Getting Started
+## Environment Variables
 
-1. Install dependencies:
+Copy `.env.example` to `.env.local` and fill in:
 
-   ```bash
-   pnpm install
-   ```
-
-2. Create environment variable files:
-
-   ```bash
-   cp .env.example .env.local
-   cp .env.example .env
-   ```
-
-   Why both files:
-   - `.env.local` is used by the app and local scripts.
-   - `.env` is used by commands that explicitly load `.env` (for example `pnpm db:sync`).
-
-3. Fill required values:
-
-- `VITE_BETTER_AUTH_URL` (auth API base URL, for local backend: `http://localhost:4000`)
-- `DATABASE_URL` (for local SQLite: `dev.db`)
-- `MAILER_TOKEN` (required for verification emails)
-- `TURSO_DATABASE_URL` (optional, used by cloud sync flows)
-- `TURSO_AUTH_TOKEN` (optional, used by cloud sync flows)
-
-4. Run Drizzle migrations:
-
-   ```bash
-   pnpm db:migrate
-   ```
-
-   This applies app-specific schema changes from:
-   - `src/db/tokens.table.ts`
-   - `src/db/auth.table.ts`
-
-5. Seed primitive tokens (optional):
-
-   ```bash
-   pnpm db:seed:primitives
-   ```
-
-6. Start the development server:
-
-   ```bash
-   pnpm dev
-   ```
+| Variable            | Description                          | Example                   |
+| ------------------- | ------------------------------------ | ------------------------- |
+| `VITE_API_ENDPOINT` | Base URL of the backend API          | `http://localhost:4000`   |
 
 ## Scripts
 
-- `pnpm dev`: Start local development server (default `http://localhost:3000`)
-- `pnpm build`: Build for production
-- `pnpm preview`: Preview production build locally
-- `pnpm test`: Run tests with Vitest
-- `pnpm lint`: Run ESLint
-- `pnpm format`: Check formatting with Prettier
-- `pnpm check`: Auto-fix formatting and lint issues
-- `pnpm db:generate`: Generate Drizzle migration files from schema
-- `pnpm db:migrate`: Apply pending migrations
-- `pnpm db:push`: Push schema changes directly to database
-- `pnpm db:push:cloud`: Push schema using the Turso config
-- `pnpm db:pull`: Pull schema from existing database
-- `pnpm db:studio`: Open Drizzle Studio
-- `pnpm db:sync`: Sync local and cloud database state
-- `pnpm db:seed:primitives`: Seed primitive tokens from `src/assets/primitive-tokens-tailwind-v4-colors.json`
+| Script               | Description                                   |
+| -------------------- | --------------------------------------------- |
+| `pnpm dev`           | Start development server at `localhost:3000`  |
+| `pnpm build`         | Production build                              |
+| `pnpm preview`       | Preview production build locally              |
+| `pnpm test`          | Run tests with Vitest                         |
+| `pnpm lint`          | Run ESLint                                    |
+| `pnpm format`        | Check formatting with Prettier                |
+| `pnpm check`         | Auto-fix lint and formatting issues           |
 
-## API
+## Features
 
-- Primitive tokens API route: `src/routes/api/primitive-tokens/$.ts`
+**Token layers:**
+- **Primitive tokens** — raw values (colors, dimensions, font sizes, etc.)
+- **Semantic tokens** — named design decisions (e.g. `color.text.primary`)
+- **Component tokens** — component-specific overrides
+
+**Supported token types:** Color, Dimension, FontFamily, FontWeight, Duration, CubicBezier, Number, Typography, Shadow, Border, Gradient
+
+**Workspaces:** Isolated environments per design system, each with their own brands and light/dark themes.
 
 ## Authentication
 
-- Authentication is handled by your backend API.
-- Frontend auth client helpers live in `src/integrations/better-auth/auth-client.ts`.
-- UI auth flows live under `src/routes/_public/auth/` (`login`, `register`, `forgot-password`).
+Auth is handled by the backend via `better-auth`. The client (`src/integrations/better-auth/auth-client.ts`) points to `VITE_API_ENDPOINT`.
 
-## Database
+Auth flows (under `src/routes/_public/auth/`):
+- Email/password login and registration
+- Email verification
+- Forgot password / reset password
 
-- Drizzle schema files:
-  - `src/db/tokens.table.ts`
-  - `src/db/auth.table.ts`
-- Drizzle config: `drizzle.config.ts`
-- Turso Drizzle config: `drizzle.config.turso.ts`
-- Migration output: `drizzle/`
-- Database client: `src/db/index.ts`
+## Project Structure
 
-Current schema models token layers and workspaces, including:
-
-- `primitive_tokens`
-- `semantic_tokens`
-- `brand_overrides`
-- `component_tokens`
-- `workspaces`
-
-## Routing
-
-This project uses file-based routing with TanStack Router.
-
-- Root shell/layout: `src/routes/__root.tsx`
-- Home route: `src/routes/index.tsx`
-
-## UI System
-
-- Primitive components: `src/components/primitives/`
-- Composite form components: `src/components/composites/`
-- Global styles entry: `src/styles.css`
+```
+src/
+├── components/
+│   ├── primitives/        # Base UI components
+│   └── composites/        # Complex form components
+├── config/
+│   └── env.ts             # Environment variable validation (t3-env)
+├── features/              # Feature modules by domain
+│   ├── auth/
+│   ├── primitive-tokens/
+│   ├── semantic-tokens/
+│   ├── component-tokens/
+│   ├── workspaces/
+│   └── settings/
+├── integrations/
+│   ├── axios/             # Configured API client
+│   ├── better-auth/       # Auth client
+│   └── tanstack-query/    # React Query setup
+├── queries/               # TanStack Query hooks and mutations
+├── routes/                # File-based routes (TanStack Router)
+│   ├── _protected/        # Requires authentication
+│   └── _public/auth/      # Login, register, password flows
+├── schemas/               # Zod validation schemas
+├── stores/                # Zustand client state
+└── types/                 # TypeScript type definitions
+```
 
 ## Notes
 
