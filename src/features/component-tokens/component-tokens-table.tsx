@@ -3,6 +3,8 @@ import { PencilIcon, TrashIcon } from 'lucide-react';
 
 import type { ComponentToken } from '@/types/token';
 
+import { TokenType } from '@/enums/token';
+
 import { Badge } from '@/components/primitives/badge';
 import { Button } from '@/components/primitives/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/primitives/tooltip';
@@ -20,17 +22,21 @@ export const SemanticTokenCell = ({ row }: TableCell) => {
 };
 
 export const PrimitiveTokenCell = ({ row }: TableCell) => {
-  return <Badge variant="secondary">{row.original.semanticToken.primitiveToken.name}</Badge>;
+  return <Badge variant="secondary">{row.original.semanticToken.primitiveToken.dotPath}</Badge>;
 };
 
 export const ValueCell = ({ row }: TableCell) => {
-  const value = row.original.semanticToken.primitiveToken.value;
+  const primitive = row.original.semanticToken.primitiveToken;
+  const value = primitive.rawValue ?? '';
+  const showSwatch = primitive.type === TokenType.Color && Boolean(value);
   return (
     <div className="inline-flex cursor-default items-center gap-2 py-1">
-      <span className="inline-block size-6 shrink-0 rounded border border-border" style={{ backgroundColor: value }}>
-        &nbsp;
-      </span>
-      {value}
+      {showSwatch ? (
+        <span className="inline-block size-6 shrink-0 rounded border border-border" style={{ backgroundColor: value }}>
+          &nbsp;
+        </span>
+      ) : null}
+      {value || '—'}
     </div>
   );
 };
@@ -40,13 +46,13 @@ export const DescriptionCell = ({ row }: TableCell) => {
   return <span className="inline-flex items-center cursor-default py-1 text-muted-foreground">{text || '—'}</span>;
 };
 
-export const ActionsCell = ({ row: _row }: TableCell) => {
+export const ActionsCell = (_props: TableCell) => {
   return (
-    <div className="inline-flex items-center gap-2 py-1">
+    <div className="flex items-center justify-end gap-2 py-1">
       <Tooltip>
         <TooltipTrigger
           render={
-            <Button variant="secondary" size="icon">
+            <Button variant="secondary" size="icon" disabled>
               <PencilIcon className="size-4" />
             </Button>
           }
@@ -56,7 +62,7 @@ export const ActionsCell = ({ row: _row }: TableCell) => {
       <Tooltip>
         <TooltipTrigger
           render={
-            <Button variant="destructive" size="icon">
+            <Button variant="destructive" size="icon" disabled>
               <TrashIcon className="size-4" />
             </Button>
           }

@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
+import { TokenType } from '@/enums/token';
+
 import { primitiveTokenSchema } from '@/schemas/primitive-token.schema';
 import type { PrimitiveTokenSchemaType } from '@/schemas/primitive-token.schema';
 
@@ -22,22 +24,23 @@ export const PrimitiveTokenEditDialog = () => {
   });
 
   useEffect(() => {
-    if (selectedToken) {
-      form.reset({
-        tokenName: selectedToken.name,
-        tokenValue: selectedToken.value,
-        tokenType: selectedToken.type,
-        tokenDescription: selectedToken.description ?? '',
-      });
-    }
-  }, [selectedToken]);
+    if (!selectedToken) return;
+    form.reset({
+      tokenName: selectedToken.name,
+      tokenDotPath: selectedToken.dotPath,
+      tokenValue: selectedToken.rawValue ?? '',
+      tokenType: (selectedToken.type ?? TokenType.Color) as PrimitiveTokenSchemaType['tokenType'],
+      tokenDescription: selectedToken.description ?? '',
+    });
+  }, [selectedToken, form]);
 
   const onSubmit = (value: PrimitiveTokenSchemaType) => {
     updateToken.mutate(
       {
         id: selectedToken!.id,
         name: value.tokenName.trim(),
-        value: value.tokenValue.trim(),
+        dotPath: value.tokenDotPath.trim(),
+        rawValue: value.tokenValue.trim(),
         type: value.tokenType,
         description: (value.tokenDescription ?? '').trim(),
       },

@@ -35,11 +35,12 @@ export const ComponentTokens = () => {
         header: 'Semantic Token',
         cell: ({ row }) => <SemanticTokenCell row={row} />,
       }),
-      columnHelper.accessor('semanticToken.primitiveToken.name', {
+      columnHelper.accessor('semanticToken.primitiveToken.dotPath', {
         header: 'Primitive Token',
         cell: ({ row }) => <PrimitiveTokenCell row={row} />,
       }),
-      columnHelper.accessor('semanticToken.primitiveToken.value', {
+      columnHelper.accessor((row) => row.semanticToken.primitiveToken.rawValue ?? '', {
+        id: 'primitiveRawValue',
         header: 'Value',
         cell: ({ row }) => <ValueCell row={row} />,
       }),

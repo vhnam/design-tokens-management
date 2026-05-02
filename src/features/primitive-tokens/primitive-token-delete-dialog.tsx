@@ -33,7 +33,7 @@ export const PrimitiveTokenDeleteDialog = () => {
         },
       },
     );
-  }, [selectedToken]);
+  }, [closeDeleteDialog, deleteToken, selectedToken]);
 
   return (
     <Dialog open={isOpenDeleteDialog}>
@@ -43,7 +43,7 @@ export const PrimitiveTokenDeleteDialog = () => {
         </DialogHeader>
         <DialogDescription>
           Are you sure you want to delete the selected primitive token{' '}
-          <code className="p-1 text-destructive bg-secondary/30">{selectedToken?.name}</code>?
+          <code className="p-1 text-destructive bg-secondary/30">{selectedToken?.name || selectedToken?.dotPath}</code>?
         </DialogDescription>
         <DialogFooter>
           <DialogClose

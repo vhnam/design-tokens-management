@@ -119,7 +119,7 @@ export const SemanticTokenEditDialog = () => {
     form.reset({
       name: selectedToken.name,
       value: selectedToken.value,
-      type: selectedToken.type,
+      type: selectedToken.type as SemanticTokenFormSchemaType['type'],
       group: selectedToken.group,
       theme: selectedToken.theme,
       description: selectedToken.description ?? '',

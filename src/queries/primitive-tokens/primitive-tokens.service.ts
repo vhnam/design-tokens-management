@@ -8,8 +8,8 @@ import type {
 
 const API_ENDPOINT = '/api/primitive-tokens';
 
-export const getPrimitiveTokens = async () => {
-  const response = await api.get(API_ENDPOINT);
+export const getPrimitiveTokens = async (tokenFileId: string) => {
+  const response = await api.get(API_ENDPOINT, { params: { tokenFileId } });
   return response.data;
 };
 

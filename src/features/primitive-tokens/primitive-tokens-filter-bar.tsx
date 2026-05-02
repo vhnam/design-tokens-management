@@ -39,7 +39,7 @@ export const PrimitiveTokensFilterBar = ({
         <Input
           value={nameQuery}
           onChange={(event) => onNameQueryChange(event.target.value)}
-          placeholder="Search token name..."
+          placeholder="Search name…"
           className="w-3xs"
         />
       </div>

@@ -23,12 +23,15 @@ const PrimitiveTokenForm = ({ form, isPending, submitText, onSubmit, onClose }: 
   return (
     <div className="no-scrollbar max-h-[50vh] overflow-y-auto -mx-4 px-4">
       <form className="grid gap-4" onSubmit={form.handleSubmit(onSubmit)}>
-        <InputField control={form.control} name="tokenName" label="Name" placeholder="e.g. color.blue.500" />
-
+        <InputField control={form.control} name="tokenName" label="Name" placeholder="e.g. --color-neutral-100" />
+        <InputField control={form.control} name="tokenDotPath" label="Dot path" placeholder="e.g. color.blue.500" />
         <SelectField control={form.control} name="tokenType" label="Type" items={PRIMITIVE_TOKEN_TYPE_OPTIONS} />
-
-        <InputField control={form.control} name="tokenValue" label="Value" placeholder="e.g. #087eb4" />
-
+        <InputField
+          control={form.control}
+          name="tokenValue"
+          label="Raw value"
+          placeholder="e.g. #087eb4 or {alias.path}"
+        />
         <TextareaField
           control={form.control}
           name="tokenDescription"
@@ -37,7 +40,6 @@ const PrimitiveTokenForm = ({ form, isPending, submitText, onSubmit, onClose }: 
           placeholder="The description of the token."
           className="min-block-[3.5rlh] min-inline-[20ch] max-inline-[50ch]"
         />
-
         <DialogFooter>
           <DialogClose onClick={onClose} render={<Button type="button" variant="outline" />}>
             Cancel

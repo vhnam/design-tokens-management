@@ -24,6 +24,7 @@ export const PrimitiveTokenAddDialog = () => {
   const form = useForm<PrimitiveTokenSchemaType>({
     defaultValues: {
       tokenName: '',
+      tokenDotPath: '',
       tokenValue: '',
       tokenType: TokenType.Color,
       tokenDescription: '',
@@ -36,7 +37,8 @@ export const PrimitiveTokenAddDialog = () => {
       {
         workspaceId: activeWorkspace?.id ?? '',
         name: value.tokenName.trim(),
-        value: value.tokenValue.trim(),
+        dotPath: value.tokenDotPath.trim(),
+        rawValue: value.tokenValue.trim(),
         type: value.tokenType,
         description: (value.tokenDescription ?? '').trim(),
       },

@@ -1,21 +1,26 @@
 import { TokenType } from '@/enums/token';
 
-export const TOKEN_TYPE_LIST: TokenType[] = [
+export const TOKEN_TYPE_LIST = [
   TokenType.Color,
   TokenType.Dimension,
   TokenType.FontFamily,
   TokenType.FontWeight,
+  TokenType.FontSize,
+  TokenType.LineHeight,
+  TokenType.LetterSpacing,
   TokenType.Duration,
   TokenType.CubicBezier,
+  TokenType.Transition,
   TokenType.Number,
-];
+  TokenType.String,
+] as const;
 
-export const COMPOSITE_TOKEN_TYPE_LIST: TokenType[] = [
+export const COMPOSITE_TOKEN_TYPE_LIST = [
   TokenType.Typography,
   TokenType.Shadow,
   TokenType.Border,
   TokenType.Gradient,
-];
+] as const;
 
 export const TOKEN_TYPE_OPTIONS: { group: string; items: { label: string; value: TokenType }[] }[] = [
   {
@@ -38,6 +43,18 @@ export const TOKEN_TYPE_OPTIONS: { group: string; items: { label: string; value:
         value: TokenType.FontWeight,
       },
       {
+        label: 'Font Size',
+        value: TokenType.FontSize,
+      },
+      {
+        label: 'Line Height',
+        value: TokenType.LineHeight,
+      },
+      {
+        label: 'Letter Spacing',
+        value: TokenType.LetterSpacing,
+      },
+      {
         label: 'Duration',
         value: TokenType.Duration,
       },
@@ -46,8 +63,16 @@ export const TOKEN_TYPE_OPTIONS: { group: string; items: { label: string; value:
         value: TokenType.CubicBezier,
       },
       {
+        label: 'Transition',
+        value: TokenType.Transition,
+      },
+      {
         label: 'Number',
         value: TokenType.Number,
+      },
+      {
+        label: 'String',
+        value: TokenType.String,
       },
     ],
   },
@@ -85,15 +110,20 @@ export const COMPOSITE_TOKEN_TYPE_OPTIONS: { group: string; items: { label: stri
 export const TOKEN_TYPE_LABELS: Record<TokenType, string> = {
   [TokenType.Color]: 'Color',
   [TokenType.Dimension]: 'Dimension',
+  [TokenType.Typography]: 'Typography',
+  [TokenType.Shadow]: 'Shadow',
+  [TokenType.Gradient]: 'Gradient',
+  [TokenType.Border]: 'Border',
+  [TokenType.Transition]: 'Transition',
   [TokenType.FontFamily]: 'Font Family',
   [TokenType.FontWeight]: 'Font Weight',
+  [TokenType.FontSize]: 'Font Size',
+  [TokenType.LineHeight]: 'Line Height',
+  [TokenType.LetterSpacing]: 'Letter Spacing',
   [TokenType.Duration]: 'Duration',
   [TokenType.CubicBezier]: 'Cubic Bezier',
   [TokenType.Number]: 'Number',
-  [TokenType.Typography]: 'Typography',
-  [TokenType.Shadow]: 'Shadow',
-  [TokenType.Border]: 'Border',
-  [TokenType.Gradient]: 'Gradient',
+  [TokenType.String]: 'String',
 };
 
 export const BORDER_STYLE_LIST: { label: string; value: string }[] = [

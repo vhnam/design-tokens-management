@@ -1,11 +1,17 @@
 import type { TokenType } from '@/enums/token';
 
+/** Maps to a `tokens` row under a primitive-level group (`dotPath`, `rawValue`, …). */
 export type PrimitiveToken = {
   id: string;
+  /** Leaf segment in DB (`name`). */
   name: string;
-  value: string;
-  type: TokenType;
-  description?: string;
+  /** Full reference path (`dot_path`). */
+  dotPath: string;
+  rawValue: string | null;
+  type: TokenType | null;
+  description?: string | null;
+  isAlias?: boolean;
+  isComposite?: boolean;
 };
 
 export type SemanticToken = {
