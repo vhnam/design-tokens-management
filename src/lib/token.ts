@@ -1,6 +1,6 @@
 import { parse } from 'culori';
 
-export function isValidColorToken(value: string) {
+export function isValidColorValue(value: string) {
   try {
     return parse(value) !== undefined;
   } catch (error) {

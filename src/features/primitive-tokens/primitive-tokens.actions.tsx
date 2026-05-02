@@ -5,11 +5,8 @@ import {
   useUpdatePrimitiveTokenMutation,
 } from '@/queries/primitive-tokens';
 
-import { useWorkspaceStore } from '@/stores/workspace.store';
-
 export const useGetPrimitiveTokens = () => {
-  const { activeWorkspace } = useWorkspaceStore();
-  return useGetPrimitiveTokensQuery(activeWorkspace?.id);
+  return useGetPrimitiveTokensQuery();
 };
 
 export const useCreatePrimitiveToken = () => {
