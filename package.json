@@ -13,7 +13,8 @@
     "lint": "eslint",
     "format": "prettier --check .",
     "check": "eslint --fix . && prettier --write .",
-    "skills:install": "npx skills experimental_install"
+    "skills:install": "npx skills experimental_install",
+    "prepare": "lefthook install"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",
@@ -61,6 +62,7 @@
     "@vitejs/plugin-react": "^6.0.1",
     "dotenv": "^17.4.2",
     "jsdom": "^28.1.0",
+    "lefthook": "^2.1.6",
     "prettier": "^3.8.3",
     "slugify": "^1.6.9",
     "tsx": "^4.21.0",
