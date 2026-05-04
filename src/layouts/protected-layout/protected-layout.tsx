@@ -10,14 +10,17 @@ import type { Workspace } from '@/types/workspace';
 
 import { useWorkspaceStore } from '@/stores/workspace.store';
 
+import { AppSidebar } from '@/layouts/protected-layout/app-sidebar';
+import { DashboardSidebar } from '@/layouts/protected-layout/dashboard-sidebar';
+
 import { WorkspaceAddDialog } from '@/features/workspaces';
 
 import { LottiePlayer } from '@/components/primitives/lottie-player';
 import { SidebarInset, SidebarProvider } from '@/components/primitives/sidebar';
 
-import { AppSidebar } from '@/components/composites/sidebar/app-sidebar';
+const allowedDashboardLayouts = ['/settings/account', '/settings/members', '/settings/projects', '/settings/workspace'];
 
-export default function ProtectedLayout({ children }: PropsWithChildren) {
+export const ProtectedLayout = ({ children }: PropsWithChildren) => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -60,6 +63,14 @@ export default function ProtectedLayout({ children }: PropsWithChildren) {
     }
   }, [activeWorkspace, workspaces, setActiveWorkspace]);
 
+  const renderSidebar = () => {
+    const isAllowedDashboardLayout = allowedDashboardLayouts.includes(location.pathname);
+    if (isAllowedDashboardLayout && session?.user) {
+      return <DashboardSidebar session={session!} workspaces={workspaces} onLogout={() => void authClient.signOut()} />;
+    }
+    return <AppSidebar session={session!} onLogout={() => void authClient.signOut()} />;
+  };
+
   if (isPending || (isWorkspacesPending && !isOnboarding)) {
     return (
       <div className="flex min-h-screen items-center justify-center">
@@ -74,7 +85,7 @@ export default function ProtectedLayout({ children }: PropsWithChildren) {
 
   return (
     <SidebarProvider>
-      <AppSidebar session={session} workspaces={workspaces} onLogout={() => void authClient.signOut()} />
+      {renderSidebar()}
       <SidebarInset>
         <div className="flex flex-1 flex-col gap-4 p-4 md:p-6">{children}</div>
       </SidebarInset>
@@ -82,4 +93,4 @@ export default function ProtectedLayout({ children }: PropsWithChildren) {
       <WorkspaceAddDialog />
     </SidebarProvider>
   );
-}
+};

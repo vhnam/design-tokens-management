@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router';
-import { BoxesIcon, ChevronsUpDownIcon, LogOutIcon, UserIcon } from 'lucide-react';
+import { ChevronsUpDownIcon, LogOutIcon, UserIcon } from 'lucide-react';
 
 import type { User } from '@/types/auth';
 
@@ -76,14 +76,6 @@ export function NavUser({ user, onLogout }: NavUserProps) {
                   <Link to="/settings/account">
                     <UserIcon />
                     Account
-                  </Link>
-                }
-              />
-              <DropdownMenuItem
-                render={
-                  <Link to="/settings/workspaces">
-                    <BoxesIcon />
-                    Workspaces
                   </Link>
                 }
               />

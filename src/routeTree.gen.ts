@@ -13,7 +13,6 @@ import { Route as PublicRouteImport } from './routes/_public'
 import { Route as ProtectedRouteImport } from './routes/_protected'
 import { Route as ProtectedIndexRouteImport } from './routes/_protected/index'
 import { Route as ProtectedOnboardingRouteImport } from './routes/_protected/onboarding'
-import { Route as ProtectedHelpRouteImport } from './routes/_protected/help'
 import { Route as PublicAuthVerifyEmailRouteImport } from './routes/_public/auth/verify-email'
 import { Route as PublicAuthResetPasswordRouteImport } from './routes/_public/auth/reset-password'
 import { Route as PublicAuthResendVerificationSuccessRouteImport } from './routes/_public/auth/resend-verification-success'
@@ -26,8 +25,10 @@ import { Route as PublicAuthForgotPasswordRouteImport } from './routes/_public/a
 import { Route as ProtectedTokensSemanticTokensRouteImport } from './routes/_protected/tokens/semantic-tokens'
 import { Route as ProtectedTokensPrimitiveTokensRouteImport } from './routes/_protected/tokens/primitive-tokens'
 import { Route as ProtectedTokensComponentTokensRouteImport } from './routes/_protected/tokens/component-tokens'
-import { Route as ProtectedSettingsWorkspacesRouteImport } from './routes/_protected/settings/workspaces'
+import { Route as ProtectedSettingsWorkspaceRouteImport } from './routes/_protected/settings/workspace'
+import { Route as ProtectedSettingsProjectsRouteImport } from './routes/_protected/settings/projects'
 import { Route as ProtectedSettingsAccountRouteImport } from './routes/_protected/settings/account'
+import { Route as ProtectedAppProjectIdRouteImport } from './routes/_protected/app.$projectId'
 
 const PublicRoute = PublicRouteImport.update({
   id: '/_public',
@@ -45,11 +46,6 @@ const ProtectedIndexRoute = ProtectedIndexRouteImport.update({
 const ProtectedOnboardingRoute = ProtectedOnboardingRouteImport.update({
   id: '/onboarding',
   path: '/onboarding',
-  getParentRoute: () => ProtectedRoute,
-} as any)
-const ProtectedHelpRoute = ProtectedHelpRouteImport.update({
-  id: '/help',
-  path: '/help',
   getParentRoute: () => ProtectedRoute,
 } as any)
 const PublicAuthVerifyEmailRoute = PublicAuthVerifyEmailRouteImport.update({
@@ -120,10 +116,16 @@ const ProtectedTokensComponentTokensRoute =
     path: '/tokens/component-tokens',
     getParentRoute: () => ProtectedRoute,
   } as any)
-const ProtectedSettingsWorkspacesRoute =
-  ProtectedSettingsWorkspacesRouteImport.update({
-    id: '/settings/workspaces',
-    path: '/settings/workspaces',
+const ProtectedSettingsWorkspaceRoute =
+  ProtectedSettingsWorkspaceRouteImport.update({
+    id: '/settings/workspace',
+    path: '/settings/workspace',
+    getParentRoute: () => ProtectedRoute,
+  } as any)
+const ProtectedSettingsProjectsRoute =
+  ProtectedSettingsProjectsRouteImport.update({
+    id: '/settings/projects',
+    path: '/settings/projects',
     getParentRoute: () => ProtectedRoute,
   } as any)
 const ProtectedSettingsAccountRoute =
@@ -132,13 +134,19 @@ const ProtectedSettingsAccountRoute =
     path: '/settings/account',
     getParentRoute: () => ProtectedRoute,
   } as any)
+const ProtectedAppProjectIdRoute = ProtectedAppProjectIdRouteImport.update({
+  id: '/app/$projectId',
+  path: '/app/$projectId',
+  getParentRoute: () => ProtectedRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof ProtectedIndexRoute
-  '/help': typeof ProtectedHelpRoute
   '/onboarding': typeof ProtectedOnboardingRoute
+  '/app/$projectId': typeof ProtectedAppProjectIdRoute
   '/settings/account': typeof ProtectedSettingsAccountRoute
-  '/settings/workspaces': typeof ProtectedSettingsWorkspacesRoute
+  '/settings/projects': typeof ProtectedSettingsProjectsRoute
+  '/settings/workspace': typeof ProtectedSettingsWorkspaceRoute
   '/tokens/component-tokens': typeof ProtectedTokensComponentTokensRoute
   '/tokens/primitive-tokens': typeof ProtectedTokensPrimitiveTokensRoute
   '/tokens/semantic-tokens': typeof ProtectedTokensSemanticTokensRoute
@@ -154,10 +162,11 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof ProtectedIndexRoute
-  '/help': typeof ProtectedHelpRoute
   '/onboarding': typeof ProtectedOnboardingRoute
+  '/app/$projectId': typeof ProtectedAppProjectIdRoute
   '/settings/account': typeof ProtectedSettingsAccountRoute
-  '/settings/workspaces': typeof ProtectedSettingsWorkspacesRoute
+  '/settings/projects': typeof ProtectedSettingsProjectsRoute
+  '/settings/workspace': typeof ProtectedSettingsWorkspaceRoute
   '/tokens/component-tokens': typeof ProtectedTokensComponentTokensRoute
   '/tokens/primitive-tokens': typeof ProtectedTokensPrimitiveTokensRoute
   '/tokens/semantic-tokens': typeof ProtectedTokensSemanticTokensRoute
@@ -175,11 +184,12 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_protected': typeof ProtectedRouteWithChildren
   '/_public': typeof PublicRouteWithChildren
-  '/_protected/help': typeof ProtectedHelpRoute
   '/_protected/onboarding': typeof ProtectedOnboardingRoute
   '/_protected/': typeof ProtectedIndexRoute
+  '/_protected/app/$projectId': typeof ProtectedAppProjectIdRoute
   '/_protected/settings/account': typeof ProtectedSettingsAccountRoute
-  '/_protected/settings/workspaces': typeof ProtectedSettingsWorkspacesRoute
+  '/_protected/settings/projects': typeof ProtectedSettingsProjectsRoute
+  '/_protected/settings/workspace': typeof ProtectedSettingsWorkspaceRoute
   '/_protected/tokens/component-tokens': typeof ProtectedTokensComponentTokensRoute
   '/_protected/tokens/primitive-tokens': typeof ProtectedTokensPrimitiveTokensRoute
   '/_protected/tokens/semantic-tokens': typeof ProtectedTokensSemanticTokensRoute
@@ -197,10 +207,11 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/help'
     | '/onboarding'
+    | '/app/$projectId'
     | '/settings/account'
-    | '/settings/workspaces'
+    | '/settings/projects'
+    | '/settings/workspace'
     | '/tokens/component-tokens'
     | '/tokens/primitive-tokens'
     | '/tokens/semantic-tokens'
@@ -216,10 +227,11 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/help'
     | '/onboarding'
+    | '/app/$projectId'
     | '/settings/account'
-    | '/settings/workspaces'
+    | '/settings/projects'
+    | '/settings/workspace'
     | '/tokens/component-tokens'
     | '/tokens/primitive-tokens'
     | '/tokens/semantic-tokens'
@@ -236,11 +248,12 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_protected'
     | '/_public'
-    | '/_protected/help'
     | '/_protected/onboarding'
     | '/_protected/'
+    | '/_protected/app/$projectId'
     | '/_protected/settings/account'
-    | '/_protected/settings/workspaces'
+    | '/_protected/settings/projects'
+    | '/_protected/settings/workspace'
     | '/_protected/tokens/component-tokens'
     | '/_protected/tokens/primitive-tokens'
     | '/_protected/tokens/semantic-tokens'
@@ -288,13 +301,6 @@ declare module '@tanstack/react-router' {
       path: '/onboarding'
       fullPath: '/onboarding'
       preLoaderRoute: typeof ProtectedOnboardingRouteImport
-      parentRoute: typeof ProtectedRoute
-    }
-    '/_protected/help': {
-      id: '/_protected/help'
-      path: '/help'
-      fullPath: '/help'
-      preLoaderRoute: typeof ProtectedHelpRouteImport
       parentRoute: typeof ProtectedRoute
     }
     '/_public/auth/verify-email': {
@@ -381,11 +387,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedTokensComponentTokensRouteImport
       parentRoute: typeof ProtectedRoute
     }
-    '/_protected/settings/workspaces': {
-      id: '/_protected/settings/workspaces'
-      path: '/settings/workspaces'
-      fullPath: '/settings/workspaces'
-      preLoaderRoute: typeof ProtectedSettingsWorkspacesRouteImport
+    '/_protected/settings/workspace': {
+      id: '/_protected/settings/workspace'
+      path: '/settings/workspace'
+      fullPath: '/settings/workspace'
+      preLoaderRoute: typeof ProtectedSettingsWorkspaceRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
+    '/_protected/settings/projects': {
+      id: '/_protected/settings/projects'
+      path: '/settings/projects'
+      fullPath: '/settings/projects'
+      preLoaderRoute: typeof ProtectedSettingsProjectsRouteImport
       parentRoute: typeof ProtectedRoute
     }
     '/_protected/settings/account': {
@@ -395,26 +408,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedSettingsAccountRouteImport
       parentRoute: typeof ProtectedRoute
     }
+    '/_protected/app/$projectId': {
+      id: '/_protected/app/$projectId'
+      path: '/app/$projectId'
+      fullPath: '/app/$projectId'
+      preLoaderRoute: typeof ProtectedAppProjectIdRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
   }
 }
 
 interface ProtectedRouteChildren {
-  ProtectedHelpRoute: typeof ProtectedHelpRoute
   ProtectedOnboardingRoute: typeof ProtectedOnboardingRoute
   ProtectedIndexRoute: typeof ProtectedIndexRoute
+  ProtectedAppProjectIdRoute: typeof ProtectedAppProjectIdRoute
   ProtectedSettingsAccountRoute: typeof ProtectedSettingsAccountRoute
-  ProtectedSettingsWorkspacesRoute: typeof ProtectedSettingsWorkspacesRoute
+  ProtectedSettingsProjectsRoute: typeof ProtectedSettingsProjectsRoute
+  ProtectedSettingsWorkspaceRoute: typeof ProtectedSettingsWorkspaceRoute
   ProtectedTokensComponentTokensRoute: typeof ProtectedTokensComponentTokensRoute
   ProtectedTokensPrimitiveTokensRoute: typeof ProtectedTokensPrimitiveTokensRoute
   ProtectedTokensSemanticTokensRoute: typeof ProtectedTokensSemanticTokensRoute
 }
 
 const ProtectedRouteChildren: ProtectedRouteChildren = {
-  ProtectedHelpRoute: ProtectedHelpRoute,
   ProtectedOnboardingRoute: ProtectedOnboardingRoute,
   ProtectedIndexRoute: ProtectedIndexRoute,
+  ProtectedAppProjectIdRoute: ProtectedAppProjectIdRoute,
   ProtectedSettingsAccountRoute: ProtectedSettingsAccountRoute,
-  ProtectedSettingsWorkspacesRoute: ProtectedSettingsWorkspacesRoute,
+  ProtectedSettingsProjectsRoute: ProtectedSettingsProjectsRoute,
+  ProtectedSettingsWorkspaceRoute: ProtectedSettingsWorkspaceRoute,
   ProtectedTokensComponentTokensRoute: ProtectedTokensComponentTokensRoute,
   ProtectedTokensPrimitiveTokensRoute: ProtectedTokensPrimitiveTokensRoute,
   ProtectedTokensSemanticTokensRoute: ProtectedTokensSemanticTokensRoute,

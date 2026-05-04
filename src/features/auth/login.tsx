@@ -37,7 +37,7 @@ export const Login = () => {
       return;
     }
 
-    await navigate({ to: '/' });
+    await navigate({ to: '/settings/projects' });
   });
 
   return (

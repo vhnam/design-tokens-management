@@ -5,7 +5,7 @@ import { authClient } from '@/integrations/better-auth/auth-client';
 
 import { LottiePlayer } from '@/components/primitives/lottie-player';
 
-export default function PublicLayout({ children }: PropsWithChildren) {
+export const PublicLayout = ({ children }: PropsWithChildren) => {
   const { data: session, isPending } = authClient.useSession();
   const location = useLocation();
 
@@ -22,4 +22,4 @@ export default function PublicLayout({ children }: PropsWithChildren) {
   }
 
   return <>{children}</>;
-}
+};
