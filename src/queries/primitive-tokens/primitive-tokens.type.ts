@@ -1,7 +1,7 @@
 import type { TokenType } from '@/enums/token';
 
 export type CreatePrimitiveTokenPayload = {
-  workspaceId: string;
+  organizationId: string;
   name: string;
   dotPath: string;
   rawValue: string;

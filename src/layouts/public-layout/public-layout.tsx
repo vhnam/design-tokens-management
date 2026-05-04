@@ -18,7 +18,7 @@ export const PublicLayout = ({ children }: PropsWithChildren) => {
   }
 
   if (session?.user && location.pathname !== '/auth/register-success') {
-    return <Navigate to="/" />;
+    return <Navigate to="/settings/projects" />;
   }
 
   return <>{children}</>;

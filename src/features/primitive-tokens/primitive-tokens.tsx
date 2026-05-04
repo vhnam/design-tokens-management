@@ -14,8 +14,8 @@ import type { TokenType } from '@/enums/token';
 
 import type { PrimitiveToken } from '@/types/token';
 
+import { useOrganizationStore } from '@/stores/organization.store';
 import { usePrimitiveTokensTableStore } from '@/stores/primitive-tokens-table.store';
-import { useWorkspaceStore } from '@/stores/workspace.store';
 
 import { Button } from '@/components/primitives/button';
 import { LottiePlayer } from '@/components/primitives/lottie-player';
@@ -40,8 +40,8 @@ const columnHelper = createColumnHelper<PrimitiveToken>();
 export const PrimitiveTokens = () => {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
-  const { activeWorkspace } = useWorkspaceStore();
-  const tokenFileId = activeWorkspace?.id;
+  const { activeOrganization } = useOrganizationStore();
+  const tokenFileId = activeOrganization?.id;
   const { data, isFetching, error } = useGetPrimitiveTokens(tokenFileId);
   const { openAddDialog } = usePrimitiveTokensTableStore();
 
@@ -93,7 +93,7 @@ export const PrimitiveTokens = () => {
   if (!tokenFileId)
     return (
       <div className="flex h-full flex-col items-center justify-center gap-2 text-center">
-        <p className="text-muted-foreground">Select a workspace to load primitive tokens for its token file.</p>
+        <p className="text-muted-foreground">Select a organization to load primitive tokens for its token file.</p>
       </div>
     );
 

@@ -7,8 +7,8 @@ import { TokenType } from '@/enums/token';
 import { primitiveTokenSchema } from '@/schemas/primitive-token.schema';
 import type { PrimitiveTokenSchemaType } from '@/schemas/primitive-token.schema';
 
+import { useOrganizationStore } from '@/stores/organization.store';
 import { usePrimitiveTokensTableStore } from '@/stores/primitive-tokens-table.store';
-import { useWorkspaceStore } from '@/stores/workspace.store';
 
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/primitives/dialog';
 
@@ -18,7 +18,7 @@ import { useCreatePrimitiveToken } from './primitive-tokens.actions';
 export const PrimitiveTokenAddDialog = () => {
   const createToken = useCreatePrimitiveToken();
 
-  const { activeWorkspace } = useWorkspaceStore();
+  const { activeOrganization } = useOrganizationStore();
   const { isOpenAddDialog, closeAddDialog } = usePrimitiveTokensTableStore();
 
   const form = useForm<PrimitiveTokenSchemaType>({
@@ -35,7 +35,7 @@ export const PrimitiveTokenAddDialog = () => {
   const onSubmit = (value: PrimitiveTokenSchemaType) => {
     createToken.mutate(
       {
-        workspaceId: activeWorkspace?.id ?? '',
+        organizationId: activeOrganization!.id,
         name: value.tokenName.trim(),
         dotPath: value.tokenDotPath.trim(),
         rawValue: value.tokenValue.trim(),

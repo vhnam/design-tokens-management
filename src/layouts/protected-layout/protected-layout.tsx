@@ -1,24 +1,26 @@
 import { Navigate, useLocation, useNavigate } from '@tanstack/react-router';
+import type { Organization } from 'better-auth/client/plugins';
 import { useEffect } from 'react';
 import type { PropsWithChildren } from 'react';
 
 import { authClient } from '@/integrations/better-auth/auth-client';
 
-import { useGetWorkspacesQuery } from '@/queries/workspaces';
-
-import type { Workspace } from '@/types/workspace';
-
-import { useWorkspaceStore } from '@/stores/workspace.store';
+import { useOrganizationStore } from '@/stores/organization.store';
 
 import { AppSidebar } from '@/layouts/protected-layout/app-sidebar';
 import { DashboardSidebar } from '@/layouts/protected-layout/dashboard-sidebar';
 
-import { WorkspaceAddDialog } from '@/features/workspaces';
+// import { OrganizationAddDialog } from '@/features/organizations';
 
 import { LottiePlayer } from '@/components/primitives/lottie-player';
 import { SidebarInset, SidebarProvider } from '@/components/primitives/sidebar';
 
-const allowedDashboardLayouts = ['/settings/account', '/settings/members', '/settings/projects', '/settings/workspace'];
+const allowedDashboardLayouts = [
+  '/settings/account',
+  '/settings/members',
+  '/settings/projects',
+  '/settings/organization',
+];
 
 export const ProtectedLayout = ({ children }: PropsWithChildren) => {
   const location = useLocation();
@@ -28,50 +30,45 @@ export const ProtectedLayout = ({ children }: PropsWithChildren) => {
 
   const isOnboarding = location.pathname === '/onboarding';
 
-  const { data: workspaces, isPending: isWorkspacesPending } = useGetWorkspacesQuery({
-    enabled: !isOnboarding,
-  });
-  const { activeWorkspace, setActiveWorkspace } = useWorkspaceStore();
+  const { data: organizations, isPending: isOrganizationsPending } = authClient.useListOrganizations();
+  const { activeOrganization, setActiveOrganization } = useOrganizationStore();
 
   useEffect(() => {
     if (!session?.user) return;
 
-    if (!workspaces || workspaces.length === 0) {
+    if (!organizations || organizations.length === 0) {
       navigate({ to: '/onboarding', replace: true });
       return;
     }
 
-    if (!activeWorkspace) {
-      setActiveWorkspace(workspaces[0]);
+    if (!activeOrganization) {
+      setActiveOrganization(organizations[0]);
       return;
     }
 
-    const nextActiveWorkspace =
-      (workspaces as Workspace[]).find((workspace) => workspace.id === activeWorkspace.id) ?? null;
-    if (!nextActiveWorkspace) {
-      setActiveWorkspace(workspaces[0]);
+    const nextActiveOrganization =
+      (organizations as Organization[]).find((organization) => organization.id === activeOrganization.id) ?? null;
+    if (!nextActiveOrganization) {
+      setActiveOrganization(organizations[0]);
       return;
     }
 
-    if (
-      nextActiveWorkspace.name !== activeWorkspace.name ||
-      nextActiveWorkspace.image !== activeWorkspace.image ||
-      nextActiveWorkspace.brands !== activeWorkspace.brands ||
-      nextActiveWorkspace.themes !== activeWorkspace.themes
-    ) {
-      setActiveWorkspace(nextActiveWorkspace);
+    if (nextActiveOrganization.name !== activeOrganization.name) {
+      setActiveOrganization(nextActiveOrganization);
     }
-  }, [activeWorkspace, workspaces, setActiveWorkspace]);
+  }, [activeOrganization, organizations, setActiveOrganization]);
 
   const renderSidebar = () => {
     const isAllowedDashboardLayout = allowedDashboardLayouts.includes(location.pathname);
     if (isAllowedDashboardLayout && session?.user) {
-      return <DashboardSidebar session={session!} workspaces={workspaces} onLogout={() => void authClient.signOut()} />;
+      return (
+        <DashboardSidebar session={session} organizations={organizations!} onLogout={() => void authClient.signOut()} />
+      );
     }
     return <AppSidebar session={session!} onLogout={() => void authClient.signOut()} />;
   };
 
-  if (isPending || (isWorkspacesPending && !isOnboarding)) {
+  if (isPending || (isOrganizationsPending && !isOnboarding)) {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <LottiePlayer src="/animations/loading.lottie" className="size-40" />
@@ -90,7 +87,7 @@ export const ProtectedLayout = ({ children }: PropsWithChildren) => {
         <div className="flex flex-1 flex-col gap-4 p-4 md:p-6">{children}</div>
       </SidebarInset>
 
-      <WorkspaceAddDialog />
+      {/* <OrganizationAddDialog /> */}
     </SidebarProvider>
   );
 };

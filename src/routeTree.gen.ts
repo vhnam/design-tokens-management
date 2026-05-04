@@ -22,11 +22,9 @@ import { Route as PublicAuthRegisterRouteImport } from './routes/_public/auth/re
 import { Route as PublicAuthLoginRouteImport } from './routes/_public/auth/login'
 import { Route as PublicAuthForgotPasswordSuccessRouteImport } from './routes/_public/auth/forgot-password-success'
 import { Route as PublicAuthForgotPasswordRouteImport } from './routes/_public/auth/forgot-password'
-import { Route as ProtectedTokensSemanticTokensRouteImport } from './routes/_protected/tokens/semantic-tokens'
 import { Route as ProtectedTokensPrimitiveTokensRouteImport } from './routes/_protected/tokens/primitive-tokens'
-import { Route as ProtectedTokensComponentTokensRouteImport } from './routes/_protected/tokens/component-tokens'
-import { Route as ProtectedSettingsWorkspaceRouteImport } from './routes/_protected/settings/workspace'
 import { Route as ProtectedSettingsProjectsRouteImport } from './routes/_protected/settings/projects'
+import { Route as ProtectedSettingsOrganizationRouteImport } from './routes/_protected/settings/organization'
 import { Route as ProtectedSettingsAccountRouteImport } from './routes/_protected/settings/account'
 import { Route as ProtectedAppProjectIdRouteImport } from './routes/_protected/app.$projectId'
 
@@ -98,34 +96,22 @@ const PublicAuthForgotPasswordRoute =
     path: '/auth/forgot-password',
     getParentRoute: () => PublicRoute,
   } as any)
-const ProtectedTokensSemanticTokensRoute =
-  ProtectedTokensSemanticTokensRouteImport.update({
-    id: '/tokens/semantic-tokens',
-    path: '/tokens/semantic-tokens',
-    getParentRoute: () => ProtectedRoute,
-  } as any)
 const ProtectedTokensPrimitiveTokensRoute =
   ProtectedTokensPrimitiveTokensRouteImport.update({
     id: '/tokens/primitive-tokens',
     path: '/tokens/primitive-tokens',
     getParentRoute: () => ProtectedRoute,
   } as any)
-const ProtectedTokensComponentTokensRoute =
-  ProtectedTokensComponentTokensRouteImport.update({
-    id: '/tokens/component-tokens',
-    path: '/tokens/component-tokens',
-    getParentRoute: () => ProtectedRoute,
-  } as any)
-const ProtectedSettingsWorkspaceRoute =
-  ProtectedSettingsWorkspaceRouteImport.update({
-    id: '/settings/workspace',
-    path: '/settings/workspace',
-    getParentRoute: () => ProtectedRoute,
-  } as any)
 const ProtectedSettingsProjectsRoute =
   ProtectedSettingsProjectsRouteImport.update({
     id: '/settings/projects',
     path: '/settings/projects',
+    getParentRoute: () => ProtectedRoute,
+  } as any)
+const ProtectedSettingsOrganizationRoute =
+  ProtectedSettingsOrganizationRouteImport.update({
+    id: '/settings/organization',
+    path: '/settings/organization',
     getParentRoute: () => ProtectedRoute,
   } as any)
 const ProtectedSettingsAccountRoute =
@@ -145,11 +131,9 @@ export interface FileRoutesByFullPath {
   '/onboarding': typeof ProtectedOnboardingRoute
   '/app/$projectId': typeof ProtectedAppProjectIdRoute
   '/settings/account': typeof ProtectedSettingsAccountRoute
+  '/settings/organization': typeof ProtectedSettingsOrganizationRoute
   '/settings/projects': typeof ProtectedSettingsProjectsRoute
-  '/settings/workspace': typeof ProtectedSettingsWorkspaceRoute
-  '/tokens/component-tokens': typeof ProtectedTokensComponentTokensRoute
   '/tokens/primitive-tokens': typeof ProtectedTokensPrimitiveTokensRoute
-  '/tokens/semantic-tokens': typeof ProtectedTokensSemanticTokensRoute
   '/auth/forgot-password': typeof PublicAuthForgotPasswordRoute
   '/auth/forgot-password-success': typeof PublicAuthForgotPasswordSuccessRoute
   '/auth/login': typeof PublicAuthLoginRoute
@@ -165,11 +149,9 @@ export interface FileRoutesByTo {
   '/onboarding': typeof ProtectedOnboardingRoute
   '/app/$projectId': typeof ProtectedAppProjectIdRoute
   '/settings/account': typeof ProtectedSettingsAccountRoute
+  '/settings/organization': typeof ProtectedSettingsOrganizationRoute
   '/settings/projects': typeof ProtectedSettingsProjectsRoute
-  '/settings/workspace': typeof ProtectedSettingsWorkspaceRoute
-  '/tokens/component-tokens': typeof ProtectedTokensComponentTokensRoute
   '/tokens/primitive-tokens': typeof ProtectedTokensPrimitiveTokensRoute
-  '/tokens/semantic-tokens': typeof ProtectedTokensSemanticTokensRoute
   '/auth/forgot-password': typeof PublicAuthForgotPasswordRoute
   '/auth/forgot-password-success': typeof PublicAuthForgotPasswordSuccessRoute
   '/auth/login': typeof PublicAuthLoginRoute
@@ -188,11 +170,9 @@ export interface FileRoutesById {
   '/_protected/': typeof ProtectedIndexRoute
   '/_protected/app/$projectId': typeof ProtectedAppProjectIdRoute
   '/_protected/settings/account': typeof ProtectedSettingsAccountRoute
+  '/_protected/settings/organization': typeof ProtectedSettingsOrganizationRoute
   '/_protected/settings/projects': typeof ProtectedSettingsProjectsRoute
-  '/_protected/settings/workspace': typeof ProtectedSettingsWorkspaceRoute
-  '/_protected/tokens/component-tokens': typeof ProtectedTokensComponentTokensRoute
   '/_protected/tokens/primitive-tokens': typeof ProtectedTokensPrimitiveTokensRoute
-  '/_protected/tokens/semantic-tokens': typeof ProtectedTokensSemanticTokensRoute
   '/_public/auth/forgot-password': typeof PublicAuthForgotPasswordRoute
   '/_public/auth/forgot-password-success': typeof PublicAuthForgotPasswordSuccessRoute
   '/_public/auth/login': typeof PublicAuthLoginRoute
@@ -210,11 +190,9 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/app/$projectId'
     | '/settings/account'
+    | '/settings/organization'
     | '/settings/projects'
-    | '/settings/workspace'
-    | '/tokens/component-tokens'
     | '/tokens/primitive-tokens'
-    | '/tokens/semantic-tokens'
     | '/auth/forgot-password'
     | '/auth/forgot-password-success'
     | '/auth/login'
@@ -230,11 +208,9 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/app/$projectId'
     | '/settings/account'
+    | '/settings/organization'
     | '/settings/projects'
-    | '/settings/workspace'
-    | '/tokens/component-tokens'
     | '/tokens/primitive-tokens'
-    | '/tokens/semantic-tokens'
     | '/auth/forgot-password'
     | '/auth/forgot-password-success'
     | '/auth/login'
@@ -252,11 +228,9 @@ export interface FileRouteTypes {
     | '/_protected/'
     | '/_protected/app/$projectId'
     | '/_protected/settings/account'
+    | '/_protected/settings/organization'
     | '/_protected/settings/projects'
-    | '/_protected/settings/workspace'
-    | '/_protected/tokens/component-tokens'
     | '/_protected/tokens/primitive-tokens'
-    | '/_protected/tokens/semantic-tokens'
     | '/_public/auth/forgot-password'
     | '/_public/auth/forgot-password-success'
     | '/_public/auth/login'
@@ -366,13 +340,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicAuthForgotPasswordRouteImport
       parentRoute: typeof PublicRoute
     }
-    '/_protected/tokens/semantic-tokens': {
-      id: '/_protected/tokens/semantic-tokens'
-      path: '/tokens/semantic-tokens'
-      fullPath: '/tokens/semantic-tokens'
-      preLoaderRoute: typeof ProtectedTokensSemanticTokensRouteImport
-      parentRoute: typeof ProtectedRoute
-    }
     '/_protected/tokens/primitive-tokens': {
       id: '/_protected/tokens/primitive-tokens'
       path: '/tokens/primitive-tokens'
@@ -380,25 +347,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedTokensPrimitiveTokensRouteImport
       parentRoute: typeof ProtectedRoute
     }
-    '/_protected/tokens/component-tokens': {
-      id: '/_protected/tokens/component-tokens'
-      path: '/tokens/component-tokens'
-      fullPath: '/tokens/component-tokens'
-      preLoaderRoute: typeof ProtectedTokensComponentTokensRouteImport
-      parentRoute: typeof ProtectedRoute
-    }
-    '/_protected/settings/workspace': {
-      id: '/_protected/settings/workspace'
-      path: '/settings/workspace'
-      fullPath: '/settings/workspace'
-      preLoaderRoute: typeof ProtectedSettingsWorkspaceRouteImport
-      parentRoute: typeof ProtectedRoute
-    }
     '/_protected/settings/projects': {
       id: '/_protected/settings/projects'
       path: '/settings/projects'
       fullPath: '/settings/projects'
       preLoaderRoute: typeof ProtectedSettingsProjectsRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
+    '/_protected/settings/organization': {
+      id: '/_protected/settings/organization'
+      path: '/settings/organization'
+      fullPath: '/settings/organization'
+      preLoaderRoute: typeof ProtectedSettingsOrganizationRouteImport
       parentRoute: typeof ProtectedRoute
     }
     '/_protected/settings/account': {
@@ -423,11 +383,9 @@ interface ProtectedRouteChildren {
   ProtectedIndexRoute: typeof ProtectedIndexRoute
   ProtectedAppProjectIdRoute: typeof ProtectedAppProjectIdRoute
   ProtectedSettingsAccountRoute: typeof ProtectedSettingsAccountRoute
+  ProtectedSettingsOrganizationRoute: typeof ProtectedSettingsOrganizationRoute
   ProtectedSettingsProjectsRoute: typeof ProtectedSettingsProjectsRoute
-  ProtectedSettingsWorkspaceRoute: typeof ProtectedSettingsWorkspaceRoute
-  ProtectedTokensComponentTokensRoute: typeof ProtectedTokensComponentTokensRoute
   ProtectedTokensPrimitiveTokensRoute: typeof ProtectedTokensPrimitiveTokensRoute
-  ProtectedTokensSemanticTokensRoute: typeof ProtectedTokensSemanticTokensRoute
 }
 
 const ProtectedRouteChildren: ProtectedRouteChildren = {
@@ -435,11 +393,9 @@ const ProtectedRouteChildren: ProtectedRouteChildren = {
   ProtectedIndexRoute: ProtectedIndexRoute,
   ProtectedAppProjectIdRoute: ProtectedAppProjectIdRoute,
   ProtectedSettingsAccountRoute: ProtectedSettingsAccountRoute,
+  ProtectedSettingsOrganizationRoute: ProtectedSettingsOrganizationRoute,
   ProtectedSettingsProjectsRoute: ProtectedSettingsProjectsRoute,
-  ProtectedSettingsWorkspaceRoute: ProtectedSettingsWorkspaceRoute,
-  ProtectedTokensComponentTokensRoute: ProtectedTokensComponentTokensRoute,
   ProtectedTokensPrimitiveTokensRoute: ProtectedTokensPrimitiveTokensRoute,
-  ProtectedTokensSemanticTokensRoute: ProtectedTokensSemanticTokensRoute,
 }
 
 const ProtectedRouteWithChildren = ProtectedRoute._addFileChildren(

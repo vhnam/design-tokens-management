@@ -13,7 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/primitives/dropdown-menu';
-import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/primitives/sidebar';
+import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/primitives/sidebar';
 
 interface NavUserProps {
   user: User;
@@ -46,8 +46,6 @@ const UserProfile = ({ user, showEmail = false }: UserProfileProps) => {
 };
 
 export function NavUser({ user, onLogout }: NavUserProps) {
-  const { isMobile } = useSidebar();
-
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -56,12 +54,7 @@ export function NavUser({ user, onLogout }: NavUserProps) {
             <UserProfile user={user} />
             <ChevronsUpDownIcon className="ml-auto size-6" />
           </DropdownMenuTrigger>
-          <DropdownMenuContent
-            className="min-w-56 rounded-lg"
-            side={isMobile ? 'bottom' : 'right'}
-            align="end"
-            sideOffset={4}
-          >
+          <DropdownMenuContent className="min-w-56 rounded-lg" side="top" align="end" sideOffset={4}>
             <DropdownMenuGroup>
               <DropdownMenuLabel className="p-0 font-normal">
                 <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">

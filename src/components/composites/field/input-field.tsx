@@ -13,7 +13,17 @@ interface InputFieldProps extends Omit<ComponentProps<typeof Input>, 'name'> {
   optional?: boolean;
 }
 
-export const InputField = ({ control, name, label, id, description, optional = false, ...props }: InputFieldProps) => {
+export const InputField = ({
+  control,
+  name,
+  label,
+  id,
+  description,
+  optional = false,
+  onChange,
+  onBlur,
+  ...props
+}: InputFieldProps) => {
   const fieldId = id ?? useId();
 
   return (
@@ -25,7 +35,23 @@ export const InputField = ({ control, name, label, id, description, optional = f
           <FieldLabel htmlFor={fieldId}>
             {label} {optional && <span className="text-xs text-muted-foreground">(optional)</span>}
           </FieldLabel>
-          <Input {...props} {...field} id={fieldId} />
+          <Input
+            {...props}
+            {...field}
+            id={fieldId}
+            onChange={(e) => {
+              field.onChange(e);
+              if (onChange) {
+                onChange(e);
+              }
+            }}
+            onBlur={(e) => {
+              field.onBlur();
+              if (onBlur) {
+                onBlur(e);
+              }
+            }}
+          />
           {description && <FieldDescription>{description}</FieldDescription>}
           {fieldState.error && <FieldError>{fieldState.error.message}</FieldError>}
         </Field>

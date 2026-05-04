@@ -4,7 +4,8 @@ import { toast } from 'sonner';
 
 import { useCreateProjectMutation } from '@/queries/projects';
 
-import { type ProjectSchemaType, projectSchema } from '@/schemas/project.schema';
+import { projectSchema } from '@/schemas/project.schema';
+import type { ProjectSchemaType } from '@/schemas/project.schema';
 
 import { useProjectStore } from '@/stores/project.store';
 

@@ -141,6 +141,9 @@ importers:
       prettier:
         specifier: ^3.8.3
         version: 3.8.3
+      slugify:
+        specifier: ^1.6.9
+        version: 1.6.9
       tsx:
         specifier: ^4.21.0
         version: 4.21.0
@@ -3958,6 +3961,10 @@ packages:
 
   sisteransi@1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
+
+  slugify@1.6.9:
+    resolution: {integrity: sha512-vZ7rfeehZui7wQs438JXBckYLkIIdfHOXsaVEUMyS5fHo1483l1bMdo0EDSWYclY0yZKFOipDy4KHuKs6ssvdg==}
+    engines: {node: '>=8.0.0'}
 
   solid-js@1.9.12:
     resolution: {integrity: sha512-QzKaSJq2/iDrWR1As6MHZQ8fQkdOBf8GReYb7L5iKwMGceg7HxDcaOHk0at66tNgn9U2U7dXo8ZZpLIAmGMzgw==}
@@ -8089,6 +8096,8 @@ snapshots:
     optional: true
 
   sisteransi@1.0.5: {}
+
+  slugify@1.6.9: {}
 
   solid-js@1.9.12:
     dependencies:

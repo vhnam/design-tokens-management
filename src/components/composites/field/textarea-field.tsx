@@ -21,6 +21,8 @@ export const TextareaField = ({
   optional = false,
   rows = 3,
   id,
+  onChange,
+  onBlur,
   ...props
 }: TextareaFieldProps) => {
   const fieldId = id ?? useId();
@@ -34,7 +36,24 @@ export const TextareaField = ({
           <FieldLabel htmlFor={fieldId}>
             {label} {optional && <span className="text-xs text-muted-foreground">(optional)</span>}
           </FieldLabel>
-          <Textarea {...props} {...field} rows={rows} id={fieldId} />
+          <Textarea
+            {...props}
+            {...field}
+            rows={rows}
+            id={fieldId}
+            onChange={(e) => {
+              field.onChange(e);
+              if (onChange) {
+                onChange(e);
+              }
+            }}
+            onBlur={(e) => {
+              field.onBlur();
+              if (onBlur) {
+                onBlur(e);
+              }
+            }}
+          />
           {description && <FieldDescription>{description}</FieldDescription>}
           {fieldState.error && <FieldError>{fieldState.error.message}</FieldError>}
         </Field>
