@@ -1,6 +1,7 @@
-import { TOKEN_TYPE_LABELS } from '@/constants/token';
 import type { Row } from '@tanstack/react-table';
 import { PencilIcon, TrashIcon } from 'lucide-react';
+
+import { TOKEN_TYPE_LABELS } from '@/constants/token';
 
 import { TokenType } from '@/enums/token';
 

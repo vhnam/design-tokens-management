@@ -3,7 +3,7 @@ import type { ChangeEvent } from 'react';
 import type { UseFormReturn } from 'react-hook-form';
 import { toast } from 'sonner';
 
-import { authClient } from '@/integrations/better-auth/auth-client';
+import { authClient } from '@/integrations/better-auth';
 
 import {
   useGetAccountProfileQuery,

@@ -3,7 +3,7 @@
 import type { Organization } from 'better-auth/client/plugins';
 import { CheckIcon, ChevronsUpDownIcon, PlusIcon } from 'lucide-react';
 
-import { authClient } from '@/integrations/better-auth/auth-client';
+import { authClient } from '@/integrations/better-auth';
 
 import { useOrganizationStore } from '@/stores/organization.store';
 

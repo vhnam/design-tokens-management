@@ -8,8 +8,8 @@ export const useCreatePrimitiveTokenMutation = () => {
 
   return useMutation({
     mutationFn: createPrimitiveToken,
-    onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: PRIMITIVE_TOKENS_KEYS.LIST });
+    onSuccess: (_, variables) => {
+      void queryClient.invalidateQueries({ queryKey: [...PRIMITIVE_TOKENS_KEYS.LIST, variables.organizationId] });
     },
   });
 };
@@ -19,7 +19,11 @@ export const useUpdatePrimitiveTokenMutation = () => {
 
   return useMutation({
     mutationFn: updatePrimitiveToken,
-    onSuccess: () => {
+    onSuccess: (_, variables) => {
+      if (variables.tokenFileId) {
+        void queryClient.invalidateQueries({ queryKey: [...PRIMITIVE_TOKENS_KEYS.LIST, variables.tokenFileId] });
+        return;
+      }
       void queryClient.invalidateQueries({ queryKey: PRIMITIVE_TOKENS_KEYS.LIST });
     },
   });
@@ -30,7 +34,11 @@ export const useDeletePrimitiveTokenMutation = () => {
 
   return useMutation({
     mutationFn: deletePrimitiveToken,
-    onSuccess: () => {
+    onSuccess: (_, variables) => {
+      if (variables.tokenFileId) {
+        void queryClient.invalidateQueries({ queryKey: [...PRIMITIVE_TOKENS_KEYS.LIST, variables.tokenFileId] });
+        return;
+      }
       void queryClient.invalidateQueries({ queryKey: PRIMITIVE_TOKENS_KEYS.LIST });
     },
   });

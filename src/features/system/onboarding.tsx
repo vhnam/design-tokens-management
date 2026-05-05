@@ -5,7 +5,7 @@ import { useForm, useWatch } from 'react-hook-form';
 import slugify from 'slugify';
 import { toast } from 'sonner';
 
-import { authClient } from '@/integrations/better-auth/auth-client';
+import { authClient } from '@/integrations/better-auth';
 
 import { organizationSchema } from '@/schemas/organization.schema';
 import type { OrganizationSchemaType } from '@/schemas/organization.schema';

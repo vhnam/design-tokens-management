@@ -3,7 +3,7 @@ import type { Organization } from 'better-auth/client/plugins';
 import { useEffect } from 'react';
 import type { PropsWithChildren } from 'react';
 
-import { authClient } from '@/integrations/better-auth/auth-client';
+import { authClient } from '@/integrations/better-auth';
 
 import { useOrganizationStore } from '@/stores/organization.store';
 

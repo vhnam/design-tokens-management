@@ -1,4 +1,4 @@
-import api from '@/integrations/axios/api';
+import { api } from '@/integrations/axios';
 
 import type {
   CreatePrimitiveTokenPayload,
@@ -18,12 +18,16 @@ export const createPrimitiveToken = async (payload: CreatePrimitiveTokenPayload)
   return response.data;
 };
 
-export const updatePrimitiveToken = async ({ id, ...payload }: UpdatePrimitiveTokenPayload) => {
+export const updatePrimitiveToken = async ({
+  id,
+  tokenFileId: _tokenFileId,
+  ...payload
+}: UpdatePrimitiveTokenPayload) => {
   const response = await api.patch(`${API_ENDPOINT}/${id}`, payload);
   return response.data;
 };
 
-export const deletePrimitiveToken = async ({ id }: DeletePrimitiveTokenPayload) => {
+export const deletePrimitiveToken = async ({ id, tokenFileId: _tokenFileId }: DeletePrimitiveTokenPayload) => {
   const response = await api.delete(`${API_ENDPOINT}/${id}`);
   return response.data;
 };

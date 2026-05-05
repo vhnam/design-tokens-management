@@ -1,4 +1,4 @@
-import api from '@/integrations/axios/api';
+import { api } from '@/integrations/axios';
 
 import type { CreateProjectPayload, DeleteProjectPayload, UpdateProjectPayload } from './projects.type';
 

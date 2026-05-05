@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-import { authClient } from '@/integrations/better-auth/auth-client';
+import { authClient } from '@/integrations/better-auth';
 
-const api = axios.create({
+export const api = axios.create({
   baseURL: import.meta.env.VITE_API_ENDPOINT,
   withCredentials: true,
 });
@@ -16,5 +16,3 @@ api.interceptors.response.use(
     return Promise.reject(error);
   },
 );
-
-export default api;

@@ -5,7 +5,7 @@ import { BoxesIcon, BriefcaseIcon, UsersRoundIcon } from 'lucide-react';
 import { forwardRef } from 'react';
 import type { ComponentProps, Ref } from 'react';
 
-import { authClient } from '@/integrations/better-auth/auth-client';
+import { authClient } from '@/integrations/better-auth';
 
 import type { UserSession } from '@/types/auth';
 

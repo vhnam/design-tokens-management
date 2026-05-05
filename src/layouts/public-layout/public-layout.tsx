@@ -1,7 +1,7 @@
 import { Navigate, useLocation } from '@tanstack/react-router';
 import type { PropsWithChildren } from 'react';
 
-import { authClient } from '@/integrations/better-auth/auth-client';
+import { authClient } from '@/integrations/better-auth';
 
 import { LottiePlayer } from '@/components/primitives/lottie-player';
 

@@ -1,5 +1,6 @@
-import { COMPOSITE_TOKEN_TYPE_LIST } from '@/constants/token';
 import { z } from 'zod/v4';
+
+import { COMPOSITE_TOKEN_TYPE_LIST } from '@/constants/token';
 
 import { TokenTheme } from '@/enums/token';
 

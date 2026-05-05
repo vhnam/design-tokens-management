@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-import api from '@/integrations/axios/api';
-import { authClient } from '@/integrations/better-auth/auth-client';
+import { api } from '@/integrations/axios';
+import { authClient } from '@/integrations/better-auth';
 
 import type { AccountProfile, UpdateAccountProfilePayload, UploadAvatarPayload } from './account-profile.type';
 

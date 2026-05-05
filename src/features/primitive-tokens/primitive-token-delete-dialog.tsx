@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { toast } from 'sonner';
 
+import { useOrganizationStore } from '@/stores/organization.store';
 import { usePrimitiveTokensTableStore } from '@/stores/primitive-tokens-table.store';
 
 import { Button } from '@/components/primitives/button';
@@ -18,11 +19,12 @@ import { useDeletePrimitiveToken } from './primitive-tokens.actions';
 
 export const PrimitiveTokenDeleteDialog = () => {
   const deleteToken = useDeletePrimitiveToken();
+  const { activeOrganization } = useOrganizationStore();
   const { isOpenDeleteDialog, selectedToken, closeDeleteDialog } = usePrimitiveTokensTableStore();
 
   const handleDelete = useCallback(() => {
     deleteToken.mutate(
-      { id: selectedToken!.id },
+      { id: selectedToken!.id, tokenFileId: activeOrganization?.id },
       {
         onSuccess: () => {
           closeDeleteDialog();

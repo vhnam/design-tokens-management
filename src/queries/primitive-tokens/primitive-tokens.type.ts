@@ -11,6 +11,7 @@ export type CreatePrimitiveTokenPayload = {
 
 export type UpdatePrimitiveTokenPayload = {
   id: string;
+  tokenFileId?: string;
   name: string;
   dotPath: string;
   rawValue: string;
@@ -20,4 +21,5 @@ export type UpdatePrimitiveTokenPayload = {
 
 export type DeletePrimitiveTokenPayload = {
   id: string;
+  tokenFileId?: string;
 };

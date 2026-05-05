@@ -3,7 +3,7 @@ import { Link, useNavigate } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
-import { authClient } from '@/integrations/better-auth/auth-client';
+import { authClient } from '@/integrations/better-auth';
 
 import { resendVerificationSchema } from '@/schemas/resend-verification.schema';
 import type { ResendVerificationSchemaType } from '@/schemas/resend-verification.schema';

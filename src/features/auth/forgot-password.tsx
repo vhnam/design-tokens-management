@@ -3,7 +3,7 @@ import { Link, useNavigate } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
-import { authClient } from '@/integrations/better-auth/auth-client';
+import { authClient } from '@/integrations/better-auth';
 
 import { forgotPasswordSchema } from '@/schemas/forgot-password.schema';
 import type { ForgotPasswordSchemaType } from '@/schemas/forgot-password.schema';

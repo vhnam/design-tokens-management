@@ -8,6 +8,7 @@ import { TokenType } from '@/enums/token';
 import { primitiveTokenSchema } from '@/schemas/primitive-token.schema';
 import type { PrimitiveTokenSchemaType } from '@/schemas/primitive-token.schema';
 
+import { useOrganizationStore } from '@/stores/organization.store';
 import { usePrimitiveTokensTableStore } from '@/stores/primitive-tokens-table.store';
 
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/primitives/dialog';
@@ -17,6 +18,7 @@ import { useUpdatePrimitiveToken } from './primitive-tokens.actions';
 
 export const PrimitiveTokenEditDialog = () => {
   const updateToken = useUpdatePrimitiveToken();
+  const { activeOrganization } = useOrganizationStore();
   const { isOpenEditDialog, selectedToken, closeEditDialog } = usePrimitiveTokensTableStore();
 
   const form = useForm<PrimitiveTokenSchemaType>({
@@ -38,6 +40,7 @@ export const PrimitiveTokenEditDialog = () => {
     updateToken.mutate(
       {
         id: selectedToken!.id,
+        tokenFileId: activeOrganization?.id,
         name: value.tokenName.trim(),
         dotPath: value.tokenDotPath.trim(),
         rawValue: value.tokenValue.trim(),

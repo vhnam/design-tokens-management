@@ -2,7 +2,7 @@ import { useNavigate } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
-import { authClient } from '@/integrations/better-auth/auth-client';
+import { authClient } from '@/integrations/better-auth';
 
 import { Button } from '@/components/primitives/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/primitives/card';
