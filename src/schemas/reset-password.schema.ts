@@ -1,15 +1,17 @@
 import { z } from 'zod/v4';
 
+import { MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH } from '@/constants/auth';
+
 export const resetPasswordSchema = z
   .object({
     password: z
       .string()
-      .min(8, 'Password must be at least 8 characters long')
-      .max(255, 'Password must be less than 255 characters'),
+      .min(MIN_PASSWORD_LENGTH, `Password must be at least ${MIN_PASSWORD_LENGTH} characters long`)
+      .max(MAX_PASSWORD_LENGTH, `Password must be less than ${MAX_PASSWORD_LENGTH} characters`),
     confirmPassword: z
       .string()
-      .min(8, 'Password must be at least 8 characters long')
-      .max(255, 'Password must be less than 255 characters'),
+      .min(MIN_PASSWORD_LENGTH, `Password must be at least ${MIN_PASSWORD_LENGTH} characters long`)
+      .max(MAX_PASSWORD_LENGTH, `Password must be less than ${MAX_PASSWORD_LENGTH} characters`),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: 'Passwords do not match',

@@ -1,6 +1,5 @@
+import { BORDER_STYLE_LIST } from '@/constants/token';
 import type { Control } from 'react-hook-form';
-
-import { BORDER_STYLE_LIST } from '@/contants/token';
 
 import type { PrimitiveTokenSchemaType } from '@/schemas/primitive-token.schema';
 

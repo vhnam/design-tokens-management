@@ -1,6 +1,5 @@
+import { PRIMITIVE_TOKEN_TYPE_OPTIONS } from '@/constants/token';
 import type { UseFormReturn } from 'react-hook-form';
-
-import { PRIMITIVE_TOKEN_TYPE_OPTIONS } from '@/contants/token';
 
 import type { PrimitiveTokenSchemaType } from '@/schemas/primitive-token.schema';
 

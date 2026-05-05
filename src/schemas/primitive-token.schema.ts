@@ -1,6 +1,5 @@
+import { TOKEN_TYPE_LIST } from '@/constants/token';
 import { z } from 'zod/v4';
-
-import { TOKEN_TYPE_LIST } from '@/contants/token';
 
 import { isTokenAliasRawValue, isValidColorValue } from '@/lib/token';
 

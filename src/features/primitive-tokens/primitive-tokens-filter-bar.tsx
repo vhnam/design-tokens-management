@@ -1,4 +1,4 @@
-import { TOKEN_TYPE_LABELS, TOKEN_TYPE_OPTIONS } from '@/contants/token';
+import { TOKEN_TYPE_LABELS, TOKEN_TYPE_OPTIONS } from '@/constants/token';
 
 import type { TokenType } from '@/enums/token';
 
